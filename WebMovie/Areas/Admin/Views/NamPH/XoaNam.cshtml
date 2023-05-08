@@ -1,0 +1,34 @@
+﻿@model WebMovie.Models.NAMPHATHANH
+
+@{
+    ViewBag.Title = "XoaNam";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<div class="container">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-6 card border rounded-4">
+            <h2 class="text-center">BẠN CÓ CHẮC MUỐN XÓA NĂM PHÁT DÀNH DƯỚI ĐÂY?</h2>
+            <hr />
+            <dl class="row" @*style="margin-left: 110px"*@>
+                <dt class="col-sm-4" style="padding-left: 100px;">Năm phát hành:</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Nam)</dd>
+
+            </dl>
+            <div class="text-center" style=" margin-left: -90px">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        @Html.ActionLink("Back to page", "QLNam", null, new { @class = "btn btn-primary btn-xs" })
+                        <input type="submit" value="Delete" class="btn btn-danger btn-xs" />
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

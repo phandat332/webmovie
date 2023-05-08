@@ -1,0 +1,25 @@
+﻿@model WebMovie.Models.PHIM
+@{
+    ViewBag.Title = "Xemphim";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="hero common-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="hero-ct">
+                    <h1>Bạn đang xem phim - @Model.TenPhim</h1>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-single">
+    <div class="container">
+        <div class="col-lg-12 col-md-12 col-sm-12" style="height:600px;">
+            <iframe src="@Model.Linkphim" width="1070" height="600" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>

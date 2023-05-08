@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 11.125" name="MovieData">
+  <DataContextMoniker Name="/MovieDataDataContext" />
+  <nestedChildShapes>
+    <classShape Id="d72c7215-89a3-4487-83ad-5259d42c5679" absoluteBounds="0.75, 5.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/MovieDataDataContext/KHACHHANG" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e46966c8-7f7c-4b51-9572-da196f68ed38" absoluteBounds="0.765, 6.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6d8f6065-1cd5-4351-9ad9-c05d907c35e2" absoluteBounds="0.75, 2.375, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/MovieDataDataContext/NAMPHATHANH" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d6bae40d-fc68-4a11-a976-f156dae13f79" absoluteBounds="0.765, 2.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d7cc38e3-679f-4cab-ab75-e67d013694d4" absoluteBounds="6.25, 2.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/MovieDataDataContext/PHIMTHELOAI" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7834d3b2-da3f-4fd3-b93c-e03b394bb27b" absoluteBounds="6.265, 3.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d43e7b8d-0328-493d-b035-b66fa54665b5" absoluteBounds="0.75, 0.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/MovieDataDataContext/QUOCGIA" />
+      <nestedChildShapes>
+        <elementListCompartment Id="474c7244-fe6d-4ee7-bcc7-8e91051276a0" absoluteBounds="0.765, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="101297be-ff84-412f-8943-21c194a0936d" absoluteBounds="1, 9.625, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/MovieDataDataContext/QUYEN" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e61c23d4-b67f-4249-b313-c5981adef1d2" absoluteBounds="1.0150000000000001, 10.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3d8e75b4-f451-4a40-91c8-abc4e0c21cb9" absoluteBounds="3.5, 6.75, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/MovieDataDataContext/THELOAI" />
+      <nestedChildShapes>
+        <elementListCompartment Id="91782118-5ac3-4e38-bc49-63ba8c974efb" absoluteBounds="3.515, 7.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.875 : 9.625); (1.875 : 7.90549967447917)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/MovieDataDataContext/QUYEN/QUYEN_KHACHHANG" />
+      <nodes>
+        <classShapeMoniker Id="101297be-ff84-412f-8943-21c194a0936d" />
+        <classShapeMoniker Id="d72c7215-89a3-4487-83ad-5259d42c5679" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 7.34699625651042); (7.25 : 7.34699625651042); (7.25 : 3.94399251302083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/MovieDataDataContext/THELOAI/THELOAI_PHIMTHELOAI" />
+      <nodes>
+        <classShapeMoniker Id="3d8e75b4-f451-4a40-91c8-abc4e0c21cb9" />
+        <classShapeMoniker Id="d7cc38e3-679f-4cab-ab75-e67d013694d4" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="802b1df2-66fa-4a85-8164-3cda08d9b848" absoluteBounds="4, 1.375, 2, 3.8862125651041666">
+      <DataClassMoniker Name="/MovieDataDataContext/PHIM" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9b7c4bd4-5387-4922-bb21-02a79023153a" absoluteBounds="4.015, 1.835, 1.9700000000000002, 3.3262125651041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6 : 3.34699625651042); (6.25 : 3.34699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MovieDataDataContext/PHIM/PHIM_PHIMTHELOAI" />
+      <nodes>
+        <classShapeMoniker Id="802b1df2-66fa-4a85-8164-3cda08d9b848" />
+        <classShapeMoniker Id="d7cc38e3-679f-4cab-ab75-e67d013694d4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 2.97199625651042); (4 : 2.97199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MovieDataDataContext/NAMPHATHANH/NAMPHATHANH_PHIM" />
+      <nodes>
+        <classShapeMoniker Id="6d8f6065-1cd5-4351-9ad9-c05d907c35e2" />
+        <classShapeMoniker Id="802b1df2-66fa-4a85-8164-3cda08d9b848" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 1.65949625651042); (4 : 1.65949625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MovieDataDataContext/QUOCGIA/QUOCGIA_PHIM" />
+      <nodes>
+        <classShapeMoniker Id="d43e7b8d-0328-493d-b035-b66fa54665b5" />
+        <classShapeMoniker Id="802b1df2-66fa-4a85-8164-3cda08d9b848" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

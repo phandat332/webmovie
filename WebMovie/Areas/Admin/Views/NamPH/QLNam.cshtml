@@ -1,0 +1,69 @@
+﻿
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.PagedList<WebMovie.Models.NAMPHATHANH>
+@{
+    ViewBag.Title = "QLNam";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<link href="~/Content/Admin/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<div class="form-horizontal">
+    <h2>Quản lý năm phát hành</h2>
+</div>
+
+
+<div class="x_panel">
+    <div class="x_title">
+        <a href="@Url.Action("ThemNam", "NamPH")" class="btn btn-default" style="margin-bottom: 8px; color: white; background-color: rebeccapurple; ">
+            <i class="fa-pie-circle"></i> Thêm mới
+        </a>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+        <p></p>
+        <div class="table-responsive">
+            <table class="table table-striped jambo_table bulk_action">
+                <thead>
+                    <tr class="headings">
+                        <th>
+                            <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" id="check-all" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                        </th>
+                        <th class="column-title">Mã Năm </th>
+                        <th class="column-title">Tên Năm </th>
+                        <th>
+                            <span class="nobr">Chức năng</span>
+                        </th>
+                        <th class="bulk-actions" colspan="7">
+                            <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr class="odd pointer">
+                            <td class="a-center ">
+                                <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MaNam)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nam)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("SuaNam","NamPH",new { id = item.MaNam})" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                <a href="@Url.Action("XoaNam","NamPH",new { id = item.MaNam})" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-center">
+    @Html.PagedListPager(Model, page => Url.Action("QLNam", new { page = page }), new PagedListRenderOptions { LiElementClasses = new string[] { "page-item btn btn-sm btn-primary mx-1" } })
+</div>

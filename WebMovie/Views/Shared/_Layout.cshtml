@@ -1,0 +1,205 @@
+﻿
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone-no" />
+  
+    <link rel="icon" type="image/png" href="@Url.Content("~/Content/user_assets/images/logoweb11.jpg")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/user_assets/css/plugins.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/user_assets/css/style.css")">
+
+    <script src="@Url.Content("~/Content/user_assets/js/jquery.js")"></script>
+
+    <title>Trang chủ</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="xem phim online, xem phim bộ, phim chiếu rạp">
+    <meta name="author" content="">
+    <link rel="profile" href="#">
+    <title>
+
+    </title>
+</head>
+<body>
+    <form method="post" action="./" id="form1">
+        <header class="ht-header">
+            <div class="container">
+                <nav class="navbar navbar-default navbar-custom">
+
+                    <div class="navbar-header logo">
+                        <div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <div id="nav-icon1">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <a href="@Url.Action("Index","Home")">
+                            <img class="logo" src="@Url.Content("~/Content/user_assets/images/logo112.png")" alt="" width="119" height="58">
+                        </a>
+                    </div>
+
+                    <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1" >
+                        <ul class="nav navbar-nav flex-child-menu menu-left" >
+                            <li class="hidden">
+                                <a href="#page-top"></a>
+                            </li>
+                            <li><a class="btn btn-default" href="/" style="text-transform: none;">Trang chủ</a></li>
+                            <li><a class="btn btn-default" href="@Url.Action("Phimle","Movie")" style="text-transform: none;" >Phim lẻ</a></li>
+                            <li class="dropdown first">
+                                <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown"  style="text-transform: none;">
+                                    Thể loại<i class="fa fa-angle-down" aria-hidden="true"></i>
+                                </a>                  
+                                <ul class="dropdown-menu level1 sidebar">
+
+                                    <li>
+                                        <a href="@Url.Action("Contact","Home")">Hành động</a>
+                                    </li>
+                                    <li>
+                                        <a >Kinh dị</a>
+                                    </li>
+                                    @Html.Action("Theloai", "Movie", new { @class = "sb-title" })
+
+                                </ul>
+                          
+                            </li>
+                            <li class="dropdown first" style="text-transform: none;">
+                                <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown"  style="text-transform: none;">
+                                    Quốc gia<i class="fa fa-angle-down" aria-hidden="true"></i>
+                                </a>
+                                <ul class="dropdown-menu level1">
+                                    <li><a href="#"> 2024</a></li>
+                                    <li><a href="#"> 2023</a></li>
+                                    <li><a href="#"> 2022</a></li>
+                                    <li><a href="#"> 2021</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="btn btn-default" href="@Url.Action("About", "Home")" style="text-transform: none;">Lịch sử</a></li>
+                           
+                        </ul>
+                        <ul class="nav navbar-nav flex-child-menu menu-right">
+
+                            @if (Session["TaiKhoan"] != null)
+                            {
+                              
+                                <li class="dropdown first btn">
+                                    <a class="btn btn-default dropdown-toggle lv1 navbar-brand text-white" data-toggle="dropdown" data-hover="dropdown" style="padding-top: 15px; text-transform: none;">
+                                        @Session["TaiKhoan"] <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                    </a>
+                                    <ul class="dropdown-menu level1">
+                                        <li><a href="/Account/Logout"  style="text-transform: none;"> Đăng xuất</a></li>
+                                        <li><a href="@Url.Action("Suakh","Account")"  style="text-transform: none;"> chỉnh sửa</a></li>
+                                        <li><a href="/Account/Logout"  style="text-transform: none;"> hỗ trợ</a></li>
+
+                                    </ul>
+                                </li>
+                            }
+                            else
+                            {
+
+                            <li><a href="#"  style="text-transform: none;">Hỗ trợ</a></li>
+                            <li class="btn"><a href="/account/login" id="hyplnkAccount"  style="text-transform: none;">Đăng nhập/Đăng ký</a></li>
+                            @* <a class="navbar-brand text-white" href="/Account/DangKy">Đăng ký</a>*@
+                            }
+                            </ul>
+                       
+                    </div>
+
+                </nav>
+
+
+                <div class="top-search">
+                    <select>
+                        <option value="united">Phim chiếu rạp</option>
+                        <option value="saab">Phim bộ</option>
+                    </select>
+                    <input id="search-input" type="text" placeholder="Nhập tên phim mà bạn muốn tìm....">
+                </div>
+            </div>
+        </header>
+        @RenderBody()
+
+        <footer class="ht-footer">
+            <div class="container">
+                <div class="flex-parent-ft">
+                    <div class="flex-child-ft item1">
+                        <a href="index.html">
+                            <img class="logo" src="@Url.Content("~/Content/user_assets/images/logo1.png")" alt="">
+                        </a>
+                        <p>
+                            Địa chỉ: 134, đường 16, phường lý thường kiệt, quận tân kì<br>
+                            Email: Admin@gmail.com
+                        </p>
+                        <p>Số ĐT: <a href="#">(+84) 0845732323</a></p>
+                    </div>
+                    <div class="flex-child-ft item2">
+                        <h4>Tài Nguyên</h4>
+                        <ul>
+                            <li><a href="#">Về chúng tôi</a></li>
+                            <li><a href="#">Liên hệ</a></li>
+                            <li><a href="#">Diễn Đàn</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Trung tâm hỗ trợ</a></li>
+                        </ul>
+                    </div>
+                    <div class="flex-child-ft item3">
+                        <h4>Điều khoản</h4>
+                        <ul>
+                            <li><a href="#">Chính sách người dùng</a></li>
+                            <li><a href="#">Chính sách quyền riêng tư</a></li>
+                            <li><a href="#">Bảo mật</a></li>
+                        </ul>
+                    </div>
+                    <div class="flex-child-ft item4">
+                        <h4>Tài Khoản</h4>
+                        <ul>
+                            <li><a href="#">Tài khoản của tôi</a></li>
+                            <li><a href="#">Xem danh sách</a></li>
+                            <li><a href="#">Bộ sưu tập</a></li>
+                            <li><a href="#">Hướng dẫn</a></li>
+                        </ul>
+                    </div>
+                   @* <div class="flex-child-ft item5">
+                        <h4>Đăng ký nhận Email</h4>
+                        <p>
+                            Đăng ký để nhận thông tin mới
+                            <br>
+                            và sớm nhất của chúng tôi.
+                        </p>
+                        <div>
+                            <input type="text" placeholder="Enter your email...">
+                        </div>
+                        <a href="#" class="btn">Đăng ký Ngay <i class="ion-ios-arrow-forward"></i></a>
+                    </div>*@
+                </div>
+            </div>
+            <div class="ft-copyright">
+                <div class="ft-left">
+
+                </div>
+                <div class="backtotop">
+                    <p><a href="#" id="back-to-top">Về đầu trang  <i class="ion-ios-arrow-thin-up"></i></a></p>
+                </div>
+            </div>
+        </footer>
+
+    </form>
+    <script src="@Url.Content("~/Content/user_assets/js/plugins.js")"></script>
+    <script src="@Url.Content("~/Content/user_assets/js/plugins2.js")"></script>
+    <script src="@Url.Content("~/Content/user_assets/js/custom.js")"></script>
+    <script type="text/javascript">
+        $("#search-input").keypress(function (e) {
+            if (e.which == 13 || e.keyCode == 13) {
+                window.location.href = "/search?input=" + $("#search-input").val();
+            }
+        });
+    </script>
+
+
+</body>
+</html>

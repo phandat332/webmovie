@@ -1,0 +1,286 @@
+﻿@*@using PagedList;
+@using PagedList.Mvc;
+@using WebMovie.Models;
+@model PagedList.PagedList<WebMovie.Models.PHIM>*@
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="hero common-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="hero-ct">
+                    <h1></h1>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="movie-items">
+    <div class="container">
+        <div class="row ipad-width">
+            <div class="col-md-8">
+
+                <div class="title-hd">
+                    <h2>Hành động</h2>
+                    <a href="/films-by-category/hanh-dong/1" class="viewall">Xem tất cả <i class="ion-ios-arrow-right"></i></a>
+                </div>
+                <div class="tabs">
+                    <ul class="tab-links">
+                        <li class="active"><p>Có thể bạn nên xem</p></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab active">
+                            <div class="row">
+                                <div class="slick-multiItem">
+
+                                    <div class="slide-it">
+                                        <div class="movie-item">
+                                            <div class="mv-img">
+                                                <img src="~/image/BlackAdam.jpg" alt="Black Adam" width="185" height="284">
+                                            </div>
+
+                                            <div class="hvr-inner" style=" margin-top: 70px; background-color: #ffffff00 ">
+                                                <a href="@Url.Action("Chitiet", "Movie", new {id = 2})">
+                                                    <img src="~/image/iconplay12.png" />
+                                                </a>
+                                            </div>
+                                            <div class="title-in">
+                                                <h6><a href="">Black Adam</a></h6>
+                                                <p><i class="ion-android-star"></i><span>10.00</span> /10</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slide-it">
+                                        <div class="movie-item">
+                                            <div class="mv-img">
+                                                <img src="~/image/BlackAdam.jpg" alt="KIMETSU NO YAIBA" width="185" height="284">
+                                            </div>
+                                            <div class="hvr-inner" style=" margin-top: 70px; background-color: #ffffff00 ">
+                                                <a href="@Url.Action("Chitiet", "Movie", new {id = 2})">
+                                                    <img src="~/image/iconplay12.png" />
+                                                </a>
+                                            </div>
+                                            <div class="title-in">
+                                                <h6><a href="">KIMETSU NO YAIBA</a></h6>
+                                                <p><i class="ion-android-star"></i><span>10.00</span> /10</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                        
+                                                    <div class="slide-it">
+                                                        <div class="movie-item">
+                                                            <div class="mv-img">
+                                                                <img src="~/image/KIMETSUNOYAIBA.jpg" alt="Black Adam" width="185" height="284">
+                                                            </div>
+                                                            <div class="hvr-inner" style=" margin-top: 70px; background-color: #ffffff00 ">
+                                                                <a href="@Url.Action("Chitiet", "Movie", new {id = 3})">
+                                                                    <img src="~/image/iconplay12.png" />
+                                                                </a>
+                                                            </div>
+                                                            <div class="title-in">
+                                                                <h6><a href="">KIMETSU NO YAIBA-tập 1</a></h6>
+                                                                <p><i class="ion-android-star"></i><span>10.00</span> /10</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="slide-it">
+                                                        <div class="movie-item">
+                                                            <div class="mv-img">
+                                                                <img src="~/image/KIMETSUNOYAIBA.jpg" alt="Black Adam" width="185" height="284">
+                                                            </div>
+                                                            <div class="hvr-inner" style=" margin-top: 70px; background-color: #ffffff00 ">
+                                                                <a href="@Url.Action("Chitiet", "Movie", new {id = 5})">
+                                                                    <img src="~/image/iconplay12.png" />
+                                                                </a>
+                                                            </div>
+                                                            <div class="title-in">
+                                                                <h6><a href="">KIMETSU NO YAIBA- tập 2</a></h6>
+                                                                <p><i class="ion-android-star"></i><span>10.00</span> /10</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                              
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="title-hd">
+                    <h2>Tình cảm</h2>
+                    <a href="/films-by-category/tinh-cam/2" class="viewall">Xem tất cả <i class="ion-ios-arrow-right"></i></a>
+                </div>
+                <div class="tabs">
+                    <ul class="tab-links">
+                        <li class="active"><p>Có thể bạn nên xem</p></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab active">
+                            <div class="row">
+                                <div class="slick-multiItem">
+                                    <div class="slide-it">
+                                        <div class="movie-item">
+                                            <div class="mv-img">
+                                                <img src="~/image/KIMETSUNOYAIBA.jpg" alt="Black Adam" width="185" height="284">
+                                            </div>
+                                            <div class="hvr-inner" style=" margin-top: 70px; background-color: #ffffff00 ">
+                                                <a href="@Url.Action("Chitiet", "Movie", new {id = 3})">
+                                                    <img src="~/image/iconplay12.png" />
+                                                </a>
+                                            </div>
+                                            <div class="title-in">
+                                                <h6><a href="">KIMETSU NO YAIBA-tập 1</a></h6>
+                                                <p><i class="ion-android-star"></i><span>10.00</span> /10</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="slide-it">
+                                        <div class="movie-item">
+                                            <div class="mv-img">
+                                                <img src="~/image/KIMETSUNOYAIBA.jpg" alt="Black Adam" width="185" height="284">
+                                            </div>
+                                            <div class="hvr-inner" style=" margin-top: 70px; background-color: #ffffff00 ">
+                                                <a href="@Url.Action("Chitiet", "Movie", new {id = 5})">
+                                                    <img src="~/image/iconplay12.png" />
+                                                </a>
+                                            </div>
+                                            <div class="title-in">
+                                                <h6><a href="">KIMETSU NO YAIBA- tập 2</a></h6>
+                                                <p><i class="ion-android-star"></i><span>10.00</span> /10</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="title-hd">
+                    <h2>Chính kịch</h2>
+                    <a href="/films-by-category/chinh-kich/3" class="viewall">Xem tất cả <i class="ion-ios-arrow-right"></i></a>
+                </div>
+                <div class="tabs">
+                    <ul class="tab-links">
+                        <li class="active"><p>Có thể bạn nên xem</p></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab active">
+                            <div class="row">
+                                <div class="slick-multiItem">
+
+                                    <div class="slide-it">
+                                        <div class="movie-item">
+                                            <div class="mv-img">
+                                                <img src="/FileUpload/Images/2022/3/5f27bedf3ab34_always_2011-02-435_627.jpg" alt="Always - Only You" width="185" height="284">
+                                            </div>
+                                            <div class="hvr-inner">
+                                                <a href="/film-detail/always---only-you/d52bbd43708be1c9b5da5a1ef167c090">Xem thêm <i class="ion-android-arrow-dropright"></i></a>
+                                            </div>
+                                            <div class="title-in">
+                                                <h6><a href="/film-detail/always---only-you/d52bbd43708be1c9b5da5a1ef167c090">Always - Only You</a></h6>
+                                                <p><i class="ion-android-star"></i><span>0.00</span> /10</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="title-hd">
+                    <h2>Bạo lực</h2>
+                    <a href="/films-by-category/bao-luc/4" class="viewall">Xem tất cả <i class="ion-ios-arrow-right"></i></a>
+                </div>
+                <div class="tabs">
+                    <ul class="tab-links">
+                        <li class="active"><p>Có thể bạn nên xem</p></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab active">
+                            <div class="row">
+                                <div class="slick-multiItem">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="title-hd">
+                    <h2>Trinh thám</h2>
+                    <a href="/films-by-category/trinh-tham/5" class="viewall">Xem tất cả <i class="ion-ios-arrow-right"></i></a>
+                </div>
+                <div class="tabs">
+                    <ul class="tab-links">
+                        <li class="active"><p>Có thể bạn nên xem</p></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab active">
+                            <div class="row">
+                                <div class="slick-multiItem">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="title-hd">
+                    <h2>Kinh dị</h2>
+                    <a href="/films-by-category/kinh-di/7" class="viewall">Xem tất cả <i class="ion-ios-arrow-right"></i></a>
+                </div>
+                <div class="tabs">
+                    <ul class="tab-links">
+                        <li class="active"><p>Có thể bạn nên xem</p></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab active">
+                            <div class="row">
+                                <div class="slick-multiItem">
+
+                                    <div class="slide-it">
+                                        <div class="movie-item">
+                                            <div class="mv-img">
+                                                <img src="~/image/BlackAdam.jpg" alt="Black Adam" width="185" height="284">
+                                            </div>
+                                            <div class="hvr-inner">
+                                                <a href="">Xem thêm <i class="ion-android-arrow-dropright"></i></a>
+                                            </div>
+                                            <div class="title-in">
+                                                <h6><a href="">Black Adam</a></h6>
+                                                <p><i class="ion-android-star"></i><span>10.00</span> /10</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="sidebar">
+                    <div class="celebrities celeb-author">
+                        @Html.Action("Namph", "Movie", new { @class = "sb-title" })
+                        <samp></samp>
+                        @Html.Action("Theloai", "Movie", new { @class = "sb-title" })
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

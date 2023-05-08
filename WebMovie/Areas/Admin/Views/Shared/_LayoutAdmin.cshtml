@@ -1,0 +1,141 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="@Url.Content("~/Content/user_assets/images/logoweb11.jpg")" />
+    <title>Admin </title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Scripts/nprogress/nprogress.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+    <script src="~/Scripts/daterangepicker.js"></script>
+    <link href="~/Content/custom.min.css" rel="stylesheet" />
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+
+    <script src="/path/or/uri/to/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+    tinyMCE.init({
+            mode: "textareas"
+
+        });</script>
+</head>
+
+
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col" >
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0; height: 100px;">
+                        <a href="@Url.Action("Index","Admin")" class="site_title">
+                            <img class="logo" src="@Url.Content("~/Content/user_assets/images/logo112.png")" alt="" width="119" height="58" style=" margin-left: 15px;">
+                           
+                        </a>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <!-- menu profile quick info -->
+                    <div class="profile clearfix">
+
+                        <div class="profile_info "  style=" width: 200px; ">
+                            <p>Xin chào, <span class="fw-bold text-light">@Session["Tendangnhap"]</span></p>
+                        </div>
+                    </div>
+                    <!-- /menu profile quick info -->
+
+                   
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                     
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a href="@Url.Action("Index","Admin")">
+                                        <i class="fa fa-home"></i> <span>Tổng quan</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("QLAdmin","Admin")"><i class="fa fa-user"></i> <span> Quản lý quản trị viên</span> </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("QLKhachhang","Khachhang")"><i class="fa fa-paw"></i> <span>Quản lý người dùng</span></a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("QLPhim","Phim")"><i class="fa fa-user"></i> <span> Quản lý Phim</span> </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("QLTheloai","Theloai")"><i class="fa fa-users"></i> <span> Quản lý Thể loại</span></a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("QLQG","Quocgia")"><i class="fa fa-cubes"></i> <span>Quản lý quốc gia</span></a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("QLNam","NamPH")"><i class="fa fa-cubes"></i> <span>Quản lý năm phát hành</span></a>
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+            <!-- top navigation -->
+            <div class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="d-flex w-100 align-items-center justify-content-end mx-2">
+                    <div> </div>
+                    <div onclick="addActiveClass()"
+                         class="nav-item dropdown show" style="padding-left: 15px;">
+                        <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="true">
+                         @Session["TaiKhoan"]
+                        </a>
+                        <div class="dropdown-menu dropdown-usermenu pull-right dimem" id="dimem" aria-labelledby="navbarDropdown" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-89px, 20px, 0px);">
+                            <a class="dropdown-item" href="javascript:;"> @Html.ActionLink("Profile", "Chitietadadmin", new { id = Session["TaiKhoan"] }) </a>
+                            <a class="dropdown-item" href="javascript:;">
+                                <span class="badge bg-red pull-right">50%</span>
+                                <span>Settings</span>
+                            </a>
+                            <a class="dropdown-item" href="javascript:;">Help</a>
+                            <a class="dropdown-item" href="/Account/Logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main" style=" min-height: 900.8px;">
+                <div class="">
+
+                    @RenderBody()
+                </div>
+            </div>
+            <!-- /page content -->
+
+        </div>
+    </div>
+
+
+    <script>
+    function addActiveClass() {
+            var element = document.getElementById("dimem");
+            if (element.classList.contains("show")) {
+                element.classList.remove("show");
+            } else {
+                element.classList.add("show");
+            }
+
+        }</script>
+</body>
+</html>

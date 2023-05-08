@@ -1,0 +1,56 @@
+﻿@model WebMovie.Models.QUOCGIA
+
+@{
+    ViewBag.Title = "ThemQG";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h2>Quản lý quốc gia phát hành / thêm mới</h2>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 ">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Thêm mới</h2>
+
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <br>
+                    <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                                Quốc gia phát hành <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                @Html.EditorFor(model => model.TenQG, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TenQG, "", new { @class = "text-danger" })
+
+                                <div style="color:red">
+                                    @ViewBag.Thongbao
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="item form-group">
+                            <div class="col-md-6 col-sm-6 offset-md-3">
+                                <a href="@Url.Action("QLQG","Quocgia")" class="btn btn-primary btn-xs"> Back to page</a>
+                                <button type="submit" class="btn btn-success">Submit</button>
+
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}

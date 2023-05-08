@@ -1,0 +1,105 @@
+﻿@model WebMovie.Models.KHACHHANG
+
+@{ Layout = null; }
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="@Url.Content("~/Content/user_assets/images/logoweb11.jpg")" />
+    <title>Đăng ký </title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Scripts/nprogress/nprogress.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+    <script src="~/Scripts/daterangepicker.js"></script>
+    <link href="~/Content/custom.min.css" rel="stylesheet" />
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+
+    <script src="/path/or/uri/to/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinyMCE.init({
+            mode: "textareas"
+
+        });</script>
+</head>
+ <body style="background-image: url('../../Content/user_assets/images/uploads/slider-bg.jpg');">>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mt-5">
+                    <div class="card-header text-center">
+                        <h3 class="card-title">Đăng ký</h3>
+                    </div>
+                    <div class="card-body">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group">
+                                <label for="HoTen">Họ tên khách hàng</label>
+                                <input type="text" name="HoTen" class="form-control" id="HoTen" placeholder="Nhập họ tên">
+                                <span class="text-danger">@ViewData["Loi1"]</span>
+                                @Html.ValidationMessageFor(model => model.Hoten, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                <label for="TaiKhoan">Tên tài khoản</label>
+                                <input type="text" name="TaiKhoan" class="form-control" id="TaiKhoan" placeholder="Nhập tên tài khoản">
+                                <span class="text-danger">@ViewData["LoiCountTK"]</span>
+                                <span class="text-danger">@ViewData["LoiTrungTK"]</span>
+                                @Html.ValidationMessageFor(model => model.Taikhoan, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                <label for="MatKhau">Mật khẩu</label>
+                                <input type="password" name="MatKhau" class="form-control" id="MatKhau" placeholder="Nhập mật khẩu">
+                                <span class="text-danger">@ViewData["LoiCountMK"]</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="MatKhau2">Nhập lại mật khẩu</label>
+                                <input type="password" name="MatKhau2" class="form-control" id="MatKhau2" placeholder="Nhập lại mật khẩu">
+                                <span class="text-danger">@ViewData["Loi4"]</span>
+                                <span class="text-danger">@ViewData["LoiTrungMK"]</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Email">Email</label>
+                                <input type="email" name="Email" class="form-control" id="Email" placeholder="Nhập email">
+                                <span class="text-danger">@ViewData["Loi6"]</span>
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label for="DienthoaiKh">Số điện thoại</label>
+                                <div class="input-group">
+
+                                    @Html.EditorFor(model => model.DienthoaiKh, new { htmlAttributes = new { @class = "form-control", @id = "DienthoaiKh", placeholder = "Nhập số điện thoại" } })
+                                    @Html.ValidationMessageFor(model => model.DienthoaiKh, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12 d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-primary">Tạo tài khoản</button>
+                                        @Html.ActionLink("Quay lại trang chủ", "Index", "Home", null, new { @class = "btn btn-secondary ml-3" })
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
