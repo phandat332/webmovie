@@ -291,6 +291,8 @@
     <Content Include="Areas\Admin\Views\Phim\QLPhim.cshtml" />
     <Content Include="Areas\Admin\Views\Phim\Chitietphim.cshtml" />
     <Content Include="Areas\Admin\Views\Phim\Xoaphim.cshtml" />
+    <Content Include="Areas\Admin\Views\Phim\Suaphim.cshtml" />
+    <Content Include="Areas\Admin\Views\Phim\Themphim.cshtml" />
     <None Include="Models\MovieData.dbml.layout">
       <DependentUpon>MovieData.dbml</DependentUpon>
     </None>

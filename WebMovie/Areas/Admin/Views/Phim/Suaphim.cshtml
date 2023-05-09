@@ -1,0 +1,181 @@
+﻿@model WebMovie.Models.PHIM
+
+@{
+    ViewBag.Title = "Suaphim";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="form-horizontal">
+    <h2>Quản lý phim/ Sửa phim</h2>
+</div>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 ">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Chỉnh sửa </h2>
+
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <br>
+                    <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                                Tên Phim <span class="required"></span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                @Html.EditorFor(model => model.TenPhim, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TenPhim, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                                Đạo diễn  <span class="required"></span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                @Html.EditorFor(model => model.Daodien, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Daodien, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                                Diễn việ <span class="required"></span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                @Html.EditorFor(model => model.Dienvien, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Dienvien, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                                Thời lượng <span class="required"></span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                @Html.EditorFor(model => model.Thoiluong, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Thoiluong, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                                Độ tuổi <span class="required"></span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                @Html.EditorFor(model => model.Dotuoi, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Dotuoi, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                                Ngôn ngữ <span class="required"></span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                @Html.EditorFor(model => model.Ngonngu, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Ngonngu, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                                link phim <span class="required"></span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                @Html.EditorFor(model => model.Linkphim, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Linkphim, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                                Trailer <span class="required"></span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                @Html.EditorFor(model => model.Trailer, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Trailer, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                                Anh bìa <span class="required"></span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                @Html.EditorFor(model => model.Anhbia, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Anhbia, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                                Năm phát hành <span class="required"></span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                @Html.EditorFor(model => model.NAMPHATHANH.Nam, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NAMPHATHANH.Nam, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                                Quốc gia <span class="required"></span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                @Html.EditorFor(model => model.QUOCGIA.TenQG, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.QUOCGIA.TenQG, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                                Phim bộ<span class="required"></span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                @Html.EditorFor(model => model.Phimbo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Phimbo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                                Phân phim<span class="required"></span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                @Html.EditorFor(model => model.Phanphim, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Phanphim, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                               Tâp phim<span class="required"></span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                @Html.EditorFor(model => model.Tapphim, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Tapphim, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="item form-group">
+                            <div class="col-md-6 col-sm-6 offset-md-3">
+                                <a href="@Url.Action("QLPhim","Phim")" class="btn btn-primary btn-xs">Back to List </a>
+                                <button type="submit" class="btn btn-success">Save</button>
+
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+
+                   
+           

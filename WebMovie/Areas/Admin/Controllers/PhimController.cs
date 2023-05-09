@@ -10,6 +10,7 @@ using PagedList;
 using WebMovie.ViewModel;
 using Raven.Database.Storage;
 using System.Drawing;
+using System.IO;
 
 namespace WebMovie.Areas.Admin.Controllers
 {
@@ -122,9 +123,9 @@ namespace WebMovie.Areas.Admin.Controllers
 
         }
         // quản lý thể loại phim
-      
-   /*     [HttpGet]
-        public ActionResult Suatl(int id)
+        [AdminAuthorize]
+        [HttpGet]
+        public ActionResult Suaphim(int id)
         {
             PHIM phim = data.PHIMs.SingleOrDefault(n => n.Maphim == id);
             if (phim == null)
@@ -135,16 +136,48 @@ namespace WebMovie.Areas.Admin.Controllers
             return View(phim);
         }
 
-        [HttpPost, ActionName("Suatl")]
+        [HttpPost, ActionName("Suaphim")]
         [ValidateInput(false)]
         public ActionResult Saved(FormCollection collection, int id)
         {
-            KHACHHANG tk = data.KHACHHANGs.SingleOrDefault(n => n.MaKh == id);
+            PHIM tk = data.PHIMs.SingleOrDefault(n => n.Maphim == id);
        
             UpdateModel(tk);
             data.SubmitChanges();
-            return RedirectToAction("QLAdmin");
-        }*/
+            return RedirectToAction("QLPhim");
+        }
+        [AdminAuthorize]
+        [HttpGet]
+        public ActionResult Themphim()
+        {
+            ViewBag.MaTH = new SelectList(data.NAMPHATHANHs.ToList().OrderBy(n => n.Nam), "MaNam", "Nam");
+            ViewBag.MaDM = new SelectList(data.QUOCGIAs.ToList().OrderBy(n => n.TenQG), "MaQG", "TenQG");
+            return View();
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Themphim(PHIM sanpham, HttpPostedFileBase uploadhinh)
+        {
 
+            data.PHIMs.InsertOnSubmit(sanpham);
+            data.SubmitChanges();
+            if (uploadhinh != null && uploadhinh.ContentLength > 0)
+            {
+                int id = int.Parse(data.PHIMs.ToList().Last().Maphim.ToString());
+
+                string _FileName = "";
+                int index = uploadhinh.FileName.IndexOf('.');
+                _FileName = "themsp" + id.ToString() + "." + uploadhinh.FileName.Substring(index + 1);
+                string _path = Path.Combine(Server.MapPath("~/Content/img"), _FileName);
+                uploadhinh.SaveAs(_path);
+
+                PHIM unv = data.PHIMs.FirstOrDefault(x => x.Maphim == id);
+                unv.Anhbia = _FileName;
+                data.SubmitChanges();
+            }
+            return RedirectToAction("QLSanpham");
+
+        }
     }
+   
 }
