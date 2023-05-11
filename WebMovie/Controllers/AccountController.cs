@@ -6,6 +6,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
 using WebMovie.App_Start;
 using WebMovie.Models;
 using WebMovie.ViewModel;
@@ -169,27 +170,58 @@ namespace WebMovie.Controllers
             return RedirectToAction("Index", "Home", new { area = "" });
         }
         // thay đổi thông tin
-       /* [HttpGet]
-        public ActionResult Suakh(int id)
+        /* [HttpGet]
+         public ActionResult Suakh(int id)
+         {
+             KHACHHANG tk = db.KHACHHANGs.SingleOrDefault(n => n.MaKh == id);
+             if (tk == null)
+             {
+                 Response.StatusCode = 404;
+                 return null;
+             }
+             return View(tk);
+         }
+         [HttpPost, ActionName("Suakh")]
+         [ValidateInput(false)]
+         public ActionResult savekh(int id)
+         {
+             KHACHHANG tk = db.KHACHHANGs.SingleOrDefault(n => n.MaKh == id);
+
+             UpdateModel(tk);
+             db.SubmitChanges();
+             return RedirectToAction("Login");
+         }*/
+        [HttpGet]
+      /*  public ActionResult LichSuPhim()
         {
-            KHACHHANG tk = db.KHACHHANGs.SingleOrDefault(n => n.MaKh == id);
-            if (tk == null)
+            // Kiểm tra khách hàng đã đăng nhập chưa
+            if (Session["User"] == null)
             {
-                Response.StatusCode = 404;
-                return null;
+                return RedirectToAction("Login");
             }
-            return View(tk);
-        }
-        [HttpPost, ActionName("Suakh")]
-        [ValidateInput(false)]
-        public ActionResult savekh(int id)
-        {
-            KHACHHANG tk = db.KHACHHANGs.SingleOrDefault(n => n.MaKh == id);
+            else
+            {
+                // Lấy mã khách hàng từ session
+                int makh = ((KHACHHANG)Session["User"]).MaKh;
 
-            UpdateModel(tk);
-            db.SubmitChanges();
-            return RedirectToAction("Login");
+                // Lấy lịch sử phim từ database
+                var lichsu = db.LICHSUs.Where(c => c.Makh == makh).ToList();
+
+                // Truyền dữ liệu lịch sử phim cho view
+                ViewBag.LichSu = lichsu;
+
+                return View();
+            }
         }*/
+        public ActionResult LichSuXemPhim()
+        {
+            int Makh = ((KHACHHANG)Session["User"]).MaKh;
+            var lichSuXemPhim = from p in db.PHIMs
+                                join l in db.LICHSUs on p.Maphim equals l.Maphim
+                                where l.Makh == Makh
+                                select p;
 
+            return View(lichSuXemPhim);
+        }
     }
 }

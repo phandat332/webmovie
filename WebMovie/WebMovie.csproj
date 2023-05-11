@@ -171,6 +171,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\MovieData.cs">
+      <DependentUpon>MovieData.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Models\MovieData.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -332,6 +335,7 @@
     <Content Include="Views\movie\SanPhamTheoHanhdong.cshtml" />
     <Content Include="Views\movie\Xemphim.cshtml" />
     <Content Include="Views\movie\Phimle.cshtml" />
+    <Content Include="Views\Account\LichSuXemPhim.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

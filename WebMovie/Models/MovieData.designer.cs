@@ -30,15 +30,21 @@ namespace WebMovie.Models
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void InsertCOMMENT(COMMENT instance);
+    partial void UpdateCOMMENT(COMMENT instance);
+    partial void DeleteCOMMENT(COMMENT instance);
     partial void InsertKHACHHANG(KHACHHANG instance);
     partial void UpdateKHACHHANG(KHACHHANG instance);
     partial void DeleteKHACHHANG(KHACHHANG instance);
+    partial void InsertLICHSU(LICHSU instance);
+    partial void UpdateLICHSU(LICHSU instance);
+    partial void DeleteLICHSU(LICHSU instance);
     partial void InsertNAMPHATHANH(NAMPHATHANH instance);
     partial void UpdateNAMPHATHANH(NAMPHATHANH instance);
     partial void DeleteNAMPHATHANH(NAMPHATHANH instance);
-    partial void InsertPHIMTHELOAI(PHIMTHELOAI instance);
-    partial void UpdatePHIMTHELOAI(PHIMTHELOAI instance);
-    partial void DeletePHIMTHELOAI(PHIMTHELOAI instance);
+    partial void InsertPHIM(PHIM instance);
+    partial void UpdatePHIM(PHIM instance);
+    partial void DeletePHIM(PHIM instance);
     partial void InsertQUOCGIA(QUOCGIA instance);
     partial void UpdateQUOCGIA(QUOCGIA instance);
     partial void DeleteQUOCGIA(QUOCGIA instance);
@@ -48,9 +54,9 @@ namespace WebMovie.Models
     partial void InsertTHELOAI(THELOAI instance);
     partial void UpdateTHELOAI(THELOAI instance);
     partial void DeleteTHELOAI(THELOAI instance);
-    partial void InsertPHIM(PHIM instance);
-    partial void UpdatePHIM(PHIM instance);
-    partial void DeletePHIM(PHIM instance);
+    partial void InsertPHIMTHELOAI(PHIMTHELOAI instance);
+    partial void UpdatePHIMTHELOAI(PHIMTHELOAI instance);
+    partial void DeletePHIMTHELOAI(PHIMTHELOAI instance);
     #endregion
 		
 		public MovieDataDataContext() : 
@@ -83,11 +89,27 @@ namespace WebMovie.Models
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<COMMENT> COMMENTs
+		{
+			get
+			{
+				return this.GetTable<COMMENT>();
+			}
+		}
+		
 		public System.Data.Linq.Table<KHACHHANG> KHACHHANGs
 		{
 			get
 			{
 				return this.GetTable<KHACHHANG>();
+			}
+		}
+		
+		public System.Data.Linq.Table<LICHSU> LICHSUs
+		{
+			get
+			{
+				return this.GetTable<LICHSU>();
 			}
 		}
 		
@@ -99,11 +121,11 @@ namespace WebMovie.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<PHIMTHELOAI> PHIMTHELOAIs
+		public System.Data.Linq.Table<PHIM> PHIMs
 		{
 			get
 			{
-				return this.GetTable<PHIMTHELOAI>();
+				return this.GetTable<PHIM>();
 			}
 		}
 		
@@ -131,11 +153,275 @@ namespace WebMovie.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<PHIM> PHIMs
+		public System.Data.Linq.Table<PHIMTHELOAI> PHIMTHELOAIs
 		{
 			get
 			{
-				return this.GetTable<PHIM>();
+				return this.GetTable<PHIMTHELOAI>();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.COMMENTS")]
+	public partial class COMMENT : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _comment_id;
+		
+		private System.Nullable<int> _Makh;
+		
+		private System.Nullable<int> _Maphim;
+		
+		private string _comment1;
+		
+		private System.Nullable<int> _rating;
+		
+		private System.Nullable<System.DateTime> _thoigian;
+		
+		private EntityRef<KHACHHANG> _KHACHHANG;
+		
+		private EntityRef<PHIM> _PHIM;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oncomment_idChanging(int value);
+    partial void Oncomment_idChanged();
+    partial void OnMakhChanging(System.Nullable<int> value);
+    partial void OnMakhChanged();
+    partial void OnMaphimChanging(System.Nullable<int> value);
+    partial void OnMaphimChanged();
+    partial void Oncomment1Changing(string value);
+    partial void Oncomment1Changed();
+    partial void OnratingChanging(System.Nullable<int> value);
+    partial void OnratingChanged();
+    partial void OnthoigianChanging(System.Nullable<System.DateTime> value);
+    partial void OnthoigianChanged();
+    #endregion
+		
+		public COMMENT()
+		{
+			this._KHACHHANG = default(EntityRef<KHACHHANG>);
+			this._PHIM = default(EntityRef<PHIM>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_comment_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int comment_id
+		{
+			get
+			{
+				return this._comment_id;
+			}
+			set
+			{
+				if ((this._comment_id != value))
+				{
+					this.Oncomment_idChanging(value);
+					this.SendPropertyChanging();
+					this._comment_id = value;
+					this.SendPropertyChanged("comment_id");
+					this.Oncomment_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Makh", DbType="Int")]
+		public System.Nullable<int> Makh
+		{
+			get
+			{
+				return this._Makh;
+			}
+			set
+			{
+				if ((this._Makh != value))
+				{
+					if (this._KHACHHANG.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMakhChanging(value);
+					this.SendPropertyChanging();
+					this._Makh = value;
+					this.SendPropertyChanged("Makh");
+					this.OnMakhChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Maphim", DbType="Int")]
+		public System.Nullable<int> Maphim
+		{
+			get
+			{
+				return this._Maphim;
+			}
+			set
+			{
+				if ((this._Maphim != value))
+				{
+					if (this._PHIM.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMaphimChanging(value);
+					this.SendPropertyChanging();
+					this._Maphim = value;
+					this.SendPropertyChanged("Maphim");
+					this.OnMaphimChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="comment", Storage="_comment1", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string comment1
+		{
+			get
+			{
+				return this._comment1;
+			}
+			set
+			{
+				if ((this._comment1 != value))
+				{
+					this.Oncomment1Changing(value);
+					this.SendPropertyChanging();
+					this._comment1 = value;
+					this.SendPropertyChanged("comment1");
+					this.Oncomment1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rating", DbType="Int")]
+		public System.Nullable<int> rating
+		{
+			get
+			{
+				return this._rating;
+			}
+			set
+			{
+				if ((this._rating != value))
+				{
+					this.OnratingChanging(value);
+					this.SendPropertyChanging();
+					this._rating = value;
+					this.SendPropertyChanged("rating");
+					this.OnratingChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_thoigian", DbType="DateTime")]
+		public System.Nullable<System.DateTime> thoigian
+		{
+			get
+			{
+				return this._thoigian;
+			}
+			set
+			{
+				if ((this._thoigian != value))
+				{
+					this.OnthoigianChanging(value);
+					this.SendPropertyChanging();
+					this._thoigian = value;
+					this.SendPropertyChanged("thoigian");
+					this.OnthoigianChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KHACHHANG_COMMENT", Storage="_KHACHHANG", ThisKey="Makh", OtherKey="MaKh", IsForeignKey=true, DeleteRule="CASCADE")]
+		public KHACHHANG KHACHHANG
+		{
+			get
+			{
+				return this._KHACHHANG.Entity;
+			}
+			set
+			{
+				KHACHHANG previousValue = this._KHACHHANG.Entity;
+				if (((previousValue != value) 
+							|| (this._KHACHHANG.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._KHACHHANG.Entity = null;
+						previousValue.COMMENTs.Remove(this);
+					}
+					this._KHACHHANG.Entity = value;
+					if ((value != null))
+					{
+						value.COMMENTs.Add(this);
+						this._Makh = value.MaKh;
+					}
+					else
+					{
+						this._Makh = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("KHACHHANG");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHIM_COMMENT", Storage="_PHIM", ThisKey="Maphim", OtherKey="Maphim", IsForeignKey=true, DeleteRule="CASCADE")]
+		public PHIM PHIM
+		{
+			get
+			{
+				return this._PHIM.Entity;
+			}
+			set
+			{
+				PHIM previousValue = this._PHIM.Entity;
+				if (((previousValue != value) 
+							|| (this._PHIM.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._PHIM.Entity = null;
+						previousValue.COMMENTs.Remove(this);
+					}
+					this._PHIM.Entity = value;
+					if ((value != null))
+					{
+						value.COMMENTs.Add(this);
+						this._Maphim = value.Maphim;
+					}
+					else
+					{
+						this._Maphim = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("PHIM");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -159,6 +445,10 @@ namespace WebMovie.Models
 		private System.Nullable<int> _MaQuyen;
 		
 		private string _Hoten;
+		
+		private EntitySet<COMMENT> _COMMENTs;
+		
+		private EntitySet<LICHSU> _LICHSUs;
 		
 		private EntityRef<QUYEN> _QUYEN;
 		
@@ -184,6 +474,8 @@ namespace WebMovie.Models
 		
 		public KHACHHANG()
 		{
+			this._COMMENTs = new EntitySet<COMMENT>(new Action<COMMENT>(this.attach_COMMENTs), new Action<COMMENT>(this.detach_COMMENTs));
+			this._LICHSUs = new EntitySet<LICHSU>(new Action<LICHSU>(this.attach_LICHSUs), new Action<LICHSU>(this.detach_LICHSUs));
 			this._QUYEN = default(EntityRef<QUYEN>);
 			OnCreated();
 		}
@@ -332,6 +624,32 @@ namespace WebMovie.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KHACHHANG_COMMENT", Storage="_COMMENTs", ThisKey="MaKh", OtherKey="Makh")]
+		public EntitySet<COMMENT> COMMENTs
+		{
+			get
+			{
+				return this._COMMENTs;
+			}
+			set
+			{
+				this._COMMENTs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KHACHHANG_LICHSU", Storage="_LICHSUs", ThisKey="MaKh", OtherKey="Makh")]
+		public EntitySet<LICHSU> LICHSUs
+		{
+			get
+			{
+				return this._LICHSUs;
+			}
+			set
+			{
+				this._LICHSUs.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="QUYEN_KHACHHANG", Storage="_QUYEN", ThisKey="MaQuyen", OtherKey="MaQuyen", IsForeignKey=true)]
 		public QUYEN QUYEN
 		{
@@ -362,6 +680,198 @@ namespace WebMovie.Models
 						this._MaQuyen = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("QUYEN");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_COMMENTs(COMMENT entity)
+		{
+			this.SendPropertyChanging();
+			entity.KHACHHANG = this;
+		}
+		
+		private void detach_COMMENTs(COMMENT entity)
+		{
+			this.SendPropertyChanging();
+			entity.KHACHHANG = null;
+		}
+		
+		private void attach_LICHSUs(LICHSU entity)
+		{
+			this.SendPropertyChanging();
+			entity.KHACHHANG = this;
+		}
+		
+		private void detach_LICHSUs(LICHSU entity)
+		{
+			this.SendPropertyChanging();
+			entity.KHACHHANG = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LICHSU")]
+	public partial class LICHSU : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Maphim;
+		
+		private int _Makh;
+		
+		private EntityRef<KHACHHANG> _KHACHHANG;
+		
+		private EntityRef<PHIM> _PHIM;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnMaphimChanging(int value);
+    partial void OnMaphimChanged();
+    partial void OnMakhChanging(int value);
+    partial void OnMakhChanged();
+    #endregion
+		
+		public LICHSU()
+		{
+			this._KHACHHANG = default(EntityRef<KHACHHANG>);
+			this._PHIM = default(EntityRef<PHIM>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Maphim", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int Maphim
+		{
+			get
+			{
+				return this._Maphim;
+			}
+			set
+			{
+				if ((this._Maphim != value))
+				{
+					if (this._PHIM.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMaphimChanging(value);
+					this.SendPropertyChanging();
+					this._Maphim = value;
+					this.SendPropertyChanged("Maphim");
+					this.OnMaphimChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Makh", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int Makh
+		{
+			get
+			{
+				return this._Makh;
+			}
+			set
+			{
+				if ((this._Makh != value))
+				{
+					if (this._KHACHHANG.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMakhChanging(value);
+					this.SendPropertyChanging();
+					this._Makh = value;
+					this.SendPropertyChanged("Makh");
+					this.OnMakhChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KHACHHANG_LICHSU", Storage="_KHACHHANG", ThisKey="Makh", OtherKey="MaKh", IsForeignKey=true)]
+		public KHACHHANG KHACHHANG
+		{
+			get
+			{
+				return this._KHACHHANG.Entity;
+			}
+			set
+			{
+				KHACHHANG previousValue = this._KHACHHANG.Entity;
+				if (((previousValue != value) 
+							|| (this._KHACHHANG.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._KHACHHANG.Entity = null;
+						previousValue.LICHSUs.Remove(this);
+					}
+					this._KHACHHANG.Entity = value;
+					if ((value != null))
+					{
+						value.LICHSUs.Add(this);
+						this._Makh = value.MaKh;
+					}
+					else
+					{
+						this._Makh = default(int);
+					}
+					this.SendPropertyChanged("KHACHHANG");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHIM_LICHSU", Storage="_PHIM", ThisKey="Maphim", OtherKey="Maphim", IsForeignKey=true)]
+		public PHIM PHIM
+		{
+			get
+			{
+				return this._PHIM.Entity;
+			}
+			set
+			{
+				PHIM previousValue = this._PHIM.Entity;
+				if (((previousValue != value) 
+							|| (this._PHIM.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._PHIM.Entity = null;
+						previousValue.LICHSUs.Remove(this);
+					}
+					this._PHIM.Entity = value;
+					if ((value != null))
+					{
+						value.LICHSUs.Add(this);
+						this._Maphim = value.Maphim;
+					}
+					else
+					{
+						this._Maphim = default(int);
+					}
+					this.SendPropertyChanged("PHIM");
 				}
 			}
 		}
@@ -501,19 +1011,53 @@ namespace WebMovie.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PHIMTHELOAI")]
-	public partial class PHIMTHELOAI : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PHIM")]
+	public partial class PHIM : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _Maphim;
 		
-		private int _MaTL;
+		private string _TenPhim;
 		
-		private EntityRef<THELOAI> _THELOAI;
+		private string _Daodien;
 		
-		private EntityRef<PHIM> _PHIM;
+		private string _Dienvien;
+		
+		private string _Noidung;
+		
+		private string _Dotuoi;
+		
+		private string _Thoiluong;
+		
+		private string _Ngonngu;
+		
+		private string _Linkphim;
+		
+		private string _Trailer;
+		
+		private System.Nullable<int> _MaNam;
+		
+		private System.Nullable<int> _MaQG;
+		
+		private string _Anhbia;
+		
+		private System.Nullable<bool> _Phimbo;
+		
+		private System.Nullable<int> _Phanphim;
+		
+		private System.Nullable<int> _Tapphim;
+		
+		private EntitySet<COMMENT> _COMMENTs;
+		
+		private EntitySet<LICHSU> _LICHSUs;
+		
+		private EntitySet<PHIMTHELOAI> _PHIMTHELOAIs;
+		
+		private EntityRef<NAMPHATHANH> _NAMPHATHANH;
+		
+		private EntityRef<QUOCGIA> _QUOCGIA;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -521,18 +1065,49 @@ namespace WebMovie.Models
     partial void OnCreated();
     partial void OnMaphimChanging(int value);
     partial void OnMaphimChanged();
-    partial void OnMaTLChanging(int value);
-    partial void OnMaTLChanged();
+    partial void OnTenPhimChanging(string value);
+    partial void OnTenPhimChanged();
+    partial void OnDaodienChanging(string value);
+    partial void OnDaodienChanged();
+    partial void OnDienvienChanging(string value);
+    partial void OnDienvienChanged();
+    partial void OnNoidungChanging(string value);
+    partial void OnNoidungChanged();
+    partial void OnDotuoiChanging(string value);
+    partial void OnDotuoiChanged();
+    partial void OnThoiluongChanging(string value);
+    partial void OnThoiluongChanged();
+    partial void OnNgonnguChanging(string value);
+    partial void OnNgonnguChanged();
+    partial void OnLinkphimChanging(string value);
+    partial void OnLinkphimChanged();
+    partial void OnTrailerChanging(string value);
+    partial void OnTrailerChanged();
+    partial void OnMaNamChanging(System.Nullable<int> value);
+    partial void OnMaNamChanged();
+    partial void OnMaQGChanging(System.Nullable<int> value);
+    partial void OnMaQGChanged();
+    partial void OnAnhbiaChanging(string value);
+    partial void OnAnhbiaChanged();
+    partial void OnPhimboChanging(System.Nullable<bool> value);
+    partial void OnPhimboChanged();
+    partial void OnPhanphimChanging(System.Nullable<int> value);
+    partial void OnPhanphimChanged();
+    partial void OnTapphimChanging(System.Nullable<int> value);
+    partial void OnTapphimChanged();
     #endregion
 		
-		public PHIMTHELOAI()
+		public PHIM()
 		{
-			this._THELOAI = default(EntityRef<THELOAI>);
-			this._PHIM = default(EntityRef<PHIM>);
+			this._COMMENTs = new EntitySet<COMMENT>(new Action<COMMENT>(this.attach_COMMENTs), new Action<COMMENT>(this.detach_COMMENTs));
+			this._LICHSUs = new EntitySet<LICHSU>(new Action<LICHSU>(this.attach_LICHSUs), new Action<LICHSU>(this.detach_LICHSUs));
+			this._PHIMTHELOAIs = new EntitySet<PHIMTHELOAI>(new Action<PHIMTHELOAI>(this.attach_PHIMTHELOAIs), new Action<PHIMTHELOAI>(this.detach_PHIMTHELOAIs));
+			this._NAMPHATHANH = default(EntityRef<NAMPHATHANH>);
+			this._QUOCGIA = default(EntityRef<QUOCGIA>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Maphim", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Maphim", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int Maphim
 		{
 			get
@@ -543,10 +1118,6 @@ namespace WebMovie.Models
 			{
 				if ((this._Maphim != value))
 				{
-					if (this._PHIM.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnMaphimChanging(value);
 					this.SendPropertyChanging();
 					this._Maphim = value;
@@ -556,94 +1127,417 @@ namespace WebMovie.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaTL", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int MaTL
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenPhim", DbType="NVarChar(100)")]
+		public string TenPhim
 		{
 			get
 			{
-				return this._MaTL;
+				return this._TenPhim;
 			}
 			set
 			{
-				if ((this._MaTL != value))
+				if ((this._TenPhim != value))
 				{
-					if (this._THELOAI.HasLoadedOrAssignedValue)
+					this.OnTenPhimChanging(value);
+					this.SendPropertyChanging();
+					this._TenPhim = value;
+					this.SendPropertyChanged("TenPhim");
+					this.OnTenPhimChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Daodien", DbType="NVarChar(50)")]
+		public string Daodien
+		{
+			get
+			{
+				return this._Daodien;
+			}
+			set
+			{
+				if ((this._Daodien != value))
+				{
+					this.OnDaodienChanging(value);
+					this.SendPropertyChanging();
+					this._Daodien = value;
+					this.SendPropertyChanged("Daodien");
+					this.OnDaodienChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dienvien", DbType="NVarChar(200)")]
+		public string Dienvien
+		{
+			get
+			{
+				return this._Dienvien;
+			}
+			set
+			{
+				if ((this._Dienvien != value))
+				{
+					this.OnDienvienChanging(value);
+					this.SendPropertyChanging();
+					this._Dienvien = value;
+					this.SendPropertyChanged("Dienvien");
+					this.OnDienvienChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Noidung", DbType="NVarChar(MAX)")]
+		public string Noidung
+		{
+			get
+			{
+				return this._Noidung;
+			}
+			set
+			{
+				if ((this._Noidung != value))
+				{
+					this.OnNoidungChanging(value);
+					this.SendPropertyChanging();
+					this._Noidung = value;
+					this.SendPropertyChanged("Noidung");
+					this.OnNoidungChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dotuoi", DbType="Char(10)")]
+		public string Dotuoi
+		{
+			get
+			{
+				return this._Dotuoi;
+			}
+			set
+			{
+				if ((this._Dotuoi != value))
+				{
+					this.OnDotuoiChanging(value);
+					this.SendPropertyChanging();
+					this._Dotuoi = value;
+					this.SendPropertyChanged("Dotuoi");
+					this.OnDotuoiChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Thoiluong", DbType="NVarChar(20)")]
+		public string Thoiluong
+		{
+			get
+			{
+				return this._Thoiluong;
+			}
+			set
+			{
+				if ((this._Thoiluong != value))
+				{
+					this.OnThoiluongChanging(value);
+					this.SendPropertyChanging();
+					this._Thoiluong = value;
+					this.SendPropertyChanged("Thoiluong");
+					this.OnThoiluongChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ngonngu", DbType="NVarChar(50)")]
+		public string Ngonngu
+		{
+			get
+			{
+				return this._Ngonngu;
+			}
+			set
+			{
+				if ((this._Ngonngu != value))
+				{
+					this.OnNgonnguChanging(value);
+					this.SendPropertyChanging();
+					this._Ngonngu = value;
+					this.SendPropertyChanged("Ngonngu");
+					this.OnNgonnguChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Linkphim", DbType="NVarChar(200)")]
+		public string Linkphim
+		{
+			get
+			{
+				return this._Linkphim;
+			}
+			set
+			{
+				if ((this._Linkphim != value))
+				{
+					this.OnLinkphimChanging(value);
+					this.SendPropertyChanging();
+					this._Linkphim = value;
+					this.SendPropertyChanged("Linkphim");
+					this.OnLinkphimChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Trailer", DbType="NVarChar(MAX)")]
+		public string Trailer
+		{
+			get
+			{
+				return this._Trailer;
+			}
+			set
+			{
+				if ((this._Trailer != value))
+				{
+					this.OnTrailerChanging(value);
+					this.SendPropertyChanging();
+					this._Trailer = value;
+					this.SendPropertyChanged("Trailer");
+					this.OnTrailerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNam", DbType="Int")]
+		public System.Nullable<int> MaNam
+		{
+			get
+			{
+				return this._MaNam;
+			}
+			set
+			{
+				if ((this._MaNam != value))
+				{
+					if (this._NAMPHATHANH.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnMaTLChanging(value);
+					this.OnMaNamChanging(value);
 					this.SendPropertyChanging();
-					this._MaTL = value;
-					this.SendPropertyChanged("MaTL");
-					this.OnMaTLChanged();
+					this._MaNam = value;
+					this.SendPropertyChanged("MaNam");
+					this.OnMaNamChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="THELOAI_PHIMTHELOAI", Storage="_THELOAI", ThisKey="MaTL", OtherKey="MaTL", IsForeignKey=true)]
-		public THELOAI THELOAI
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaQG", DbType="Int")]
+		public System.Nullable<int> MaQG
 		{
 			get
 			{
-				return this._THELOAI.Entity;
+				return this._MaQG;
 			}
 			set
 			{
-				THELOAI previousValue = this._THELOAI.Entity;
-				if (((previousValue != value) 
-							|| (this._THELOAI.HasLoadedOrAssignedValue == false)))
+				if ((this._MaQG != value))
 				{
+					if (this._QUOCGIA.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMaQGChanging(value);
 					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._THELOAI.Entity = null;
-						previousValue.PHIMTHELOAIs.Remove(this);
-					}
-					this._THELOAI.Entity = value;
-					if ((value != null))
-					{
-						value.PHIMTHELOAIs.Add(this);
-						this._MaTL = value.MaTL;
-					}
-					else
-					{
-						this._MaTL = default(int);
-					}
-					this.SendPropertyChanged("THELOAI");
+					this._MaQG = value;
+					this.SendPropertyChanged("MaQG");
+					this.OnMaQGChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHIM_PHIMTHELOAI", Storage="_PHIM", ThisKey="Maphim", OtherKey="Maphim", IsForeignKey=true)]
-		public PHIM PHIM
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Anhbia", DbType="VarChar(50)")]
+		public string Anhbia
 		{
 			get
 			{
-				return this._PHIM.Entity;
+				return this._Anhbia;
 			}
 			set
 			{
-				PHIM previousValue = this._PHIM.Entity;
+				if ((this._Anhbia != value))
+				{
+					this.OnAnhbiaChanging(value);
+					this.SendPropertyChanging();
+					this._Anhbia = value;
+					this.SendPropertyChanged("Anhbia");
+					this.OnAnhbiaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phimbo", DbType="Bit")]
+		public System.Nullable<bool> Phimbo
+		{
+			get
+			{
+				return this._Phimbo;
+			}
+			set
+			{
+				if ((this._Phimbo != value))
+				{
+					this.OnPhimboChanging(value);
+					this.SendPropertyChanging();
+					this._Phimbo = value;
+					this.SendPropertyChanged("Phimbo");
+					this.OnPhimboChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phanphim", DbType="Int")]
+		public System.Nullable<int> Phanphim
+		{
+			get
+			{
+				return this._Phanphim;
+			}
+			set
+			{
+				if ((this._Phanphim != value))
+				{
+					this.OnPhanphimChanging(value);
+					this.SendPropertyChanging();
+					this._Phanphim = value;
+					this.SendPropertyChanged("Phanphim");
+					this.OnPhanphimChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tapphim", DbType="Int")]
+		public System.Nullable<int> Tapphim
+		{
+			get
+			{
+				return this._Tapphim;
+			}
+			set
+			{
+				if ((this._Tapphim != value))
+				{
+					this.OnTapphimChanging(value);
+					this.SendPropertyChanging();
+					this._Tapphim = value;
+					this.SendPropertyChanged("Tapphim");
+					this.OnTapphimChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHIM_COMMENT", Storage="_COMMENTs", ThisKey="Maphim", OtherKey="Maphim")]
+		public EntitySet<COMMENT> COMMENTs
+		{
+			get
+			{
+				return this._COMMENTs;
+			}
+			set
+			{
+				this._COMMENTs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHIM_LICHSU", Storage="_LICHSUs", ThisKey="Maphim", OtherKey="Maphim")]
+		public EntitySet<LICHSU> LICHSUs
+		{
+			get
+			{
+				return this._LICHSUs;
+			}
+			set
+			{
+				this._LICHSUs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHIM_PHIMTHELOAI", Storage="_PHIMTHELOAIs", ThisKey="Maphim", OtherKey="Maphim")]
+		public EntitySet<PHIMTHELOAI> PHIMTHELOAIs
+		{
+			get
+			{
+				return this._PHIMTHELOAIs;
+			}
+			set
+			{
+				this._PHIMTHELOAIs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NAMPHATHANH_PHIM", Storage="_NAMPHATHANH", ThisKey="MaNam", OtherKey="MaNam", IsForeignKey=true)]
+		public NAMPHATHANH NAMPHATHANH
+		{
+			get
+			{
+				return this._NAMPHATHANH.Entity;
+			}
+			set
+			{
+				NAMPHATHANH previousValue = this._NAMPHATHANH.Entity;
 				if (((previousValue != value) 
-							|| (this._PHIM.HasLoadedOrAssignedValue == false)))
+							|| (this._NAMPHATHANH.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._PHIM.Entity = null;
-						previousValue.PHIMTHELOAIs.Remove(this);
+						this._NAMPHATHANH.Entity = null;
+						previousValue.PHIMs.Remove(this);
 					}
-					this._PHIM.Entity = value;
+					this._NAMPHATHANH.Entity = value;
 					if ((value != null))
 					{
-						value.PHIMTHELOAIs.Add(this);
-						this._Maphim = value.Maphim;
+						value.PHIMs.Add(this);
+						this._MaNam = value.MaNam;
 					}
 					else
 					{
-						this._Maphim = default(int);
+						this._MaNam = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("PHIM");
+					this.SendPropertyChanged("NAMPHATHANH");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="QUOCGIA_PHIM", Storage="_QUOCGIA", ThisKey="MaQG", OtherKey="MaQG", IsForeignKey=true)]
+		public QUOCGIA QUOCGIA
+		{
+			get
+			{
+				return this._QUOCGIA.Entity;
+			}
+			set
+			{
+				QUOCGIA previousValue = this._QUOCGIA.Entity;
+				if (((previousValue != value) 
+							|| (this._QUOCGIA.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._QUOCGIA.Entity = null;
+						previousValue.PHIMs.Remove(this);
+					}
+					this._QUOCGIA.Entity = value;
+					if ((value != null))
+					{
+						value.PHIMs.Add(this);
+						this._MaQG = value.MaQG;
+					}
+					else
+					{
+						this._MaQG = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("QUOCGIA");
 				}
 			}
 		}
@@ -666,6 +1560,42 @@ namespace WebMovie.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_COMMENTs(COMMENT entity)
+		{
+			this.SendPropertyChanging();
+			entity.PHIM = this;
+		}
+		
+		private void detach_COMMENTs(COMMENT entity)
+		{
+			this.SendPropertyChanging();
+			entity.PHIM = null;
+		}
+		
+		private void attach_LICHSUs(LICHSU entity)
+		{
+			this.SendPropertyChanging();
+			entity.PHIM = this;
+		}
+		
+		private void detach_LICHSUs(LICHSU entity)
+		{
+			this.SendPropertyChanging();
+			entity.PHIM = null;
+		}
+		
+		private void attach_PHIMTHELOAIs(PHIMTHELOAI entity)
+		{
+			this.SendPropertyChanging();
+			entity.PHIM = this;
+		}
+		
+		private void detach_PHIMTHELOAIs(PHIMTHELOAI entity)
+		{
+			this.SendPropertyChanging();
+			entity.PHIM = null;
 		}
 	}
 	
@@ -1011,49 +1941,19 @@ namespace WebMovie.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PHIM")]
-	public partial class PHIM : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PHIMTHELOAI")]
+	public partial class PHIMTHELOAI : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _Maphim;
 		
-		private string _TenPhim;
+		private int _MaTL;
 		
-		private string _Daodien;
+		private EntityRef<PHIM> _PHIM;
 		
-		private string _Dienvien;
-		
-		private string _Noidung;
-		
-		private string _Dotuoi;
-		
-		private string _Thoiluong;
-		
-		private string _Ngonngu;
-		
-		private string _Linkphim;
-		
-		private string _Trailer;
-		
-		private System.Nullable<int> _MaNam;
-		
-		private System.Nullable<int> _MaQG;
-		
-		private string _Anhbia;
-		
-		private System.Nullable<bool> _Phimbo;
-		
-		private System.Nullable<int> _Phanphim;
-		
-		private System.Nullable<int> _Tapphim;
-		
-		private EntitySet<PHIMTHELOAI> _PHIMTHELOAIs;
-		
-		private EntityRef<NAMPHATHANH> _NAMPHATHANH;
-		
-		private EntityRef<QUOCGIA> _QUOCGIA;
+		private EntityRef<THELOAI> _THELOAI;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1061,47 +1961,18 @@ namespace WebMovie.Models
     partial void OnCreated();
     partial void OnMaphimChanging(int value);
     partial void OnMaphimChanged();
-    partial void OnTenPhimChanging(string value);
-    partial void OnTenPhimChanged();
-    partial void OnDaodienChanging(string value);
-    partial void OnDaodienChanged();
-    partial void OnDienvienChanging(string value);
-    partial void OnDienvienChanged();
-    partial void OnNoidungChanging(string value);
-    partial void OnNoidungChanged();
-    partial void OnDotuoiChanging(string value);
-    partial void OnDotuoiChanged();
-    partial void OnThoiluongChanging(string value);
-    partial void OnThoiluongChanged();
-    partial void OnNgonnguChanging(string value);
-    partial void OnNgonnguChanged();
-    partial void OnLinkphimChanging(string value);
-    partial void OnLinkphimChanged();
-    partial void OnTrailerChanging(string value);
-    partial void OnTrailerChanged();
-    partial void OnMaNamChanging(System.Nullable<int> value);
-    partial void OnMaNamChanged();
-    partial void OnMaQGChanging(System.Nullable<int> value);
-    partial void OnMaQGChanged();
-    partial void OnAnhbiaChanging(string value);
-    partial void OnAnhbiaChanged();
-    partial void OnPhimboChanging(System.Nullable<bool> value);
-    partial void OnPhimboChanged();
-    partial void OnPhanphimChanging(System.Nullable<int> value);
-    partial void OnPhanphimChanged();
-    partial void OnTapphimChanging(System.Nullable<int> value);
-    partial void OnTapphimChanged();
+    partial void OnMaTLChanging(int value);
+    partial void OnMaTLChanged();
     #endregion
 		
-		public PHIM()
+		public PHIMTHELOAI()
 		{
-			this._PHIMTHELOAIs = new EntitySet<PHIMTHELOAI>(new Action<PHIMTHELOAI>(this.attach_PHIMTHELOAIs), new Action<PHIMTHELOAI>(this.detach_PHIMTHELOAIs));
-			this._NAMPHATHANH = default(EntityRef<NAMPHATHANH>);
-			this._QUOCGIA = default(EntityRef<QUOCGIA>);
+			this._PHIM = default(EntityRef<PHIM>);
+			this._THELOAI = default(EntityRef<THELOAI>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Maphim", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Maphim", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int Maphim
 		{
 			get
@@ -1112,6 +1983,10 @@ namespace WebMovie.Models
 			{
 				if ((this._Maphim != value))
 				{
+					if (this._PHIM.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnMaphimChanging(value);
 					this.SendPropertyChanging();
 					this._Maphim = value;
@@ -1121,391 +1996,94 @@ namespace WebMovie.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenPhim", DbType="NVarChar(100)")]
-		public string TenPhim
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaTL", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int MaTL
 		{
 			get
 			{
-				return this._TenPhim;
+				return this._MaTL;
 			}
 			set
 			{
-				if ((this._TenPhim != value))
+				if ((this._MaTL != value))
 				{
-					this.OnTenPhimChanging(value);
-					this.SendPropertyChanging();
-					this._TenPhim = value;
-					this.SendPropertyChanged("TenPhim");
-					this.OnTenPhimChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Daodien", DbType="NVarChar(50)")]
-		public string Daodien
-		{
-			get
-			{
-				return this._Daodien;
-			}
-			set
-			{
-				if ((this._Daodien != value))
-				{
-					this.OnDaodienChanging(value);
-					this.SendPropertyChanging();
-					this._Daodien = value;
-					this.SendPropertyChanged("Daodien");
-					this.OnDaodienChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dienvien", DbType="NVarChar(200)")]
-		public string Dienvien
-		{
-			get
-			{
-				return this._Dienvien;
-			}
-			set
-			{
-				if ((this._Dienvien != value))
-				{
-					this.OnDienvienChanging(value);
-					this.SendPropertyChanging();
-					this._Dienvien = value;
-					this.SendPropertyChanged("Dienvien");
-					this.OnDienvienChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Noidung", DbType="NVarChar(MAX)")]
-		public string Noidung
-		{
-			get
-			{
-				return this._Noidung;
-			}
-			set
-			{
-				if ((this._Noidung != value))
-				{
-					this.OnNoidungChanging(value);
-					this.SendPropertyChanging();
-					this._Noidung = value;
-					this.SendPropertyChanged("Noidung");
-					this.OnNoidungChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dotuoi", DbType="Char(10)")]
-		public string Dotuoi
-		{
-			get
-			{
-				return this._Dotuoi;
-			}
-			set
-			{
-				if ((this._Dotuoi != value))
-				{
-					this.OnDotuoiChanging(value);
-					this.SendPropertyChanging();
-					this._Dotuoi = value;
-					this.SendPropertyChanged("Dotuoi");
-					this.OnDotuoiChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Thoiluong", DbType="NVarChar(20)")]
-		public string Thoiluong
-		{
-			get
-			{
-				return this._Thoiluong;
-			}
-			set
-			{
-				if ((this._Thoiluong != value))
-				{
-					this.OnThoiluongChanging(value);
-					this.SendPropertyChanging();
-					this._Thoiluong = value;
-					this.SendPropertyChanged("Thoiluong");
-					this.OnThoiluongChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ngonngu", DbType="NVarChar(50)")]
-		public string Ngonngu
-		{
-			get
-			{
-				return this._Ngonngu;
-			}
-			set
-			{
-				if ((this._Ngonngu != value))
-				{
-					this.OnNgonnguChanging(value);
-					this.SendPropertyChanging();
-					this._Ngonngu = value;
-					this.SendPropertyChanged("Ngonngu");
-					this.OnNgonnguChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Linkphim", DbType="NVarChar(200)")]
-		public string Linkphim
-		{
-			get
-			{
-				return this._Linkphim;
-			}
-			set
-			{
-				if ((this._Linkphim != value))
-				{
-					this.OnLinkphimChanging(value);
-					this.SendPropertyChanging();
-					this._Linkphim = value;
-					this.SendPropertyChanged("Linkphim");
-					this.OnLinkphimChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Trailer", DbType="NVarChar(200)")]
-		public string Trailer
-		{
-			get
-			{
-				return this._Trailer;
-			}
-			set
-			{
-				if ((this._Trailer != value))
-				{
-					this.OnTrailerChanging(value);
-					this.SendPropertyChanging();
-					this._Trailer = value;
-					this.SendPropertyChanged("Trailer");
-					this.OnTrailerChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNam", DbType="Int")]
-		public System.Nullable<int> MaNam
-		{
-			get
-			{
-				return this._MaNam;
-			}
-			set
-			{
-				if ((this._MaNam != value))
-				{
-					if (this._NAMPHATHANH.HasLoadedOrAssignedValue)
+					if (this._THELOAI.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnMaNamChanging(value);
+					this.OnMaTLChanging(value);
 					this.SendPropertyChanging();
-					this._MaNam = value;
-					this.SendPropertyChanged("MaNam");
-					this.OnMaNamChanged();
+					this._MaTL = value;
+					this.SendPropertyChanged("MaTL");
+					this.OnMaTLChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaQG", DbType="Int")]
-		public System.Nullable<int> MaQG
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHIM_PHIMTHELOAI", Storage="_PHIM", ThisKey="Maphim", OtherKey="Maphim", IsForeignKey=true)]
+		public PHIM PHIM
 		{
 			get
 			{
-				return this._MaQG;
+				return this._PHIM.Entity;
 			}
 			set
 			{
-				if ((this._MaQG != value))
-				{
-					if (this._QUOCGIA.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnMaQGChanging(value);
-					this.SendPropertyChanging();
-					this._MaQG = value;
-					this.SendPropertyChanged("MaQG");
-					this.OnMaQGChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Anhbia", DbType="VarChar(50)")]
-		public string Anhbia
-		{
-			get
-			{
-				return this._Anhbia;
-			}
-			set
-			{
-				if ((this._Anhbia != value))
-				{
-					this.OnAnhbiaChanging(value);
-					this.SendPropertyChanging();
-					this._Anhbia = value;
-					this.SendPropertyChanged("Anhbia");
-					this.OnAnhbiaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phimbo", DbType="Bit")]
-		public System.Nullable<bool> Phimbo
-		{
-			get
-			{
-				return this._Phimbo;
-			}
-			set
-			{
-				if ((this._Phimbo != value))
-				{
-					this.OnPhimboChanging(value);
-					this.SendPropertyChanging();
-					this._Phimbo = value;
-					this.SendPropertyChanged("Phimbo");
-					this.OnPhimboChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phanphim", DbType="Int")]
-		public System.Nullable<int> Phanphim
-		{
-			get
-			{
-				return this._Phanphim;
-			}
-			set
-			{
-				if ((this._Phanphim != value))
-				{
-					this.OnPhanphimChanging(value);
-					this.SendPropertyChanging();
-					this._Phanphim = value;
-					this.SendPropertyChanged("Phanphim");
-					this.OnPhanphimChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tapphim", DbType="Int")]
-		public System.Nullable<int> Tapphim
-		{
-			get
-			{
-				return this._Tapphim;
-			}
-			set
-			{
-				if ((this._Tapphim != value))
-				{
-					this.OnTapphimChanging(value);
-					this.SendPropertyChanging();
-					this._Tapphim = value;
-					this.SendPropertyChanged("Tapphim");
-					this.OnTapphimChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHIM_PHIMTHELOAI", Storage="_PHIMTHELOAIs", ThisKey="Maphim", OtherKey="Maphim")]
-		public EntitySet<PHIMTHELOAI> PHIMTHELOAIs
-		{
-			get
-			{
-				return this._PHIMTHELOAIs;
-			}
-			set
-			{
-				this._PHIMTHELOAIs.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NAMPHATHANH_PHIM", Storage="_NAMPHATHANH", ThisKey="MaNam", OtherKey="MaNam", IsForeignKey=true)]
-		public NAMPHATHANH NAMPHATHANH
-		{
-			get
-			{
-				return this._NAMPHATHANH.Entity;
-			}
-			set
-			{
-				NAMPHATHANH previousValue = this._NAMPHATHANH.Entity;
+				PHIM previousValue = this._PHIM.Entity;
 				if (((previousValue != value) 
-							|| (this._NAMPHATHANH.HasLoadedOrAssignedValue == false)))
+							|| (this._PHIM.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._NAMPHATHANH.Entity = null;
-						previousValue.PHIMs.Remove(this);
+						this._PHIM.Entity = null;
+						previousValue.PHIMTHELOAIs.Remove(this);
 					}
-					this._NAMPHATHANH.Entity = value;
+					this._PHIM.Entity = value;
 					if ((value != null))
 					{
-						value.PHIMs.Add(this);
-						this._MaNam = value.MaNam;
+						value.PHIMTHELOAIs.Add(this);
+						this._Maphim = value.Maphim;
 					}
 					else
 					{
-						this._MaNam = default(Nullable<int>);
+						this._Maphim = default(int);
 					}
-					this.SendPropertyChanged("NAMPHATHANH");
+					this.SendPropertyChanged("PHIM");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="QUOCGIA_PHIM", Storage="_QUOCGIA", ThisKey="MaQG", OtherKey="MaQG", IsForeignKey=true)]
-		public QUOCGIA QUOCGIA
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="THELOAI_PHIMTHELOAI", Storage="_THELOAI", ThisKey="MaTL", OtherKey="MaTL", IsForeignKey=true)]
+		public THELOAI THELOAI
 		{
 			get
 			{
-				return this._QUOCGIA.Entity;
+				return this._THELOAI.Entity;
 			}
 			set
 			{
-				QUOCGIA previousValue = this._QUOCGIA.Entity;
+				THELOAI previousValue = this._THELOAI.Entity;
 				if (((previousValue != value) 
-							|| (this._QUOCGIA.HasLoadedOrAssignedValue == false)))
+							|| (this._THELOAI.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._QUOCGIA.Entity = null;
-						previousValue.PHIMs.Remove(this);
+						this._THELOAI.Entity = null;
+						previousValue.PHIMTHELOAIs.Remove(this);
 					}
-					this._QUOCGIA.Entity = value;
+					this._THELOAI.Entity = value;
 					if ((value != null))
 					{
-						value.PHIMs.Add(this);
-						this._MaQG = value.MaQG;
+						value.PHIMTHELOAIs.Add(this);
+						this._MaTL = value.MaTL;
 					}
 					else
 					{
-						this._MaQG = default(Nullable<int>);
+						this._MaTL = default(int);
 					}
-					this.SendPropertyChanged("QUOCGIA");
+					this.SendPropertyChanged("THELOAI");
 				}
 			}
 		}
@@ -1528,18 +2106,6 @@ namespace WebMovie.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_PHIMTHELOAIs(PHIMTHELOAI entity)
-		{
-			this.SendPropertyChanging();
-			entity.PHIM = this;
-		}
-		
-		private void detach_PHIMTHELOAIs(PHIMTHELOAI entity)
-		{
-			this.SendPropertyChanging();
-			entity.PHIM = null;
 		}
 	}
 }
