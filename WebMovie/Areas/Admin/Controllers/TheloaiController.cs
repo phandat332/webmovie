@@ -7,6 +7,8 @@ using WebMovie.Models;
 using PagedList;
 using PagedList.Mvc;
 using WebMovie.App_Start;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 
 namespace WebMovie.Areas.Admin.Controllers
 {

@@ -127,24 +127,54 @@ namespace WebMovie.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Suaphim(int id)
         {
+
             PHIM phim = data.PHIMs.SingleOrDefault(n => n.Maphim == id);
             if (phim == null)
             {
                 Response.StatusCode = 404;
                 return null;
             }
+            ViewBag.Nam = new SelectList(data.NAMPHATHANHs.ToList().OrderBy(n => n.MaNam), "MaNam", "Nam", phim.MaNam);
+            ViewBag.QuocGia = new SelectList(data.QUOCGIAs.ToList().OrderBy(n => n.MaQG), "MaQG", "TenQG", phim.MaQG);
             return View(phim);
         }
 
-        [HttpPost, ActionName("Suaphim")]
+        [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Saved(FormCollection collection, int id)
+        public ActionResult Suaphim(PHIM phim, HttpPostedFileBase uploadhinh)
         {
-            PHIM tk = data.PHIMs.SingleOrDefault(n => n.Maphim == id);
-       
-            UpdateModel(tk);
+           /* ViewBag.Nam = new SelectList(data.NAMPHATHANHs.ToList().OrderBy(n => n.MaNam), "MaTH", "TenTH");
+            ViewBag.QuocGia = new SelectList(data.QUOCGIAs.ToList().OrderBy(n => n.MaQG), "MaQG", "TenQG");*/
+            PHIM sp = data.PHIMs.FirstOrDefault(x => x.Maphim == phim.Maphim);
+            sp.TenPhim = phim.TenPhim;
+            sp.Noidung = phim.Noidung;
+
+            if (uploadhinh != null && uploadhinh.ContentLength > 0)
+            {
+                int id = phim.Maphim;
+
+                string _FileName = "";
+                int index = uploadhinh.FileName.IndexOf('.');
+                _FileName = "suasp" + id.ToString() + "." + uploadhinh.FileName.Substring(index + 1);
+                string _path = Path.Combine(Server.MapPath("~/Content/img"), _FileName);
+                uploadhinh.SaveAs(_path);
+                sp.Anhbia = _FileName;
+            }
+
+            sp.Dotuoi = phim.Dotuoi;
+            sp.Daodien = phim.Daodien;
+            sp.Dienvien = phim.Dienvien;
+            sp.Thoiluong = phim.Thoiluong;
+            sp.Ngonngu = phim.Ngonngu;
+            sp.Phanphim = phim.Phanphim;
+            sp.Tapphim = phim.Tapphim;
+            sp.Trailer= phim.Trailer;
+            sp.MaNam = phim.MaNam;
+            sp.MaQG= phim.MaQG ;
+            UpdateModel(sp);
             data.SubmitChanges();
-            return RedirectToAction("QLPhim");
+            return RedirectToAction("QLSanpham");
+
         }
         [AdminAuthorize]
         [HttpGet]
@@ -156,10 +186,10 @@ namespace WebMovie.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Themphim(PHIM sanpham, HttpPostedFileBase uploadhinh)
+        public ActionResult Themphim(PHIM phim, HttpPostedFileBase uploadhinh)
         {
 
-            data.PHIMs.InsertOnSubmit(sanpham);
+            data.PHIMs.InsertOnSubmit(phim);
             data.SubmitChanges();
             if (uploadhinh != null && uploadhinh.ContentLength > 0)
             {

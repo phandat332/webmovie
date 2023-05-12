@@ -1,13 +1,12 @@
 ﻿using PagedList;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.UI;
+using WebMovie.App_Start;
 using WebMovie.Models;
 using WebMovie.ViewModel;
+using System.Data.Entity;
+
 
 
 namespace WebMovie.Controllers
@@ -21,6 +20,7 @@ namespace WebMovie.Controllers
         {
             return View();
         }
+        [UserAuthorize]
         public ActionResult Chitiet(int id)
          {
             var phim = (from p in data.PHIMs
@@ -58,11 +58,12 @@ namespace WebMovie.Controllers
             {
                 return HttpNotFound();
             }
-
+            ViewBag.Title = phim.TenPhim + " - phimmoi24h";
             return View(phim);
 
 
         }
+   
         // xem phim
         public ActionResult Xemphim(int id)
         {

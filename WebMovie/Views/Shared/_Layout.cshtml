@@ -14,7 +14,7 @@
 
     <script src="@Url.Content("~/Content/user_assets/js/jquery.js")"></script>
 
-    <title>Trang chủ</title>
+    <title>@ViewBag.title</title>
     <meta charset="UTF-8">
     <meta name="description" content="">
     <meta name="keywords" content="xem phim online, xem phim bộ, phim chiếu rạp">
@@ -44,32 +44,32 @@
                         </a>
                     </div>
 
-                    <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1" >
-                        <ul class="nav navbar-nav flex-child-menu menu-left" >
+                    <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav flex-child-menu menu-left">
                             <li class="hidden">
                                 <a href="#page-top"></a>
                             </li>
                             <li><a class="btn btn-default" href="/" style="text-transform: none;">Trang chủ</a></li>
-                            <li><a class="btn btn-default" href="@Url.Action("Phimle","Movie")" style="text-transform: none;" >Phim lẻ</a></li>
+                            <li><a class="btn btn-default" href="@Url.Action("Phimle","Movie")" style="text-transform: none;">Phim lẻ</a></li>
                             <li class="dropdown first">
-                                <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown"  style="text-transform: none;">
+                                <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown" style="text-transform: none;">
                                     Thể loại<i class="fa fa-angle-down" aria-hidden="true"></i>
-                                </a>                  
+                                </a>
                                 <ul class="dropdown-menu level1 sidebar">
 
                                     <li>
                                         <a href="@Url.Action("Contact","Home")">Hành động</a>
                                     </li>
                                     <li>
-                                        <a >Kinh dị</a>
+                                        <a>Kinh dị</a>
                                     </li>
                                     @Html.Action("Theloai", "Movie", new { @class = "sb-title" })
 
                                 </ul>
-                          
+
                             </li>
                             <li class="dropdown first" style="text-transform: none;">
-                                <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown"  style="text-transform: none;">
+                                <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown" style="text-transform: none;">
                                     Quốc gia<i class="fa fa-angle-down" aria-hidden="true"></i>
                                 </a>
                                 <ul class="dropdown-menu level1">
@@ -80,21 +80,21 @@
                                 </ul>
                             </li>
                             <li><a class="btn btn-default" href="@Url.Action("LichSuXemPhim", "Account")" style="text-transform: none;">Lịch sử</a></li>
-                           
+
                         </ul>
                         <ul class="nav navbar-nav flex-child-menu menu-right">
 
                             @if (Session["TaiKhoan"] != null)
                             {
-                              
+
                                 <li class="dropdown first btn">
                                     <a class="btn btn-default dropdown-toggle lv1 navbar-brand text-white" data-toggle="dropdown" data-hover="dropdown" style="padding-top: 15px; text-transform: none;">
                                         @Session["TaiKhoan"] <i class="fa fa-angle-down" aria-hidden="true"></i>
                                     </a>
                                     <ul class="dropdown-menu level1">
-                                        <li><a href="/Account/Logout"  style="text-transform: none;"> Đăng xuất</a></li>
-                                        <li><a href="@Url.Action("Suakh","Account")"  style="text-transform: none;"> chỉnh sửa</a></li>
-                                        <li><a href="/Account/Logout"  style="text-transform: none;"> hỗ trợ</a></li>
+                                        <li><a href="/Account/Logout" style="text-transform: none;"> Đăng xuất</a></li>
+                                        <li><a href="@Url.Action("Suakh","Account")" style="text-transform: none;"> chỉnh sửa</a></li>
+                                        <li><a href="/Account/Logout" style="text-transform: none;"> hỗ trợ</a></li>
 
                                     </ul>
                                 </li>
@@ -102,12 +102,12 @@
                             else
                             {
 
-                            <li><a href="#"  style="text-transform: none;">Hỗ trợ</a></li>
-                            <li class="btn"><a href="/account/login" id="hyplnkAccount"  style="text-transform: none;">Đăng nhập/Đăng ký</a></li>
-                            @* <a class="navbar-brand text-white" href="/Account/DangKy">Đăng ký</a>*@
+                                <li><a href="#" style="text-transform: none;">Hỗ trợ</a></li>
+                                <li class="btn"><a href="/account/login" id="hyplnkAccount" style="text-transform: none;">Đăng nhập/Đăng ký</a></li>
+                                @* <a class="navbar-brand text-white" href="/Account/DangKy">Đăng ký</a>*@
                             }
-                            </ul>
-                       
+                        </ul>
+
                     </div>
 
                 </nav>
@@ -164,18 +164,18 @@
                             <li><a href="#">Hướng dẫn</a></li>
                         </ul>
                     </div>
-                   @* <div class="flex-child-ft item5">
-                        <h4>Đăng ký nhận Email</h4>
-                        <p>
-                            Đăng ký để nhận thông tin mới
-                            <br>
-                            và sớm nhất của chúng tôi.
-                        </p>
-                        <div>
-                            <input type="text" placeholder="Enter your email...">
-                        </div>
-                        <a href="#" class="btn">Đăng ký Ngay <i class="ion-ios-arrow-forward"></i></a>
-                    </div>*@
+                    @* <div class="flex-child-ft item5">
+                            <h4>Đăng ký nhận Email</h4>
+                            <p>
+                                Đăng ký để nhận thông tin mới
+                                <br>
+                                và sớm nhất của chúng tôi.
+                            </p>
+                            <div>
+                                <input type="text" placeholder="Enter your email...">
+                            </div>
+                            <a href="#" class="btn">Đăng ký Ngay <i class="ion-ios-arrow-forward"></i></a>
+                        </div>*@
                 </div>
             </div>
             <div class="ft-copyright">
@@ -199,7 +199,7 @@
             }
         });
     </script>
-
+    @RenderSection("scripts", required: false)
 
 </body>
 </html>

@@ -68,6 +68,7 @@ namespace WebMovie.Controllers
                 KHACHHANG tk = db.KHACHHANGs.SingleOrDefault(n => n.Taikhoan == tendn && n.Matkhau == MD5Hash(matkhau));
                 KHACHHANG tkCheck = db.KHACHHANGs.SingleOrDefault(n => n.Taikhoan == tendn && n.MaQuyen == 1);
                 KHACHHANG User = db.KHACHHANGs.SingleOrDefault(n => n.Taikhoan == tendn && n.MaQuyen == 0);
+                
                 Session["User"] = User;
                 Session["Admin"] = tkCheck;
                 if (tk == null)
@@ -191,28 +192,8 @@ namespace WebMovie.Controllers
              db.SubmitChanges();
              return RedirectToAction("Login");
          }*/
-        [HttpGet]
-      /*  public ActionResult LichSuPhim()
-        {
-            // Kiểm tra khách hàng đã đăng nhập chưa
-            if (Session["User"] == null)
-            {
-                return RedirectToAction("Login");
-            }
-            else
-            {
-                // Lấy mã khách hàng từ session
-                int makh = ((KHACHHANG)Session["User"]).MaKh;
-
-                // Lấy lịch sử phim từ database
-                var lichsu = db.LICHSUs.Where(c => c.Makh == makh).ToList();
-
-                // Truyền dữ liệu lịch sử phim cho view
-                ViewBag.LichSu = lichsu;
-
-                return View();
-            }
-        }*/
+       
+        [UserAuthorize]
         public ActionResult LichSuXemPhim()
         {
             int Makh = ((KHACHHANG)Session["User"]).MaKh;
@@ -220,8 +201,38 @@ namespace WebMovie.Controllers
                                 join l in db.LICHSUs on p.Maphim equals l.Maphim
                                 where l.Makh == Makh
                                 select p;
-
+          
             return View(lichSuXemPhim);
+        }
+
+
+     //lịch sử xem phim người dùng
+
+      [HttpPost]
+        public ActionResult ThemLichSuXemPhim(int Makh, int Maphim)
+        {
+            var lichSu = new LICHSU();
+            lichSu.Makh = Makh;
+            lichSu.Maphim = Maphim;
+            db.LICHSUs.InsertOnSubmit(lichSu);
+            db.SubmitChanges();
+            return Json(new { success = true });
+        }
+        [HttpPost]
+        public JsonResult GetWatchedMovies(int makh)
+        {
+            var lichsu = db.LICHSUs.Where(ls => ls.Makh == makh).ToList();
+            var phimdaxem = lichsu.Select(ls => ls.Maphim).ToList();
+            return Json(new { success = true, phimdaxem });
+        }
+        [HttpPost]
+        public ActionResult AddToHistory(int Maphim)
+        {
+            var makh = ((KHACHHANG)Session["User"]).MaKh;
+            var lichsu = new LICHSU { Maphim = Maphim, Makh = makh };
+            db.LICHSUs.InsertOnSubmit(lichsu);
+            db.SubmitChanges();
+            return Json(new { success = true });
         }
     }
 }

@@ -1,10 +1,14 @@
 ﻿
+@using WebMovie.Models
+
 @model WebMovie.ViewModel.TheloaiPhim
 @{
-    ViewBag.Title = "Chitiet";
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<head>
+    <title>@ViewBag.Title</title>
+</head>
 <div class="hero mv-single-hero">
     <div class="container">
         <div class="row">
@@ -14,151 +18,153 @@
     </div>
 </div>
 
-    <div class="page-single movie-single movie_single">
-        <div class="container">
-            <div class="row ipad-width2">
-                <div class="col-md-4 col-sm-12 col-xs-12">
-                    <div class="movie-img sticky-sb">
-                        <img src="~/image/@Model.Anhbia" alt="">
-                        <div class="movie-btn">
-                            <div class="btn-transform transform-vertical red">
-                                <div><a href="#" class="item item-1 redbtn"><i class="ion-play"></i>Xem phim</a></div>
-                                <div><a href="@Url.Action("Xemphim", "Movie",new { id = @Model.Maphim })" class="item item-2 redbtn"><i class="ion-play"></i>Xem ngay</a></div>
+<div class="page-single movie-single movie_single">
+    <div class="container">
+        <div class="row ipad-width2">
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <div class="movie-img sticky-sb">
+                    <img src="~/image/@Model.Anhbia" alt="">
+                    <div class="movie-btn">
+                        <div class="btn-transform transform-vertical red">
+                            <div><a href="#" class="item item-1 redbtn"><i class="ion-play"></i>Xem phim</a></div>
+                            <div>
+                                <a href="@Url.Action("Xemphim", "Movie",new { id = @Model.Maphim })" class="item item-2 redbtn@* watch-movie-btn*@"><i class="ion-play"></i>Xem ngay</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8 col-sm-12 col-xs-12">
-                    <div class="movie-single-ct main-content">
-                        <h1 class="bd-hd">@Model.TenPhim  <span>@string.Join("", Model.Nam)</span></h1>
-                        <div class="social-btn">
+            </div>
+            <div class="col-md-8 col-sm-12 col-xs-12">
+                <div class="movie-single-ct main-content">
+                    <h1 class="bd-hd">@Model.TenPhim  <span>@string.Join("", Model.Nam)</span></h1>
 
-                            <div class="hover-bnt">
-                                <a href="#" class="parent-btn"><i class="ion-android-share-alt"></i>Chia sẻ</a>
-                                <div class="hvr-item">
-                                    <a href="#" class="hvr-grow"><i class="ion-social-facebook"></i></a>
-                                    <a href="#" class="hvr-grow"><i class="ion-social-twitter"></i></a>
-                                    <a href="#" class="hvr-grow"><i class="ion-social-googleplus"></i></a>
-                                    <a href="#" class="hvr-grow"><i class="ion-social-youtube"></i></a>
-                                </div>
+                    <div class="social-btn">
+
+                        <div class="hover-bnt">
+                            <a href="#" class="parent-btn"><i class="ion-android-share-alt"></i>Chia sẻ</a>
+                            <div class="hvr-item">
+                                <a href="#" class="hvr-grow"><i class="ion-social-facebook"></i></a>
+                                <a href="#" class="hvr-grow"><i class="ion-social-twitter"></i></a>
+                                <a href="#" class="hvr-grow"><i class="ion-social-googleplus"></i></a>
+                                <a href="#" class="hvr-grow"><i class="ion-social-youtube"></i></a>
                             </div>
                         </div>
-                        <div class="movie-rate">
-                            <div class="rate">
-                                <i class="ion-android-star"></i>
-                                <p>
-                                    <span>10.00</span> /10<br>
-                                    <span class="rv">5 lượt xem</span>
-                                </p>
-                            </div>
-                            <div class="rate-star">
-                                <p>Đánh giá: </p>
-
-                                <i class="ion-ios-star"></i>
-
-                                <i class="ion-ios-star"></i>
-
-                                <i class="ion-ios-star"></i>
-
-                                <i class="ion-ios-star"></i>
-
-                                <i class="ion-ios-star"></i>
-
-                                <i class="ion-ios-star"></i>
-
-                                <i class="ion-ios-star"></i>
-
-                                <i class="ion-ios-star"></i>
-
-                                <i class="ion-ios-star"></i>
-
-                                <i class="ion-ios-star"></i>
-
-                            </div>
+                    </div>
+                    <div class="movie-rate">
+                        <div class="rate">
+                            <i class="ion-android-star"></i>
+                            <p>
+                                <span>10.00</span> /10<br>
+                                <span class="rv">5 lượt xem</span>
+                            </p>
                         </div>
-                        <div class="movie-tabs">
-                            <div class="tabs">
-                                <ul class="tab-links tabs-mv">
-                                    <li class="active"><a href="#overview">Tổng quan</a></li>
-                                    @*  <li><a href="#moviesrelated">Phim liên quan</a></li>*@
-                                </ul>
-                                <div class="tab-content">
-                                    <div id="overview" class="tab active">
-                                        <div class="row">
-                                            <div class="col-md-8 col-sm-12 col-xs-12">
-                                                <p class="text-justif">@Model.Noidung</p>
-                                                <div class="title-hd-sm">
-                                                    <h4>Đạo diễn</h4>
-                                                </div>
-                                                <div class="mvcast-item">
+                        <div class="rate-star">
+                            <p>Đánh giá: </p>
 
-                                                    <div class="cast-it">
-                                                        <div class="cast-left">
+                            <i class="ion-ios-star"></i>
 
-                                                            <a href="#">@Model.Daodien</a>
-                                                        </div>
-                                                    </div>
+                            <i class="ion-ios-star"></i>
 
-                                                </div>
-                                                <div class="title-hd-sm">
-                                                    <h4>Diễn viên</h4>
-                                                </div>
-                                                <div class="mvcast-item">
+                            <i class="ion-ios-star"></i>
 
-                                                    <div class="cast-it">
-                                                        <div class="cast-left">
+                            <i class="ion-ios-star"></i>
 
-                                                            <a href="#">@Model.Dienvien</a>
-                                                        </div>
-                                                    </div>
+                            <i class="ion-ios-star"></i>
 
-                                                </div>
+                            <i class="ion-ios-star"></i>
+
+                            <i class="ion-ios-star"></i>
+
+                            <i class="ion-ios-star"></i>
+
+                            <i class="ion-ios-star"></i>
+
+                            <i class="ion-ios-star"></i>
+
+                        </div>
+                    </div>
+                    <div class="movie-tabs">
+                        <div class="tabs">
+                            <ul class="tab-links tabs-mv">
+                                <li class="active"><a href="#overview">Tổng quan</a></li>
+                                @*  <li><a href="#moviesrelated">Phim liên quan</a></li>*@
+                            </ul>
+                            <div class="tab-content">
+                                <div id="overview" class="tab active">
+                                    <div class="row">
+                                        <div class="col-md-8 col-sm-12 col-xs-12">
+                                            <p class="text-justif">@Model.Noidung</p>
+                                            <div class="title-hd-sm">
+                                                <h4>Đạo diễn</h4>
                                             </div>
-                                            <div class="col-md-4 col-xs-12 col-sm-12">
-                                                <div class="sb-it">
-                                                    <h6>Thể loại:</h6>
-                                                    <p> @string.Join(", ", Model.TheLoai)</p>
-                                                </div>
-                                                <div class="sb-it">
-                                                    <h6>Ngày phát hành:</h6>
-                                                    <p>
-                                                        @string.Join(", ", Model.Nam)
-                                                    </p>
-                                                </div>
-                                                <div class="sb-it">
-                                                    <h6>Ngôn ngữ:</h6>
-                                                    <p>
-                                                        @Model.Ngonngu
-                                                    </p>
-                                                </div>
-                                                <div class="sb-it">
-                                                    <h6>Quốc gia:</h6>
-                                                    <p>
-                                                        @string.Join("", Model.Quociga)
-                                                    </p>
-                                                </div>
-                                                <div class="sb-it">
-                                                    <h6>Thẻ tag:</h6>
-                                                    <p class="tags">
+                                            <div class="mvcast-item">
 
-                                                        <span class="time"><a href="#">phim hành động hay </a></span>,
+                                                <div class="cast-it">
+                                                    <div class="cast-left">
 
-                                                        <span class="time"><a href="#">phim hành động Mỹ </a></span>,
-
-                                                        <span class="time"><a href="#">series phim Người Nhện </a></span>,
-
-                                                    </p>
+                                                        <a href="#">@Model.Daodien</a>
+                                                    </div>
                                                 </div>
-                                                <div class="ads">
-                                                    <img src="/user_assets/images/uploads/banner_img.jpg" alt="">
+
+                                            </div>
+                                            <div class="title-hd-sm">
+                                                <h4>Diễn viên</h4>
+                                            </div>
+                                            <div class="mvcast-item">
+
+                                                <div class="cast-it">
+                                                    <div class="cast-left">
+
+                                                        <a href="#">@Model.Dienvien</a>
+                                                    </div>
                                                 </div>
+
                                             </div>
                                         </div>
+                                        <div class="col-md-4 col-xs-12 col-sm-12">
+                                            <div class="sb-it">
+                                                <h6>Thể loại:</h6>
+                                                <p> @string.Join(", ", Model.TheLoai)</p>
+                                            </div>
+                                            <div class="sb-it">
+                                                <h6>Ngày phát hành:</h6>
+                                                <p>
+                                                    @string.Join(", ", Model.Nam)
+                                                </p>
+                                            </div>
+                                            <div class="sb-it">
+                                                <h6>Ngôn ngữ:</h6>
+                                                <p>
+                                                    @Model.Ngonngu
+                                                </p>
+                                            </div>
+                                            <div class="sb-it">
+                                                <h6>Quốc gia:</h6>
+                                                <p>
+                                                    @string.Join("", Model.Quociga)
+                                                </p>
+                                            </div>
+                                            <div class="sb-it">
+                                                <h6>Thẻ tag:</h6>
+                                                <p class="tags">
 
-                                        <iframe width="885" height="498" src=" @Model.Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                                    <span class="time"><a href="#">phim hành động hay </a></span>,
+
+                                                    <span class="time"><a href="#">phim hành động Mỹ </a></span>,
+
+                                                    <span class="time"><a href="#">series phim Người Nhện </a></span>,
+
+                                                </p>
+                                            </div>
+                                            <div class="ads">
+                                                <img src="/user_assets/images/uploads/banner_img.jpg" alt="">
+                                            </div>
+                                        </div>
                                     </div>
 
+                                    <iframe width="885" height="498" src=" @Model.Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -166,3 +172,55 @@
             </div>
         </div>
     </div>
+</div>
+
+@section scripts
+{
+   
+<script>
+    $('.watch-movie-btn').click(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/api/currentuser',
+            type: 'GET',
+            success: function(result) {
+                var makh = result.MaKh;
+                console.log(makh);
+                var maphim = '@Model.Maphim';
+                $.ajax({
+                    url: '@Url.Action("GetWatchedMovies", "Account")',
+                    type: 'POST',
+                    data: { makh: makh },
+                    success: function(result) {
+                        if (result.success) {
+                            var phimdaxem = result.phimdaxem;
+                            if (phimdaxem.indexOf(maphim) !== -1) {
+                                console.log('Phim đã xem.');
+                                return;
+                            }
+                        }
+                        $.ajax({
+                            url: '@Url.Action("ThemLichSuXemPhim", "Account")',
+                            type: 'POST',
+                            data: { Makh: makh, Maphim: maphim },
+                            success: function(result) {
+                                console.log('Lịch sử xem phim đã được cập nhật.');
+                            },
+                            error: function(err) {
+                                console.log('Lỗi khi cập nhật lịch sử xem phim: ' + err.responseText);
+                            }
+                        });
+                    },
+                    error: function(err) {
+                        console.log('Lỗi khi kiểm tra phim đã xem: ' + err.responseText);
+                    }
+                });
+            },
+            error: function(err) {
+                console.log('Lỗi khi lấy thông tin user: ' + err.responseText);
+            }
+        });
+    });
+    </script>
+
+}
