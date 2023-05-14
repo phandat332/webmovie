@@ -50,11 +50,12 @@
                     Thể loại:
                 </dt>
                 <dd class="col-sm-9">
-                    
+                   @* 
                     @foreach (var tenTheLoai in ViewData["Theloai"] as List<string>)
                     {
                        @tenTheLoai<span>;</span>
-                    }
+                    }*@
+                    @Html.DisplayFor(model=>model.THELOAI.TenTL)
                     
 
                 </dd>

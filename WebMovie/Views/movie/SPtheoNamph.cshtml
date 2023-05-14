@@ -25,14 +25,10 @@
         <div class="row ipad-width">
 
             <div class="col-md-12 col-sm-12 col-xs-12">
-                @foreach (var item in Model)
-                {                
-                    <div class="topbar-filter">
-                        <p>Tìm thấy:  phim phát hành vào năm @item.NAMPHATHANH.Nam (@ViewBag.soluong)</p>
-                    </div>
-                    break;
-                }
-
+               
+                <div class="topbar-filter">
+                    <p>Phim phát hành vào năm <strong> @ViewBag.Nam</strong> (Tổng số phim: <strong>@ViewBag.soluong</strong>)</p>
+                        </div>
                 <div class="flex-wrap-movielist">
                     @foreach (var item in Model)
                     {

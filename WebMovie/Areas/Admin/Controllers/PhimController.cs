@@ -24,13 +24,6 @@ namespace WebMovie.Areas.Admin.Controllers
 
             int pageNumber = (page ?? 1);
             int pageSize = 6;
-           /* var model = from p in data.PHIMs
-                        join pt in data.PHIMTHELOAIs on p.Maphim equals pt.Maphim
-                        join tl in data.THELOAIs on pt.MaTL equals tl.MaTL
-                        select new { Phim = p, TenTheLoai = tl.TenTL };
-
-            ViewBag.Theloai = model;*/
-
             return View(data.PHIMs.ToList().ToPagedList(pageNumber, pageSize));
         }
         // thêm mới phim
@@ -39,50 +32,14 @@ namespace WebMovie.Areas.Admin.Controllers
         [AdminAuthorize]
         public ActionResult Chitietphim(int id)
         {
-            var phim = (from p in data.PHIMs
-                        where p.Maphim == id
-                        select new TheloaiPhim
-                        {
-                            Maphim = p.Maphim,
-                            TenPhim = p.TenPhim,
-                            Daodien = p.Daodien,
-                            Dienvien = p.Dienvien,
-                            Noidung = p.Noidung,
-                            Dotuoi = p.Dotuoi,
-                            Thoiluong = p.Thoiluong,
-                            Ngonngu = p.Ngonngu,
-                            Linkphim = p.Linkphim,
-                            Trailer = p.Trailer,
-                            Anhbia = p.Anhbia,
-                            Phimbo = (bool)p.Phimbo,
-                            Phanphim = p.Phanphim,
-                            Tapphim = p.Tapphim,
-                            TheLoai = (from tl in data.THELOAIs
-                                       join ct in data.PHIMTHELOAIs on tl.MaTL equals ct.MaTL
-                                       where ct.Maphim == id
-                                       select tl.TenTL).ToList(),
-                            Nam = (from n in data.NAMPHATHANHs
-                                   where n.MaNam == p.MaNam
-                                   select n.Nam).ToList(),
-                            Quociga = (from n in data.QUOCGIAs
-                                       where n.MaQG == p.MaQG
-                                       select n.TenQG).ToList()
-
-                        }).FirstOrDefault();
-
+            PHIM phim = data.PHIMs.SingleOrDefault(n => n.Maphim == id);
+            ViewBag.MaSP = phim.Maphim;
             if (phim == null)
             {
-                return HttpNotFound();
-            }
-            if(phim.Phimbo == false)
-            {
-                ViewData["Phanphim"] = "Trống";
-                ViewData["Tapphim"] = "Trống";
-
+                Response.StatusCode = 404;
+                return null;
             }
             return View(phim);
-
-
         }
       
         // Xóa phim5
@@ -90,7 +47,7 @@ namespace WebMovie.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Xoaphim(int id)
         {
-            PHIM pm = data.PHIMs.SingleOrDefault(n => n.Maphim == id);
+            /*PHIM pm = data.PHIMs.SingleOrDefault(n => n.Maphim == id);
             var dsTheLoai = (
             from p in data.PHIMs
             join pt in data.PHIMTHELOAIs on p.Maphim equals pt.Maphim
@@ -106,7 +63,16 @@ namespace WebMovie.Areas.Admin.Controllers
             ViewData["Theloai"] = dsTheLoai;
 
             ViewBag.MaKh = pm.Maphim;
-            return View(pm);
+            return View(pm);*/
+            PHIM phim = data.PHIMs.SingleOrDefault(n => n.Maphim == id);
+            ViewBag.MaSP = phim.Maphim;
+            if (phim == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(phim);
+
         }
         [HttpPost, ActionName("Xoaphim")]
         public ActionResult Upxoaphim(int id)
@@ -136,27 +102,29 @@ namespace WebMovie.Areas.Admin.Controllers
             }
             ViewBag.Nam = new SelectList(data.NAMPHATHANHs.ToList().OrderBy(n => n.MaNam), "MaNam", "Nam", phim.MaNam);
             ViewBag.QuocGia = new SelectList(data.QUOCGIAs.ToList().OrderBy(n => n.MaQG), "MaQG", "TenQG", phim.MaQG);
+            ViewBag.Theloai = new SelectList(data.THELOAIs.ToList().OrderBy(n => n.MaTL), "MaTL", "TenTL", phim.MaTL);
             return View(phim);
         }
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Suaphim(PHIM phim, HttpPostedFileBase uploadhinh)
+        public ActionResult Suaphim(PHIM phim , HttpPostedFileBase uploadhinh,int id)
         {
-           /* ViewBag.Nam = new SelectList(data.NAMPHATHANHs.ToList().OrderBy(n => n.MaNam), "MaTH", "TenTH");
-            ViewBag.QuocGia = new SelectList(data.QUOCGIAs.ToList().OrderBy(n => n.MaQG), "MaQG", "TenQG");*/
-            PHIM sp = data.PHIMs.FirstOrDefault(x => x.Maphim == phim.Maphim);
+           ViewBag.Nam = new SelectList(data.NAMPHATHANHs.ToList().OrderBy(n => n.MaNam), "MaTH", "TenTH");
+            ViewBag.QuocGia = new SelectList(data.QUOCGIAs.ToList().OrderBy(n => n.MaQG), "MaQG", "TenQG");
+            ViewBag.Theloai = new SelectList(data.THELOAIs.ToList().OrderBy(n => n.MaTL), "MaTL", "TenTL");
+            PHIM sp = data.PHIMs.FirstOrDefault(p => p.Maphim == phim.Maphim || p.Maphim == id);
             sp.TenPhim = phim.TenPhim;
             sp.Noidung = phim.Noidung;
 
             if (uploadhinh != null && uploadhinh.ContentLength > 0)
             {
-                int id = phim.Maphim;
+              /*  int id = phim.Maphim;*/
 
                 string _FileName = "";
                 int index = uploadhinh.FileName.IndexOf('.');
-                _FileName = "suasp" + id.ToString() + "." + uploadhinh.FileName.Substring(index + 1);
-                string _path = Path.Combine(Server.MapPath("~/Content/img"), _FileName);
+                _FileName = "Suaphim" + id.ToString() + "." + uploadhinh.FileName.Substring(index + 1);
+                string _path = Path.Combine(Server.MapPath("~/image/"), _FileName);
                 uploadhinh.SaveAs(_path);
                 sp.Anhbia = _FileName;
             }
@@ -173,22 +141,23 @@ namespace WebMovie.Areas.Admin.Controllers
             sp.MaQG= phim.MaQG ;
             UpdateModel(sp);
             data.SubmitChanges();
-            return RedirectToAction("QLSanpham");
+            return RedirectToAction("QLPhim");
 
         }
         [AdminAuthorize]
         [HttpGet]
         public ActionResult Themphim()
         {
-            ViewBag.MaTH = new SelectList(data.NAMPHATHANHs.ToList().OrderBy(n => n.Nam), "MaNam", "Nam");
-            ViewBag.MaDM = new SelectList(data.QUOCGIAs.ToList().OrderBy(n => n.TenQG), "MaQG", "TenQG");
+            ViewBag.MaNam = new SelectList(data.NAMPHATHANHs.ToList().OrderBy(n => n.Nam), "MaNam", "Nam");
+            ViewBag.MaQG = new SelectList(data.QUOCGIAs.ToList().OrderBy(n => n.TenQG), "MaQG", "TenQG");
+            ViewBag.MaTL = new SelectList(data.THELOAIs.ToList().OrderBy(n => n.MaTL), "MaTL", "TenTL");
+
             return View();
         }
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Themphim(PHIM phim, HttpPostedFileBase uploadhinh)
         {
-
             data.PHIMs.InsertOnSubmit(phim);
             data.SubmitChanges();
             if (uploadhinh != null && uploadhinh.ContentLength > 0)
@@ -198,14 +167,14 @@ namespace WebMovie.Areas.Admin.Controllers
                 string _FileName = "";
                 int index = uploadhinh.FileName.IndexOf('.');
                 _FileName = "themsp" + id.ToString() + "." + uploadhinh.FileName.Substring(index + 1);
-                string _path = Path.Combine(Server.MapPath("~/Content/img"), _FileName);
+                string _path = Path.Combine(Server.MapPath("~/image/"), _FileName);
                 uploadhinh.SaveAs(_path);
 
                 PHIM unv = data.PHIMs.FirstOrDefault(x => x.Maphim == id);
                 unv.Anhbia = _FileName;
                 data.SubmitChanges();
             }
-            return RedirectToAction("QLSanpham");
+            return RedirectToAction("QLPhim");
 
         }
     }

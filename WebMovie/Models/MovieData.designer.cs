@@ -54,9 +54,6 @@ namespace WebMovie.Models
     partial void InsertTHELOAI(THELOAI instance);
     partial void UpdateTHELOAI(THELOAI instance);
     partial void DeleteTHELOAI(THELOAI instance);
-    partial void InsertPHIMTHELOAI(PHIMTHELOAI instance);
-    partial void UpdatePHIMTHELOAI(PHIMTHELOAI instance);
-    partial void DeletePHIMTHELOAI(PHIMTHELOAI instance);
     #endregion
 		
 		public MovieDataDataContext() : 
@@ -150,14 +147,6 @@ namespace WebMovie.Models
 			get
 			{
 				return this.GetTable<THELOAI>();
-			}
-		}
-		
-		public System.Data.Linq.Table<PHIMTHELOAI> PHIMTHELOAIs
-		{
-			get
-			{
-				return this.GetTable<PHIMTHELOAI>();
 			}
 		}
 	}
@@ -1049,15 +1038,17 @@ namespace WebMovie.Models
 		
 		private System.Nullable<int> _Tapphim;
 		
+		private System.Nullable<int> _MaTL;
+		
 		private EntitySet<COMMENT> _COMMENTs;
 		
 		private EntitySet<LICHSU> _LICHSUs;
 		
-		private EntitySet<PHIMTHELOAI> _PHIMTHELOAIs;
-		
 		private EntityRef<NAMPHATHANH> _NAMPHATHANH;
 		
 		private EntityRef<QUOCGIA> _QUOCGIA;
+		
+		private EntityRef<THELOAI> _THELOAI;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1095,15 +1086,17 @@ namespace WebMovie.Models
     partial void OnPhanphimChanged();
     partial void OnTapphimChanging(System.Nullable<int> value);
     partial void OnTapphimChanged();
+    partial void OnMaTLChanging(System.Nullable<int> value);
+    partial void OnMaTLChanged();
     #endregion
 		
 		public PHIM()
 		{
 			this._COMMENTs = new EntitySet<COMMENT>(new Action<COMMENT>(this.attach_COMMENTs), new Action<COMMENT>(this.detach_COMMENTs));
 			this._LICHSUs = new EntitySet<LICHSU>(new Action<LICHSU>(this.attach_LICHSUs), new Action<LICHSU>(this.detach_LICHSUs));
-			this._PHIMTHELOAIs = new EntitySet<PHIMTHELOAI>(new Action<PHIMTHELOAI>(this.attach_PHIMTHELOAIs), new Action<PHIMTHELOAI>(this.detach_PHIMTHELOAIs));
 			this._NAMPHATHANH = default(EntityRef<NAMPHATHANH>);
 			this._QUOCGIA = default(EntityRef<QUOCGIA>);
+			this._THELOAI = default(EntityRef<THELOAI>);
 			OnCreated();
 		}
 		
@@ -1435,6 +1428,30 @@ namespace WebMovie.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaTL", DbType="Int")]
+		public System.Nullable<int> MaTL
+		{
+			get
+			{
+				return this._MaTL;
+			}
+			set
+			{
+				if ((this._MaTL != value))
+				{
+					if (this._THELOAI.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMaTLChanging(value);
+					this.SendPropertyChanging();
+					this._MaTL = value;
+					this.SendPropertyChanged("MaTL");
+					this.OnMaTLChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHIM_COMMENT", Storage="_COMMENTs", ThisKey="Maphim", OtherKey="Maphim")]
 		public EntitySet<COMMENT> COMMENTs
 		{
@@ -1458,19 +1475,6 @@ namespace WebMovie.Models
 			set
 			{
 				this._LICHSUs.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHIM_PHIMTHELOAI", Storage="_PHIMTHELOAIs", ThisKey="Maphim", OtherKey="Maphim")]
-		public EntitySet<PHIMTHELOAI> PHIMTHELOAIs
-		{
-			get
-			{
-				return this._PHIMTHELOAIs;
-			}
-			set
-			{
-				this._PHIMTHELOAIs.Assign(value);
 			}
 		}
 		
@@ -1542,6 +1546,40 @@ namespace WebMovie.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="THELOAI_PHIM", Storage="_THELOAI", ThisKey="MaTL", OtherKey="MaTL", IsForeignKey=true)]
+		public THELOAI THELOAI
+		{
+			get
+			{
+				return this._THELOAI.Entity;
+			}
+			set
+			{
+				THELOAI previousValue = this._THELOAI.Entity;
+				if (((previousValue != value) 
+							|| (this._THELOAI.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._THELOAI.Entity = null;
+						previousValue.PHIMs.Remove(this);
+					}
+					this._THELOAI.Entity = value;
+					if ((value != null))
+					{
+						value.PHIMs.Add(this);
+						this._MaTL = value.MaTL;
+					}
+					else
+					{
+						this._MaTL = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("THELOAI");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1581,18 +1619,6 @@ namespace WebMovie.Models
 		}
 		
 		private void detach_LICHSUs(LICHSU entity)
-		{
-			this.SendPropertyChanging();
-			entity.PHIM = null;
-		}
-		
-		private void attach_PHIMTHELOAIs(PHIMTHELOAI entity)
-		{
-			this.SendPropertyChanging();
-			entity.PHIM = this;
-		}
-		
-		private void detach_PHIMTHELOAIs(PHIMTHELOAI entity)
 		{
 			this.SendPropertyChanging();
 			entity.PHIM = null;
@@ -1837,7 +1863,7 @@ namespace WebMovie.Models
 		
 		private string _TenTL;
 		
-		private EntitySet<PHIMTHELOAI> _PHIMTHELOAIs;
+		private EntitySet<PHIM> _PHIMs;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1851,7 +1877,7 @@ namespace WebMovie.Models
 		
 		public THELOAI()
 		{
-			this._PHIMTHELOAIs = new EntitySet<PHIMTHELOAI>(new Action<PHIMTHELOAI>(this.attach_PHIMTHELOAIs), new Action<PHIMTHELOAI>(this.detach_PHIMTHELOAIs));
+			this._PHIMs = new EntitySet<PHIM>(new Action<PHIM>(this.attach_PHIMs), new Action<PHIM>(this.detach_PHIMs));
 			OnCreated();
 		}
 		
@@ -1895,16 +1921,16 @@ namespace WebMovie.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="THELOAI_PHIMTHELOAI", Storage="_PHIMTHELOAIs", ThisKey="MaTL", OtherKey="MaTL")]
-		public EntitySet<PHIMTHELOAI> PHIMTHELOAIs
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="THELOAI_PHIM", Storage="_PHIMs", ThisKey="MaTL", OtherKey="MaTL")]
+		public EntitySet<PHIM> PHIMs
 		{
 			get
 			{
-				return this._PHIMTHELOAIs;
+				return this._PHIMs;
 			}
 			set
 			{
-				this._PHIMTHELOAIs.Assign(value);
+				this._PHIMs.Assign(value);
 			}
 		}
 		
@@ -1928,184 +1954,16 @@ namespace WebMovie.Models
 			}
 		}
 		
-		private void attach_PHIMTHELOAIs(PHIMTHELOAI entity)
+		private void attach_PHIMs(PHIM entity)
 		{
 			this.SendPropertyChanging();
 			entity.THELOAI = this;
 		}
 		
-		private void detach_PHIMTHELOAIs(PHIMTHELOAI entity)
+		private void detach_PHIMs(PHIM entity)
 		{
 			this.SendPropertyChanging();
 			entity.THELOAI = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PHIMTHELOAI")]
-	public partial class PHIMTHELOAI : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Maphim;
-		
-		private int _MaTL;
-		
-		private EntityRef<PHIM> _PHIM;
-		
-		private EntityRef<THELOAI> _THELOAI;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnMaphimChanging(int value);
-    partial void OnMaphimChanged();
-    partial void OnMaTLChanging(int value);
-    partial void OnMaTLChanged();
-    #endregion
-		
-		public PHIMTHELOAI()
-		{
-			this._PHIM = default(EntityRef<PHIM>);
-			this._THELOAI = default(EntityRef<THELOAI>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Maphim", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int Maphim
-		{
-			get
-			{
-				return this._Maphim;
-			}
-			set
-			{
-				if ((this._Maphim != value))
-				{
-					if (this._PHIM.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnMaphimChanging(value);
-					this.SendPropertyChanging();
-					this._Maphim = value;
-					this.SendPropertyChanged("Maphim");
-					this.OnMaphimChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaTL", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int MaTL
-		{
-			get
-			{
-				return this._MaTL;
-			}
-			set
-			{
-				if ((this._MaTL != value))
-				{
-					if (this._THELOAI.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnMaTLChanging(value);
-					this.SendPropertyChanging();
-					this._MaTL = value;
-					this.SendPropertyChanged("MaTL");
-					this.OnMaTLChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHIM_PHIMTHELOAI", Storage="_PHIM", ThisKey="Maphim", OtherKey="Maphim", IsForeignKey=true)]
-		public PHIM PHIM
-		{
-			get
-			{
-				return this._PHIM.Entity;
-			}
-			set
-			{
-				PHIM previousValue = this._PHIM.Entity;
-				if (((previousValue != value) 
-							|| (this._PHIM.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._PHIM.Entity = null;
-						previousValue.PHIMTHELOAIs.Remove(this);
-					}
-					this._PHIM.Entity = value;
-					if ((value != null))
-					{
-						value.PHIMTHELOAIs.Add(this);
-						this._Maphim = value.Maphim;
-					}
-					else
-					{
-						this._Maphim = default(int);
-					}
-					this.SendPropertyChanged("PHIM");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="THELOAI_PHIMTHELOAI", Storage="_THELOAI", ThisKey="MaTL", OtherKey="MaTL", IsForeignKey=true)]
-		public THELOAI THELOAI
-		{
-			get
-			{
-				return this._THELOAI.Entity;
-			}
-			set
-			{
-				THELOAI previousValue = this._THELOAI.Entity;
-				if (((previousValue != value) 
-							|| (this._THELOAI.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._THELOAI.Entity = null;
-						previousValue.PHIMTHELOAIs.Remove(this);
-					}
-					this._THELOAI.Entity = value;
-					if ((value != null))
-					{
-						value.PHIMTHELOAIs.Add(this);
-						this._MaTL = value.MaTL;
-					}
-					else
-					{
-						this._MaTL = default(int);
-					}
-					this.SendPropertyChanged("THELOAI");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 }

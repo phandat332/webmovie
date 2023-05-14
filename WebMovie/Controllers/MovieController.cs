@@ -23,45 +23,48 @@ namespace WebMovie.Controllers
         [UserAuthorize]
         public ActionResult Chitiet(int id)
          {
-            var phim = (from p in data.PHIMs
-                        where p.Maphim == id
-                        select new TheloaiPhim
-                        {
-                            Maphim = p.Maphim,
-                            TenPhim = p.TenPhim,
-                            Daodien = p.Daodien,
-                            Dienvien = p.Dienvien,
-                            Noidung = p.Noidung,
-                            Dotuoi = p.Dotuoi,
-                            Thoiluong = p.Thoiluong,
-                            Ngonngu = p.Ngonngu,
-                            Linkphim = p.Linkphim,
-                            Trailer = p.Trailer,
-                            Anhbia = p.Anhbia,
-                            Phimbo = (bool)p.Phimbo,
-                            Phanphim =p.Phanphim,
-                            Tapphim = p.Tapphim,
-                            TheLoai = (from tl in data.THELOAIs
-                                       join ct in data.PHIMTHELOAIs on tl.MaTL equals ct.MaTL
-                                       where ct.Maphim == id
-                                       select tl.TenTL).ToList(),
-                            Nam = (from n in data.NAMPHATHANHs
-                                   where n.MaNam == p.MaNam
-                                   select n.Nam).ToList(),
-                            Quociga = (from n in data.QUOCGIAs
-                                       where n.MaQG  == p.MaQG
-                                       select n.TenQG).ToList()
+            /* var phim = (from p in data.PHIMs
+                         where p.Maphim == id
+                         select new TheloaiPhim
+                         {
+                             Maphim = p.Maphim,
+                             TenPhim = p.TenPhim,
+                             Daodien = p.Daodien,
+                             Dienvien = p.Dienvien,
+                             Noidung = p.Noidung,
+                             Dotuoi = p.Dotuoi,
+                             Thoiluong = p.Thoiluong,
+                             Ngonngu = p.Ngonngu,
+                             Linkphim = p.Linkphim,
+                             Trailer = p.Trailer,
+                             Anhbia = p.Anhbia,
+                             Phimbo = (bool)p.Phimbo,
+                             Phanphim =p.Phanphim,
+                             Tapphim = p.Tapphim,
+                             TheLoai = (from tl in data.THELOAIs
+                                        join ct in data.PHIMTHELOAIs on tl.MaTL equals ct.MaTL
+                                        where ct.Maphim == id
+                                        select tl.TenTL).ToList(),
+                             Nam = (from n in data.NAMPHATHANHs
+                                    where n.MaNam == p.MaNam
+                                    select n.Nam).ToList(),
+                             Quociga = (from n in data.QUOCGIAs
+                                        where n.MaQG  == p.MaQG
+                                        select n.TenQG).ToList()
 
-                        }).FirstOrDefault();
+                         }).FirstOrDefault();
 
-            if (phim == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Title = phim.TenPhim + " - phimmoi24h";
-            return View(phim);
+             if (phim == null)
+             {
+                 return HttpNotFound();
+             }
+             ViewBag.Title = phim.TenPhim + " - phimmoi24h";
+             return View(phim);*/
 
-
+            var chitiet = from s in data.PHIMs
+                          where s.Maphim == id
+                          select s;
+            return View(chitiet.Single());
         }
    
         // xem phim
@@ -79,7 +82,7 @@ namespace WebMovie.Controllers
         }
         public ActionResult SPTheotheloai(int id, int? page)
         {
-            // kiem tra thuong hieu co ton tai khong
+            /*// kiem tra thuong hieu co ton tai khong
             if (Request.HttpMethod != "GET")
             {
                 page = 1;
@@ -100,7 +103,8 @@ namespace WebMovie.Controllers
                  where pt.MaTL == id
                  select p
              ).ToList();
-         
+              List<PHIM> listphim = data.PHIMs.Where(n => n.Maphim == id).ToList();
+
             if (listphim.Count == 0)
             {
                 // không làm gì cả
@@ -112,38 +116,82 @@ namespace WebMovie.Controllers
                 ViewBag.soluong = i;
                 ViewBag.theloai = danhmuc.TenTL;
             }
-            return View(listphim.ToPagedList(pageNumber, pageSize));
-        }
-        // phim theo thể loại hành động
-        public ActionResult SanPhamTheoHanhdong( int? page)
-        {
-            // kiem tra thuong hieu co ton tai khong
+            return View(listphim.ToPagedList(pageNumber, pageSize));*/
+            // Kiểm tra xem 'data' có được khởi tạo hay không
+            if (data == null)
+            {
+                // Xử lý lỗi ở đây
+                return null;
+            }
+
+            // Kiểm tra thương hiệu có tồn tại không
             if (Request.HttpMethod != "GET")
             {
                 page = 1;
             }
-            int pageSize = 4;
+            int pageSize = 6;
             int pageNumber = (page ?? 1);
+            THELOAI theloai = data.THELOAIs.SingleOrDefault(n => n.MaTL == id);
+            if (theloai == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
 
-            //truy xuat danh sach theo thuong hieu
-            List<PHIM> listphim = data.PHIMs
-                .Join(data.PHIMTHELOAIs, p => p.Maphim, pt => pt.Maphim, (p, pt) => new { Phim = p, PhimTheLoai = pt })
-                .Join(data.THELOAIs, ppt => ppt.PhimTheLoai.MaTL, tl => tl.MaTL, (ppt, tl) => new { Phim = ppt.Phim, TheLoai = tl })
-                .Where(t => t.TheLoai.TenTL == "Hành động")
-                .Select(t => t.Phim)
-                .ToList(); 
-
+            // Truy xuất danh sách
+            List<PHIM> listphim = data.PHIMs.Where(n => n.MaTL == id).ToList();
+            if (listphim.Count == 0)
+            {
+                // Không có phim nào
+                ViewBag.soluong = 0;
+            }
+            else
+            {
+                // Có phim
+                ViewBag.soluong = listphim.Count;
+            }
+            ViewBag.Theloai = theloai.TenTL;
             return View(listphim.ToPagedList(pageNumber, pageSize));
         }
+        // phim theo thể loại hành động
+        /*     public ActionResult SanPhamTheoHanhdong( int? page)
+             {
+                 // kiem tra thuong hieu co ton tai khong
+                   if (Request.HttpMethod != "GET")
+                   {
+                       page = 1;
+                   }
+                   int pageSize = 4;
+                   int pageNumber = (page ?? 1);
+
+                   //truy xuat danh sach theo thuong hieu
+                   List<PHIM> listphim = data.PHIMs
+                       .Join(data.PHIMTHELOAIs, p => p.Maphim, pt => pt.Maphim, (p, pt) => new { Phim = p, PhimTheLoai = pt })
+                       .Join(data.THELOAIs, ppt => ppt.PhimTheLoai.MaTL, tl => tl.MaTL, (ppt, tl) => new { Phim = ppt.Phim, TheLoai = tl })
+                       .Where(t => t.TheLoai.TenTL == "Hành động")
+                       .Select(t => t.Phim)
+                       .ToList(); 
+
+                   return View(listphim.ToPagedList(pageNumber, pageSize));
+                 return View();
+             }*/
         //sản phẩm theo năm phát hành
         public ActionResult Namph()
         {
             var Namph = from tl in data.NAMPHATHANHs select tl;
             return PartialView(Namph);
         }
+
         public ActionResult SPtheoNamph(int id, int? page)
         {
-            // kiem tra thuong hieu co ton tai khong
+            // Kiểm tra xem 'data' có được khởi tạo hay không
+            if (data == null)
+            {
+                // Xử lý lỗi ở đây
+                return null;
+            }
+
+            // Kiểm tra thương hiệu có tồn tại không
             if (Request.HttpMethod != "GET")
             {
                 page = 1;
@@ -156,23 +204,23 @@ namespace WebMovie.Controllers
                 Response.StatusCode = 404;
                 return null;
             }
-            //truy xuat danh sach theo thuong hieu
-            List<PHIM> listphim = data.PHIMs.Where(n => n.Maphim  == id).ToList();
+
+            // Truy xuất danh sách
+            List<PHIM> listphim = data.PHIMs.Where(n => n.MaNam == id).ToList();
             if (listphim.Count == 0)
             {
-                // không làm gì cả
+                // Không có phim nào
+                ViewBag.soluong = 0;
             }
             else
             {
-                int i;
-                for (i = 0; i < listphim.Count; i++)
-                {
-                    i = i++;
-                }
-                ViewBag.soluong = i;
+                // Có phim
+                ViewBag.soluong = listphim.Count;
             }
+            ViewBag.Nam = Namph.Nam;
             return View(listphim.ToPagedList(pageNumber, pageSize));
         }
+
         // phim lẻ
         public ActionResult Phimle(int ? page) 
         {

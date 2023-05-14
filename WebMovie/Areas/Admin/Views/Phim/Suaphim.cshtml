@@ -14,7 +14,7 @@
 {
     @Html.AntiForgeryToken()
 
-
+    @Html.HiddenFor(model => model.Maphim)
     <div class="row">
         <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
@@ -34,6 +34,16 @@
                             <div class="col-md-6 col-sm-6 ">
                                 @Html.EditorFor(model => model.TenPhim, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.TenPhim, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                                Anh bìa <span class="required"></span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <label for="uploadhinh">Chọn Ảnh Bìa mới:</label>
+                                <input type="file" name="uploadhinh" id="uploadhinh" /><br />
+                                <img style="padding-top:40px" src="@Url.Content("~/image/" + Model.Anhbia)" alt="Ảnh Bìa" width="150" height="250" /><h2> (Ảnh hiện tại)</h2>
                             </div>
                         </div>
                         <div class="item form-group">
@@ -99,42 +109,41 @@
                                 @Html.ValidationMessageFor(model => model.Trailer, "", new { @class = "text-danger" })
                             </div>
                         </div>
+
                         <div class="item form-group">
                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
-                                Anh bìa <span class="required"></span>
+                                Mô tả <span class="required"></span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                @Html.EditorFor(model => model.Anhbia, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Anhbia, "", new { @class = "text-danger" })
+
+                                <textarea name="Noidung"> @Html.Raw(Model.Noidung)</textarea>
                             </div>
                         </div>
                         <div class="item form-group">
                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
                                 Năm phát hành <span class="required"></span>
                             </label>
-                            <div class="col-md-6 col-sm-6 ">
-                                @Html.EditorFor(model => model.NAMPHATHANH.Nam, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.NAMPHATHANH.Nam, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
-                                Mô tả <span class="required"></span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 ">
-                              @*  @Html.EditorFor(model => model.Noidung, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Noidung, "", new { @class = "text-danger" })*@
-                                <textarea name="Noidung"> @Html.Raw(Model.Noidung)</textarea>
+                            <div class="col-md-10 ">
+
+                                @Html.DropDownList("MaNam", ViewBag.Nam as SelectList)
                             </div>
                         </div>
                         <div class="item form-group">
                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
                                 Quốc gia <span class="required"></span>
                             </label>
-                            <div class="col-md-6 col-sm-6 ">
-                                @*@Html.EditorFor(model => model.QUOCGIA.TenQG, new { htmlAttributes = new { @class = "form-control" } })
-                                     @Html.ValidationMessageFor(model => model.QUOCGIA.TenQG, "", new { @class = "text-danger" })*@
+                            <div class="col-md-10 ">
+
                                 @Html.DropDownList("MaQG", ViewBag.QuocGia as SelectList)
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                                Thể loại <span class="required"></span>
+                            </label>
+                            <div class="col-md-10 ">
+
+                                @Html.DropDownList("MaTL", ViewBag.Theloai as SelectList)
                             </div>
                         </div>
 
@@ -188,5 +197,5 @@
 
 
 
-                   
-           
+
+

@@ -59,11 +59,12 @@
       <Column Name="Phimbo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Phanphim" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Tapphim" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaTL" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="PHIM_COMMENT" Member="COMMENTs" ThisKey="Maphim" OtherKey="Maphim" Type="COMMENT" />
       <Association Name="PHIM_LICHSU" Member="LICHSUs" ThisKey="Maphim" OtherKey="Maphim" Type="LICHSU" />
-      <Association Name="PHIM_PHIMTHELOAI" Member="PHIMTHELOAIs" ThisKey="Maphim" OtherKey="Maphim" Type="PHIMTHELOAI" />
       <Association Name="NAMPHATHANH_PHIM" Member="NAMPHATHANH" ThisKey="MaNam" OtherKey="MaNam" Type="NAMPHATHANH" IsForeignKey="true" />
       <Association Name="QUOCGIA_PHIM" Member="QUOCGIA" ThisKey="MaQG" OtherKey="MaQG" Type="QUOCGIA" IsForeignKey="true" />
+      <Association Name="THELOAI_PHIM" Member="THELOAI" ThisKey="MaTL" OtherKey="MaTL" Type="THELOAI" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.QUOCGIA" Member="QUOCGIAs">
@@ -84,15 +85,7 @@
     <Type Name="THELOAI">
       <Column Name="MaTL" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="TenTL" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="THELOAI_PHIMTHELOAI" Member="PHIMTHELOAIs" ThisKey="MaTL" OtherKey="MaTL" Type="PHIMTHELOAI" />
-    </Type>
-  </Table>
-  <Table Name="dbo.PHIMTHELOAI" Member="PHIMTHELOAIs">
-    <Type Name="PHIMTHELOAI">
-      <Column Name="Maphim" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="MaTL" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="PHIM_PHIMTHELOAI" Member="PHIM" ThisKey="Maphim" OtherKey="Maphim" Type="PHIM" IsForeignKey="true" />
-      <Association Name="THELOAI_PHIMTHELOAI" Member="THELOAI" ThisKey="MaTL" OtherKey="MaTL" Type="THELOAI" IsForeignKey="true" />
+      <Association Name="THELOAI_PHIM" Member="PHIMs" ThisKey="MaTL" OtherKey="MaTL" Type="PHIM" />
     </Type>
   </Table>
 </Database>

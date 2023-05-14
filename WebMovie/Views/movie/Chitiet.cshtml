@@ -1,7 +1,7 @@
 ﻿
 @using WebMovie.Models
 
-@model WebMovie.ViewModel.TheloaiPhim
+@model WebMovie.Models.PHIM
 @{
 
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -28,7 +28,7 @@
                         <div class="btn-transform transform-vertical red">
                             <div><a href="#" class="item item-1 redbtn"><i class="ion-play"></i>Xem phim</a></div>
                             <div>
-                                <a href="@Url.Action("Xemphim", "Movie",new { id = @Model.Maphim })" class="item item-2 redbtn@* watch-movie-btn*@"><i class="ion-play"></i>Xem ngay</a>
+                                <a href="@Url.Action("Xemphim", "Movie",new { id = @Model.Maphim })" class="item item-2 redbtn watch-movie-btn"><i class="ion-play"></i>Xem ngay</a>
                             </div>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
             </div>
             <div class="col-md-8 col-sm-12 col-xs-12">
                 <div class="movie-single-ct main-content">
-                    <h1 class="bd-hd">@Model.TenPhim  <span>@string.Join("", Model.Nam)</span></h1>
+                    <h1 class="bd-hd">@Model.TenPhim  <span>@Model.NAMPHATHANH.Nam</span></h1>
 
                     <div class="social-btn">
 
@@ -93,7 +93,7 @@
                                 <div id="overview" class="tab active">
                                     <div class="row">
                                         <div class="col-md-8 col-sm-12 col-xs-12">
-                                            <p class="text-justif">@Model.Noidung</p>
+                                            <p class="text-justif">  @Html.Raw(Model.Noidung)</p>
                                             <div class="title-hd-sm">
                                                 <h4>Đạo diễn</h4>
                                             </div>
@@ -124,12 +124,14 @@
                                         <div class="col-md-4 col-xs-12 col-sm-12">
                                             <div class="sb-it">
                                                 <h6>Thể loại:</h6>
-                                                <p> @string.Join(", ", Model.TheLoai)</p>
+                                                @*<p> @string.Join(", ", Model.TheLoai)</p>*@
+                                                <p>@Model.THELOAI.TenTL</p>
                                             </div>
                                             <div class="sb-it">
                                                 <h6>Ngày phát hành:</h6>
                                                 <p>
-                                                    @string.Join(", ", Model.Nam)
+                                                   @* @string.Join(", ", Model.Nam)*@
+                                                    @Model.NAMPHATHANH.Nam
                                                 </p>
                                             </div>
                                             <div class="sb-it">
@@ -141,7 +143,8 @@
                                             <div class="sb-it">
                                                 <h6>Quốc gia:</h6>
                                                 <p>
-                                                    @string.Join("", Model.Quociga)
+                                                   @* @string.Join("", Model.Quociga)*@
+                                                    @Model.QUOCGIA.TenQG
                                                 </p>
                                             </div>
                                             <div class="sb-it">
@@ -176,51 +179,51 @@
 
 @section scripts
 {
-   
-<script>
-    $('.watch-movie-btn').click(function(e) {
-        e.preventDefault();
-        $.ajax({
-            url: '/api/currentuser',
-            type: 'GET',
-            success: function(result) {
-                var makh = result.MaKh;
-                console.log(makh);
-                var maphim = '@Model.Maphim';
+    @*
+        <script>
+            $('.watch-movie-btn').click(function(e) {
+                e.preventDefault();
                 $.ajax({
-                    url: '@Url.Action("GetWatchedMovies", "Account")',
-                    type: 'POST',
-                    data: { makh: makh },
+                    url: '/api/currentuser',
+                    type: 'GET',
                     success: function(result) {
-                        if (result.success) {
-                            var phimdaxem = result.phimdaxem;
-                            if (phimdaxem.indexOf(maphim) !== -1) {
-                                console.log('Phim đã xem.');
-                                return;
-                            }
-                        }
+                        var makh = result.MaKh;
+                        console.log(makh);
+                        var maphim = '@Model.Maphim';
                         $.ajax({
-                            url: '@Url.Action("ThemLichSuXemPhim", "Account")',
+                            url: '@Url.Action("GetWatchedMovies", "Account")',
                             type: 'POST',
-                            data: { Makh: makh, Maphim: maphim },
+                            data: { makh: makh },
                             success: function(result) {
-                                console.log('Lịch sử xem phim đã được cập nhật.');
+                                if (result.success) {
+                                    var phimdaxem = result.phimdaxem;
+                                    if (phimdaxem.indexOf(maphim) !== -1) {
+                                        console.log('Phim đã xem.');
+                                        return;
+                                    }
+                                }
+                                $.ajax({
+                                    url: '@Url.Action("ThemLichSuXemPhim", "Account")',
+                                    type: 'POST',
+                                    data: { Makh: makh, Maphim: maphim },
+                                    success: function(result) {
+                                        console.log('Lịch sử xem phim đã được cập nhật.');
+                                    },
+                                    error: function(err) {
+                                        console.log('Lỗi khi cập nhật lịch sử xem phim: ' + err.responseText);
+                                    }
+                                });
                             },
                             error: function(err) {
-                                console.log('Lỗi khi cập nhật lịch sử xem phim: ' + err.responseText);
+                                console.log('Lỗi khi kiểm tra phim đã xem: ' + err.responseText);
                             }
                         });
                     },
                     error: function(err) {
-                        console.log('Lỗi khi kiểm tra phim đã xem: ' + err.responseText);
+                        console.log('Lỗi khi lấy thông tin user: ' + err.responseText);
                     }
                 });
-            },
-            error: function(err) {
-                console.log('Lỗi khi lấy thông tin user: ' + err.responseText);
-            }
-        });
-    });
-    </script>
-
+            });
+            </script>
+    *@
 }

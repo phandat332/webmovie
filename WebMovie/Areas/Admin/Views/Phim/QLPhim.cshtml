@@ -30,7 +30,7 @@
                         <th class="column-title">Anh bia </th>
                         <th class="column-title">Đạo diễn </th>
                         @* <th class="column-title">diễn viên </th>*@
-                        @* <th class="column-title">Thể loại </th>*@
+                        <th class="column-title">Thể loại </th>
                         <th class="column-title">Quốc gia </th>
                         <th class="column-title">Ngôn ngữ </th>
                         <th class="column-title">Độ tuổi </th>
@@ -66,20 +66,12 @@
                                 @Html.DisplayFor(modelItem => item.Daodien)
                             </td>
 
-                            @* <td>
-            @Html.DisplayFor(modelItem => item.Dienvien)
-        </td>*@
-                            @*
-        <td>
-
-            @foreach (var tl in ViewBag.Theloai)
-            {
-                if (tl.Phim.Maphim == item.Maphim)
-                {
-                    <span>@tl.TenTheLoai</span>
-                }
-            }
-        </td>*@
+                                                @* <td>
+                                @Html.DisplayFor(modelItem => item.Dienvien)
+                            </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.THELOAI.TenTL)
+                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.QUOCGIA.TenQG)
                             </td>
@@ -105,7 +97,8 @@
                                 @Html.DisplayFor(modelItem => item.Tapphim)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Noidung)
+                              
+                                @Html.Raw(item.Noidung)
 
                             </td>
                             <td>
