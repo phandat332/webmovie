@@ -113,17 +113,14 @@ namespace WebMovie.Areas.Admin.Controllers
            ViewBag.Nam = new SelectList(data.NAMPHATHANHs.ToList().OrderBy(n => n.MaNam), "MaTH", "TenTH");
             ViewBag.QuocGia = new SelectList(data.QUOCGIAs.ToList().OrderBy(n => n.MaQG), "MaQG", "TenQG");
             ViewBag.Theloai = new SelectList(data.THELOAIs.ToList().OrderBy(n => n.MaTL), "MaTL", "TenTL");
-            PHIM sp = data.PHIMs.FirstOrDefault(p => p.Maphim == phim.Maphim || p.Maphim == id);
+            PHIM sp = data.PHIMs.FirstOrDefault(p => p.Maphim /* == phim.Maphim || p.Maphim */== id);
             sp.TenPhim = phim.TenPhim;
             sp.Noidung = phim.Noidung;
 
             if (uploadhinh != null && uploadhinh.ContentLength > 0)
             {
-              /*  int id = phim.Maphim;*/
-
-                string _FileName = "";
                 int index = uploadhinh.FileName.IndexOf('.');
-                _FileName = "Suaphim" + id.ToString() + "." + uploadhinh.FileName.Substring(index + 1);
+                string _FileName = "Suaphim" + id.ToString() + "." + uploadhinh.FileName.Substring(index + 1);
                 string _path = Path.Combine(Server.MapPath("~/image/"), _FileName);
                 uploadhinh.SaveAs(_path);
                 sp.Anhbia = _FileName;
@@ -166,7 +163,7 @@ namespace WebMovie.Areas.Admin.Controllers
 
                 string _FileName = "";
                 int index = uploadhinh.FileName.IndexOf('.');
-                _FileName = "themsp" + id.ToString() + "." + uploadhinh.FileName.Substring(index + 1);
+                _FileName = "themphim" + id.ToString() + "." + uploadhinh.FileName.Substring(index + 1);
                 string _path = Path.Combine(Server.MapPath("~/image/"), _FileName);
                 uploadhinh.SaveAs(_path);
 

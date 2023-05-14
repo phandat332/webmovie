@@ -10,7 +10,7 @@
 </div>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Suaphim", "Phim", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -41,9 +41,10 @@
                                 Anh bìa <span class="required"></span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <label for="uploadhinh">Chọn Ảnh Bìa mới:</label>
+                            
+                                <img src="@Url.Content("~/image/" + Model.Anhbia)" alt="Ảnh bìa" width="150" height="250" /><br />
+                                <label for="uploadhinh">Chọn ảnh bìa mới:</label>
                                 <input type="file" name="uploadhinh" id="uploadhinh" /><br />
-                                <img style="padding-top:40px" src="@Url.Content("~/image/" + Model.Anhbia)" alt="Ảnh Bìa" width="150" height="250" /><h2> (Ảnh hiện tại)</h2>
                             </div>
                         </div>
                         <div class="item form-group">
