@@ -1,10 +1,7 @@
-﻿
-
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600" />
+    @*<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600" />*@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="format-detection" content="telephone-no" />
   
@@ -25,7 +22,7 @@
     </title>
 </head>
 <body>
-    <form method="post" action="./" id="form1">
+
         <header class="ht-header">
             <div class="container">
                 <nav class="navbar navbar-default navbar-custom">
@@ -104,7 +101,7 @@
 
                                 <li><a href="#" style="text-transform: none;">Hỗ trợ</a></li>
                                 <li class="btn"><a href="/account/login" id="hyplnkAccount" style="text-transform: none;">Đăng nhập/Đăng ký</a></li>
-                                @* <a class="navbar-brand text-white" href="/Account/DangKy">Đăng ký</a>*@
+
                             }
                         </ul>
 
@@ -113,13 +110,22 @@
                 </nav>
 
 
-                <div class="top-search">
-                    <select>
-                        <option value="united">Phim chiếu rạp</option>
-                        <option value="saab">Phim bộ</option>
-                    </select>
-                    <input id="search-input" type="text" placeholder="Nhập tên phim mà bạn muốn tìm....">
-                </div>
+                @using (Html.BeginForm("LayTuKhoaTimKiem", "Timkiem"))
+                {<form method="post" action="./" id="form1">
+
+                        <div class="top-search">
+                            <select>
+                                <option value="united">Phim chiếu rạp</option>
+                                <option value="saab">Phim bộ</option>
+                            </select>
+                            <input id="search" name="sTukhoa" type="text" placeholder="Nhập tên phim mà bạn muốn tìm....">
+                            <input type="submit" value="Tìm kiếm" class="btn btn-outline-success" style="padding-right: 20px;"/>
+                     </div>
+                            </form>
+                
+                }
+                
+
             </div>
         </header>
         @RenderBody()
@@ -164,18 +170,7 @@
                             <li><a href="#">Hướng dẫn</a></li>
                         </ul>
                     </div>
-                    @* <div class="flex-child-ft item5">
-                            <h4>Đăng ký nhận Email</h4>
-                            <p>
-                                Đăng ký để nhận thông tin mới
-                                <br>
-                                và sớm nhất của chúng tôi.
-                            </p>
-                            <div>
-                                <input type="text" placeholder="Enter your email...">
-                            </div>
-                            <a href="#" class="btn">Đăng ký Ngay <i class="ion-ios-arrow-forward"></i></a>
-                        </div>*@
+                   
                 </div>
             </div>
             <div class="ft-copyright">
@@ -188,17 +183,11 @@
             </div>
         </footer>
 
-    </form>
+ 
     <script src="@Url.Content("~/Content/user_assets/js/plugins.js")"></script>
     <script src="@Url.Content("~/Content/user_assets/js/plugins2.js")"></script>
     <script src="@Url.Content("~/Content/user_assets/js/custom.js")"></script>
-    <script type="text/javascript">
-        $("#search-input").keypress(function (e) {
-            if (e.which == 13 || e.keyCode == 13) {
-                window.location.href = "/search?input=" + $("#search-input").val();
-            }
-        });
-    </script>
+
     @RenderSection("scripts", required: false)
 
 </body>

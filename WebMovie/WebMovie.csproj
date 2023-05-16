@@ -169,6 +169,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MovieController.cs" />
+    <Compile Include="Controllers\TimkiemController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -222,7 +223,6 @@
     <Content Include="Content\user_assets\images\uploads\hero-bg.jpg" />
     <Content Include="Content\user_assets\images\uploads\search-bg.png" />
     <Content Include="Content\user_assets\images\uploads\slider-bg.jpg" />
-    <Content Include="Content\user_assets\images\uploads\topsearch.png" />
     <Content Include="Content\user_assets\images\uploads\user-hero-bg.jpg" />
     <Content Include="Content\user_assets\js\custom.js" />
     <Content Include="Content\user_assets\js\jquery.js" />
@@ -338,6 +338,7 @@
     <Content Include="Views\movie\Xemphim.cshtml" />
     <Content Include="Views\movie\Phimle.cshtml" />
     <Content Include="Views\Account\LichSuXemPhim.cshtml" />
+    <Content Include="Views\Timkiem\KQTimkiem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
