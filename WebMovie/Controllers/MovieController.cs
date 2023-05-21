@@ -6,8 +6,9 @@ using WebMovie.App_Start;
 using WebMovie.Models;
 using WebMovie.ViewModel;
 using System.Data.Entity;
-
-
+using System.Data.Linq;
+using System;
+using System.Web;
 
 namespace WebMovie.Controllers
 {
@@ -66,14 +67,44 @@ namespace WebMovie.Controllers
                           select s;
             return View(chitiet.Single());
         }
-   
+
         // xem phim
         public ActionResult Xemphim(int id)
         {
-            var Xemphim = from s in data.PHIMs
-                          where s.Maphim == id
-                          select s;
-            return View(Xemphim.Single());
+       
+            int maKhachHang = ((KHACHHANG)System.Web.HttpContext.Current.Session["User"]).MaKh;
+            bool daXem = CheckMovie(maKhachHang, id);
+            if (!daXem)
+            {
+                // Ghi nhận lịch sử xem phim nếu chưa xem
+                Themlichsu(maKhachHang, id);
+            }
+            // Lấy thông tin phim từ cơ sở dữ liệu
+            var Xemphim = data.PHIMs.Single(p => p.Maphim == id);
+            return View(Xemphim);
+        }
+        //check phim đã xem hay chưa
+        public bool CheckMovie(int maKhachHang, int maPhim)
+        {
+            using (var dbContext = new MovieDataDataContext())
+            {
+                var lichSu = dbContext.LICHSUs.SingleOrDefault(l => l.Makh == maKhachHang && l.Maphim == maPhim);
+
+                return lichSu != null;
+            }
+        }
+        //lịch sử người dùng
+        public void Themlichsu(int maKhachHang, int maPhim)
+        {
+            LICHSU lichSuXemPhim = new LICHSU
+            {
+                Makh = maKhachHang,
+                Maphim = maPhim,
+                Thoigian = DateTime.Now
+            };
+
+            data.LICHSUs.InsertOnSubmit(lichSuXemPhim);
+            data.SubmitChanges();
         }
         public ActionResult Theloai()
         {

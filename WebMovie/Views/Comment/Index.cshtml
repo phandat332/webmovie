@@ -1,0 +1,24 @@
+﻿@model WebMovie.Models.COMMENT
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<div class="comment-container">
+    <div class="img">
+        <img src="~/image/hinh-ve-co-gai-cute.jpg" width="30" height="30" />
+    </div>
+    <div>
+        <div class="author">@Model.KHACHHANG.Hoten</div>
+        <div class="timestamp">@Model.thoigian</div>
+        <div class="content">@Model.Binhluan</div>
+        <a href="#">Thích</a>
+        <span aria-hidden="true"> · </span>
+        <a href="#">phản hồi</a>
+        <span aria-hidden="true"> · </span>
+    </div>
+
+</div>
+

@@ -227,6 +227,7 @@
                             </div>
 
                         </div>
+                      @*  @Html.Action("Index","Comment")*@
                     </div>
 
                 </div>
@@ -235,56 +236,7 @@
     </div>
 </div>
 
-@section scripts
-{
-    @*
-        <script>
-            $('.watch-movie-btn').click(function(e) {
-                e.preventDefault();
-                $.ajax({
-                    url: '/api/currentuser',
-                    type: 'GET',
-                    success: function(result) {
-                        var makh = result.MaKh;
-                        console.log(makh);
-                        var maphim = '@Model.Maphim';
-                        $.ajax({
-                            url: '@Url.Action("GetWatchedMovies", "Account")',
-                            type: 'POST',
-                            data: { makh: makh },
-                            success: function(result) {
-                                if (result.success) {
-                                    var phimdaxem = result.phimdaxem;
-                                    if (phimdaxem.indexOf(maphim) !== -1) {
-                                        console.log('Phim đã xem.');
-                                        return;
-                                    }
-                                }
-                                $.ajax({
-                                    url: '@Url.Action("ThemLichSuXemPhim", "Account")',
-                                    type: 'POST',
-                                    data: { Makh: makh, Maphim: maphim },
-                                    success: function(result) {
-                                        console.log('Lịch sử xem phim đã được cập nhật.');
-                                    },
-                                    error: function(err) {
-                                        console.log('Lỗi khi cập nhật lịch sử xem phim: ' + err.responseText);
-                                    }
-                                });
-                            },
-                            error: function(err) {
-                                console.log('Lỗi khi kiểm tra phim đã xem: ' + err.responseText);
-                            }
-                        });
-                    },
-                    error: function(err) {
-                        console.log('Lỗi khi lấy thông tin user: ' + err.responseText);
-                    }
-                });
-            });
-            </script>
-    *@
-}
+
 <style>
    
     .bt {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -10,6 +11,7 @@ using System.Xml.Linq;
 using WebMovie.App_Start;
 using WebMovie.Models;
 using WebMovie.ViewModel;
+using System.Data.Linq;
 
 namespace WebMovie.Controllers
 {
@@ -200,39 +202,10 @@ namespace WebMovie.Controllers
             var lichSuXemPhim = from p in db.PHIMs
                                 join l in db.LICHSUs on p.Maphim equals l.Maphim
                                 where l.Makh == Makh
+                                orderby l.Thoigian descending
                                 select p;
-          
+
             return View(lichSuXemPhim);
-        }
-
-
-     //lịch sử xem phim người dùng
-
-      [HttpPost]
-        public ActionResult ThemLichSuXemPhim(int Makh, int Maphim)
-        {
-            var lichSu = new LICHSU();
-            lichSu.Makh = Makh;
-            lichSu.Maphim = Maphim;
-            db.LICHSUs.InsertOnSubmit(lichSu);
-            db.SubmitChanges();
-            return Json(new { success = true });
-        }
-        [HttpPost]
-        public JsonResult GetWatchedMovies(int makh)
-        {
-            var lichsu = db.LICHSUs.Where(ls => ls.Makh == makh).ToList();
-            var phimdaxem = lichsu.Select(ls => ls.Maphim).ToList();
-            return Json(new { success = true, phimdaxem });
-        }
-        [HttpPost]
-        public ActionResult AddToHistory(int Maphim)
-        {
-            var makh = ((KHACHHANG)Session["User"]).MaKh;
-            var lichsu = new LICHSU { Maphim = Maphim, Makh = makh };
-            db.LICHSUs.InsertOnSubmit(lichsu);
-            db.SubmitChanges();
-            return Json(new { success = true });
         }
     }
 }

@@ -167,6 +167,7 @@
     <Compile Include="Areas\Admin\Controllers\QuocgiaController.cs" />
     <Compile Include="Areas\Admin\Controllers\TheloaiController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\TimkiemController.cs" />
@@ -339,6 +340,7 @@
     <Content Include="Views\movie\Phimle.cshtml" />
     <Content Include="Views\Account\LichSuXemPhim.cshtml" />
     <Content Include="Views\Timkiem\KQTimkiem.cshtml" />
+    <Content Include="Views\Comment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
