@@ -2,14 +2,96 @@
     ViewBag.Title = "Trang chủ - phimmoi24h";
 }
 
-<div class="hero common-hero">
+<div class="slider movie-items">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <div class="hero-ct">
-                    <h1></h1>
+            <div class="social-link">
+                <p>Theo dõi chúng tôi: </p>
+                <a href="#"><i class="ion-social-facebook"></i></a>
+                <a href="#"><i class="ion-social-twitter"></i></a>
+                <a href="#"><i class="ion-social-googleplus"></i></a>
+                <a href="#"><i class="ion-social-youtube"></i></a>
+            </div>
+            <div class="slick-multiItemSlider slick-initialized slick-slider">
 
+                <div aria-live="polite" class="slick-list draggable">
+                    <div class="slick-track" style="opacity: 1; width: 1156px; transform: translate3d(0px, 0px, 0px);" role="listbox">
+                        <div class="movie-item slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" style="width: 274px;" tabindex="-1" role="option" aria-describedby="slick-slide70">
+                            <div class="mv-img">
+                                <a href="@Url.Action("Chitiet", "Movie", new { id = 13 }) " tabindex="0">
+                                    <img src="/image/Suaphim13.jpg" alt="Mèo Đi Hia: Điều Ước Cuối Cùng" style="width:285px; height:437px;">
+                                </a>
+                            </div>
+                            <div class="title-in">
+                                <div class="cate">
+
+                                    <span class="blue"><a href="#" tabindex="0">Phưu lưu</a></span>
+
+                                </div>
+                                <h6><a href=" @Url.Action("Chitiet", "Movie", new { id = 13 }) " tabindex="0" style="color:white;">Mèo Đi Hia: Điều Ước Cuối Cùng</a></h6>
+                                <p><i class="ion-android-star"></i><span>10</span> /10</p>
+                            </div>
+                        </div>
+
+                        <div class="movie-item slick-slide slick-active" data-slick-index="1" aria-hidden="false" style="width: 274px;" tabindex="-1" role="option" aria-describedby="slick-slide70">
+                            <div class="mv-img">
+                                <a href=" @Url.Action("Chitiet", "Movie", new { id = 13 })" tabindex="0">
+                                    <img src="/image/Suaphim13.jpg" style="width:285px; height:437px;">
+                                </a>
+                            </div>
+                            <div class="title-in">
+                                <div class="cate">
+
+                                    <span class="blue"><a href="#" tabindex="0">Hành động</a></span>
+
+                                </div>
+                                <h6><a href=" @Url.Action("Chitiet", "Movie", new { id = 13 })" tabindex="0">Spider-Man No Way Home</a></h6>
+                                <p><i class="ion-android-star"></i><span>10.00</span> /10</p>
+                            </div>
+                        </div>
+
+                        <div class="movie-item slick-slide slick-active" data-slick-index="1" aria-hidden="false" style="width: 274px;" tabindex="-1" role="option" aria-describedby="slick-slide70">
+                            <div class="mv-img">
+                                <a href=" @Url.Action("Chitiet", "Movie", new { id = 13 })" tabindex="0">
+                                    <img src="/image/Suaphim13.jpg" style="width:285px; height:437px;">
+                                </a>
+                            </div>
+                            <div class="title-in">
+                                <div class="cate">
+
+                                    <span class="blue"><a href="#" tabindex="0">Hành động</a></span>
+
+                                </div>
+                                <h6><a href=" @Url.Action("Chitiet", "Movie", new { id = 13 })" tabindex="0">Spider-Man No Way Home</a></h6>
+                                <p><i class="ion-android-star"></i><span>10.00</span> /10</p>
+                            </div>
+                        </div>
+
+                        <div class="movie-item slick-slide slick-active" data-slick-index="1" aria-hidden="false" style="width: 274px;" tabindex="-1" role="option" aria-describedby="slick-slide70">
+                            <div class="mv-img">
+                                <a href=" @Url.Action("Chitiet", "Movie", new { id = 13 })" tabindex="0">
+                                    <img src="/image/Suaphim13.jpg" style="width:285px; height:437px;">
+                                </a>
+                            </div>
+                            <div class="title-in">
+                                <div class="cate">
+
+                                    <span class="blue"><a href="#" tabindex="0">Hành động</a></span>
+
+                                </div>
+                                <h6><a href=" @Url.Action("Chitiet", "Movie", new { id = 13 })" tabindex="0">Spider-Man No Way Home</a></h6>
+                                <p><i class="ion-android-star"></i><span>10.00</span> /10</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+
+
+
+
+
+
             </div>
         </div>
     </div>
@@ -158,54 +240,6 @@
                     </div>
                 </div>
 
-                <div class="title-hd">
-                    <h2>Chính kịch</h2>
-                    <a href="/films-by-category/chinh-kich/3" class="viewall">Xem tất cả <i class="ion-ios-arrow-right"></i></a>
-                </div>
-                <div class="tabs">
-                    <ul class="tab-links">
-                        <li class="active"><p>Có thể bạn nên xem</p></li>
-                    </ul>
-                  
-                </div>
-
-                <div class="title-hd">
-                    <h2>Bạo lực</h2>
-                    <a href="/films-by-category/bao-luc/4" class="viewall">Xem tất cả <i class="ion-ios-arrow-right"></i></a>
-                </div>
-                <div class="tabs">
-                    <ul class="tab-links">
-                        <li class="active"><p>Có thể bạn nên xem</p></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab active">
-                            <div class="row">
-                                <div class="slick-multiItem">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="title-hd">
-                    <h2>Trinh thám</h2>
-                    <a href="/films-by-category/trinh-tham/5" class="viewall">Xem tất cả <i class="ion-ios-arrow-right"></i></a>
-                </div>
-                <div class="tabs">
-                    <ul class="tab-links">
-                        <li class="active"><p>Có thể bạn nên xem</p></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab active">
-                            <div class="row">
-                                <div class="slick-multiItem">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
 
 

@@ -6,23 +6,94 @@
     ViewBag.Title = "SanPhamTheoHanhdong";
 }
 
-<h2>SanPhamTheoHanhdong</h2>
-@foreach (var item in Model)
-{
-    <div class="slide-it">
-        <div class="movie-item">
-            <div class="mv-img">
-                <img src="@Url.Content("/image/"+ item.Anhbia)" alt="@item.TenPhim" width="185" height="284">
+@*<h2>SanPhamTheoHanhdong</h2>
+    @foreach (var item in Model)
+    {
+        <div class="slide-it">
+            <div class="movie-item">
+                <div class="mv-img">
+                    <img src="@Url.Content("/image/"+ item.Anhbia)" alt="@item.TenPhim" width="185" height="284">
+                </div>
+                <div class="hvr-inner" style="margin: 80px 40px; background-color: #ffffff00 ">
+                    <a href="@Url.Action("Chitiet", "Movie", new {id = item.Maphim})">
+                        <img src="~/image/iconplay12.png" />
+                    </a>
+                </div>
+                <div class="title-in">
+                    <h6><a href="@Url.Action("Chitiet", "Movie", new {id = item.Maphim})"> @item.TenPhim </a></h6>
+                    <p><i class="ion-android-star"></i><span>0.00</span> /10</p>
+                </div>
             </div>
-            <div class="hvr-inner" style="margin: 80px 40px; background-color: #ffffff00 ">
-                <a href="@Url.Action("Chitiet", "Movie", new {id = item.Maphim})">
-                    <img src="~/image/iconplay12.png" />
-                </a>
-            </div>
-            <div class="title-in">
-                <h6><a href="@Url.Action("Chitiet", "Movie", new {id = item.Maphim})"> @item.TenPhim </a></h6>
-                <p><i class="ion-android-star"></i><span>0.00</span> /10</p>
+        </div>
+    }*@
+<head>
+    <title>@ViewBag.Title</title>
+</head>
+<div class="hero mv-single-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
             </div>
         </div>
     </div>
-}
+</div>
+
+<div class="page-single movie-single movie_single">
+    <div class="container">
+        <div class="row ipad-width2">
+           
+            <div class="col-md-8 col-sm-12 col-xs-12">
+                <div class="movie-single-ct main-content">
+                    <h1 class="bd-hd">Thanh kiếm diệt quỷ <span>2022</span></h1>
+
+                    <div class="social-btn">
+
+                        <div class="hover-bnt">
+                            <a href="#" class="parent-btn"><i class="ion-android-share-alt"></i>Chia sẻ</a>
+                            <div class="hvr-item">
+                                <a href="#" class="hvr-grow"><i class="ion-social-facebook"></i></a>
+                                <a href="#" class="hvr-grow"><i class="ion-social-twitter"></i></a>
+                                <a href="#" class="hvr-grow"><i class="ion-social-googleplus"></i></a>
+                                <a href="#" class="hvr-grow"><i class="ion-social-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="movie-rate">
+                        <div class="rate">
+                            <i class="ion-android-star"></i>
+                            <p>
+                                <span>10.00</span> /10<br>
+                                <span class="rv">5 lượt xem</span>
+                            </p>
+                        </div>
+                        <div class="rate-star">
+                            <p>Đánh giá: </p>
+
+                            <i class="ion-ios-star"></i>
+
+                            <i class="ion-ios-star"></i>
+
+                            <i class="ion-ios-star"></i>
+
+                            <i class="ion-ios-star"></i>
+
+                            <i class="ion-ios-star"></i>
+
+                            <i class="ion-ios-star"></i>
+
+                            <i class="ion-ios-star"></i>
+
+                            <i class="ion-ios-star"></i>
+
+                            <i class="ion-ios-star"></i>
+
+                            <i class="ion-ios-star"></i>
+
+                        </div>
+                    </div>                
+                </div>        
+            </div>
+        </div>
+    </div>
+</div>
+

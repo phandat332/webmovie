@@ -69,6 +69,7 @@ namespace WebMovie.Controllers
         }
 
         // xem phim
+        [UserAuthorize]
         public ActionResult Xemphim(int id)
         {
        
@@ -107,6 +108,11 @@ namespace WebMovie.Controllers
             data.SubmitChanges();
         }
         public ActionResult Theloai()
+        {
+            var theloai = from tl in data.THELOAIs select tl;
+            return PartialView(theloai);
+        }
+        public ActionResult Theloais()
         {
             var theloai = from tl in data.THELOAIs select tl;
             return PartialView(theloai);
@@ -185,7 +191,7 @@ namespace WebMovie.Controllers
             return View(listphim.ToPagedList(pageNumber, pageSize));
         }
         // phim theo thể loại hành động
-        /*     public ActionResult SanPhamTheoHanhdong( int? page)
+           /* public ActionResult SanPhamTheoHanhdong( int? page)
              {
                  // kiem tra thuong hieu co ton tai khong
                    if (Request.HttpMethod != "GET")
@@ -196,12 +202,8 @@ namespace WebMovie.Controllers
                    int pageNumber = (page ?? 1);
 
                    //truy xuat danh sach theo thuong hieu
-                   List<PHIM> listphim = data.PHIMs
-                       .Join(data.PHIMTHELOAIs, p => p.Maphim, pt => pt.Maphim, (p, pt) => new { Phim = p, PhimTheLoai = pt })
-                       .Join(data.THELOAIs, ppt => ppt.PhimTheLoai.MaTL, tl => tl.MaTL, (ppt, tl) => new { Phim = ppt.Phim, TheLoai = tl })
-                       .Where(t => t.TheLoai.TenTL == "Hành động")
-                       .Select(t => t.Phim)
-                       .ToList(); 
+                  *//* List<PHIM> listphim = data.PHIMs*//*
+                       
 
                    return View(listphim.ToPagedList(pageNumber, pageSize));
                  return View();
@@ -258,6 +260,52 @@ namespace WebMovie.Controllers
             int pageNumber = (page ?? 1);
             int pageSize = 8;
             return View(data.PHIMs.Where(n => n.Phimbo == false).ToList().ToPagedList(pageNumber, pageSize));
+        }
+        //sản phẩm theo quôc gia
+
+         public ActionResult quocgia()
+        {
+            var quocgia = from tl in data.QUOCGIAs select tl;
+            return PartialView(quocgia);
+        }
+
+        public ActionResult SPtheoquocgia(int id, int? page)
+        {
+            // Kiểm tra xem 'data' có được khởi tạo hay không
+            if (data == null)
+            {
+                // Xử lý lỗi ở đây
+                return null;
+            }
+
+            // Kiểm tra thương hiệu có tồn tại không
+            if (Request.HttpMethod != "GET")
+            {
+                page = 1;
+            }
+            int pageSize = 6;
+            int pageNumber = (page ?? 1);
+            QUOCGIA quocgia = data.QUOCGIAs.SingleOrDefault(n => n.MaQG == id);
+            if (quocgia == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+
+            // Truy xuất danh sách
+            List<PHIM> listphim = data.PHIMs.Where(n => n.MaQG == id).ToList();
+            if (listphim.Count == 0)
+            {
+                // Không có phim nào
+                ViewBag.soluong = 0;
+            }
+            else
+            {
+                // Có phim
+                ViewBag.soluong = listphim.Count;
+            }
+            ViewBag.quocgia = quocgia.TenQG;
+            return View(listphim.ToPagedList(pageNumber, pageSize));
         }
     }
 }

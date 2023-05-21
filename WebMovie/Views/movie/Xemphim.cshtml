@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="hero-ct">
-                    <h1>Bạn đang xem phim - @Model.TenPhim</h1>
+                    <h2 class="h">Bạn đang xem phim - @Model.TenPhim</h2>
 
                 </div>
             </div>
@@ -17,9 +17,79 @@
     </div>
 </div>
 <div class="page-single">
-    <div class="container">
-        <div class="col-lg-12 col-md-12 col-sm-12" style="height:600px;">
-            <iframe src="@Model.Linkphim" width="1070" height="600" allowfullscreen></iframe>
+    <div class="container" style="width:1120px">
+        <div class="col-lg-12 col-md-12 col-sm-12 paddings" style="height:600px;">
+            <iframe src="@Model.Linkphim" width="1060" height="570" allowfullscreen></iframe>
         </div>
     </div>
+   <!--<div class="container paddig" style="width:1000px">
+        <div class="moview">
+            <div class="ing">
+                <img src="~/image/@Model.Anhbia" alt="" width="190" height="250">
+            </div>
+            <div>
+                <div>
+                    <h1 class="h">@Model.TenPhim <span>(@Model.NAMPHATHANH.Nam)</span> <span>@Model.Dotuoi</span></h1>
+                    <p>@Model.Thoiluong <span style="padding-left: 20px;">@Model.QUOCGIA.TenQG</span></p>
+                </div>-->
+              @* <div class="movie-single movie_single" style="margin-top: -30px; padding-block: 40px;">
+                        <div class="row ipad-width2" style=" padding-left: 20px;">                     
+                                <div class="movie-single-ct main-content">
+                                    <div class="movie-rate">
+                                        <div class="rate">
+                                            <i class="ion-android-star"></i>
+                                            <p>
+                                                <span>10.00</span> /10<br>
+                                                <span class="rv">5 lượt xem</span>
+                                            </p>
+                                        </div>
+                                        <div class="rate-star">
+                                            <p>Đánh giá: </p>
+                                            <i class="ion-ios-star"></i>
+                                            <i class="ion-ios-star"></i>
+                                            <i class="ion-ios-star"></i>
+                                            <i class="ion-ios-star"></i>
+                                            <i class="ion-ios-star"></i>
+                                            <i class="ion-ios-star"></i>
+                                            <i class="ion-ios-star"></i>
+                                            <i class="ion-ios-star"></i>
+                                            <i class="ion-ios-star"></i>
+                                            <i class="ion-ios-star"></i>
+                                        </div>
+                                    </div>
+
+                                </div>
+                           
+                        </div>             
+                </div>*@
+             
+            <!--</div>
+        </div>
+    </div>-->
+    
 </div>
+<style>
+    .paddig{
+        padding-top:20px;
+
+    }
+    .paddings {
+        padding-top: 15px;
+        padding-block: 15px;
+        background-color: #000000 ;
+    }
+    .moview{
+        padding: 15px 15px;
+        display:flex;
+        height:350px;
+    }
+    .ing {
+        width:190px;
+        height:250px;
+        padding-right:20px;
+    }
+    .h {
+        color: white;
+    }
+
+</style>

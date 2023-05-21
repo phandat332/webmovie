@@ -4,7 +4,7 @@
 @model PagedList.PagedList<WebMovie.Models.PHIM>
 
 @{
-    ViewBag.Title = "Phim theo năm phát hành";
+    ViewBag.Title = "Phim theo quốc gia";
 
 }
 <div class="hero common-hero">
@@ -12,8 +12,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="hero-ct">
-                    <h2 style="color:white">Phim phát hành theo năm</h2>
-
+                    <h2 style="color:white">Phim phát hành theo quốc gia</h2>
                 </div>
             </div>
         </div>
@@ -25,10 +24,10 @@
         <div class="row ipad-width">
 
             <div class="col-md-12 col-sm-12 col-xs-12">
-               
+
                 <div class="topbar-filter">
-                    <p>Phim phát hành vào năm <strong> @ViewBag.Nam</strong> (Tổng số phim: <strong>@ViewBag.soluong</strong>)</p>
-                        </div>
+                    <p>Phim phát hành vào năm <strong> @ViewBag.quocgia</strong> (Tổng số phim: <strong>@ViewBag.soluong</strong>)</p>
+                </div>
                 <div class="flex-wrap-movielist">
                     @foreach (var item in Model)
                     {
@@ -58,8 +57,8 @@
     <div class="container">
         <div class="row ipad-width">
             <div>
-                @Html.PagedListPager(Model, page => Url.Action("SPtheoNamph", new { page = page }), new PagedListRenderOptions { LiElementClasses = new string[] { "page-item btn btn-sm btn-primary mx-1" } })
+                @Html.PagedListPager(Model, page => Url.Action("SPtheoquocgia", new { page = page }), new PagedListRenderOptions { LiElementClasses = new string[] { "page-item btn btn-sm btn-primary mx-1" } })
             </div>
-         </div>
-     </div>
+        </div>
+    </div>
 </div>
