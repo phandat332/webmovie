@@ -1,20 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Movie" Class="MovieDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-B14PQIH\PHANDAT;Initial Catalog=Movie;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="MovieConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.COMMENTS" Member="COMMENTs">
-    <Type Name="COMMENT">
-      <Column Name="MaBL" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Makh" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Maphim" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Binhluan" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
-      <Column Name="Danhgia" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="thoigian" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Macha" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="COMMENT_COMMENT" Member="COMMENTs" ThisKey="MaBL" OtherKey="Macha" Type="COMMENT" />
-      <Association Name="COMMENT_COMMENT" Member="COMMENT1" ThisKey="Macha" OtherKey="MaBL" Type="COMMENT" IsForeignKey="true" />
-      <Association Name="KHACHHANG_COMMENT" Member="KHACHHANG" ThisKey="Makh" OtherKey="MaKh" Type="KHACHHANG" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="PHIM_COMMENT" Member="PHIM" ThisKey="Maphim" OtherKey="Maphim" Type="PHIM" IsForeignKey="true" DeleteRule="CASCADE" />
-    </Type>
-  </Table>
   <Table Name="dbo.KHACHHANG" Member="KHACHHANGs">
     <Type Name="KHACHHANG">
       <Column Name="MaKh" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -24,9 +9,19 @@
       <Column Name="DienthoaiKh" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="MaQuyen" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Hoten" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="KHACHHANG_COMMENT" Member="COMMENTs" ThisKey="MaKh" OtherKey="Makh" Type="COMMENT" />
       <Association Name="KHACHHANG_LICHSU" Member="LICHSUs" ThisKey="MaKh" OtherKey="Makh" Type="LICHSU" />
+      <Association Name="KHACHHANG_DONHANG" Member="DONHANGs" ThisKey="MaKh" OtherKey="MaKH" Type="DONHANG" />
+      <Association Name="KHACHHANG_COMMENT" Member="COMMENTs" ThisKey="MaKh" OtherKey="Makh" Type="COMMENT" />
       <Association Name="QUYEN_KHACHHANG" Member="QUYEN" ThisKey="MaQuyen" OtherKey="MaQuyen" Type="QUYEN" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LICHSU" Member="LICHSUs">
+    <Type Name="LICHSU">
+      <Column Name="Maphim" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Makh" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Thoigian" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="KHACHHANG_LICHSU" Member="KHACHHANG" ThisKey="Makh" OtherKey="MaKh" Type="KHACHHANG" IsForeignKey="true" />
+      <Association Name="PHIM_LICHSU" Member="PHIM" ThisKey="Maphim" OtherKey="Maphim" Type="PHIM" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.NAMPHATHANH" Member="NAMPHATHANHs">
@@ -55,8 +50,8 @@
       <Column Name="Phanphim" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Tapphim" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="MaTL" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="PHIM_COMMENT" Member="COMMENTs" ThisKey="Maphim" OtherKey="Maphim" Type="COMMENT" />
       <Association Name="PHIM_LICHSU" Member="LICHSUs" ThisKey="Maphim" OtherKey="Maphim" Type="LICHSU" />
+      <Association Name="PHIM_COMMENT" Member="COMMENTs" ThisKey="Maphim" OtherKey="Maphim" Type="COMMENT" />
       <Association Name="NAMPHATHANH_PHIM" Member="NAMPHATHANH" ThisKey="MaNam" OtherKey="MaNam" Type="NAMPHATHANH" IsForeignKey="true" />
       <Association Name="QUOCGIA_PHIM" Member="QUOCGIA" ThisKey="MaQG" OtherKey="MaQG" Type="QUOCGIA" IsForeignKey="true" />
       <Association Name="THELOAI_PHIM" Member="THELOAI" ThisKey="MaTL" OtherKey="MaTL" Type="THELOAI" IsForeignKey="true" />
@@ -83,13 +78,50 @@
       <Association Name="THELOAI_PHIM" Member="PHIMs" ThisKey="MaTL" OtherKey="MaTL" Type="PHIM" />
     </Type>
   </Table>
-  <Table Name="dbo.LICHSU" Member="LICHSUs">
-    <Type Name="LICHSU">
-      <Column Name="Maphim" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Makh" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Thoigian" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="KHACHHANG_LICHSU" Member="KHACHHANG" ThisKey="Makh" OtherKey="MaKh" Type="KHACHHANG" IsForeignKey="true" />
-      <Association Name="PHIM_LICHSU" Member="PHIM" ThisKey="Maphim" OtherKey="Maphim" Type="PHIM" IsForeignKey="true" />
+  <Table Name="dbo.THE" Member="THEs">
+    <Type Name="THE">
+      <Column Name="Mathe" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="LoaiThe" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="GiaTien" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="ChatLuong" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="PhanGiai" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Association Name="THE_CHITIETDONHANG" Member="CHITIETDONHANGs" ThisKey="Mathe" OtherKey="Mathe" Type="CHITIETDONHANG" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DONHANG" Member="DONHANGs">
+    <Type Name="DONHANG">
+      <Column Name="MaDH" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NgayDH" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Ngaygiao" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Trangthai" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MaKH" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="DONHANG_CHITIETDONHANG" Member="CHITIETDONHANGs" ThisKey="MaDH" OtherKey="MaDH" Type="CHITIETDONHANG" />
+      <Association Name="KHACHHANG_DONHANG" Member="KHACHHANG" ThisKey="MaKH" OtherKey="MaKh" Type="KHACHHANG" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CHITIETDONHANG" Member="CHITIETDONHANGs">
+    <Type Name="CHITIETDONHANG">
+      <Column Name="MaDH" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Soluong" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Dongia" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="Mathe" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="DONHANG_CHITIETDONHANG" Member="DONHANG" ThisKey="MaDH" OtherKey="MaDH" Type="DONHANG" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="THE_CHITIETDONHANG" Member="THE" ThisKey="Mathe" OtherKey="Mathe" Type="THE" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.COMMENTS" Member="COMMENTs">
+    <Type Name="COMMENT">
+      <Column Name="MaBL" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Makh" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Maphim" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Binhluan" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
+      <Column Name="thoigian" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Macha" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Danhgia" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="COMMENT_COMMENT" Member="COMMENTs" ThisKey="MaBL" OtherKey="Macha" Type="COMMENT" />
+      <Association Name="KHACHHANG_COMMENT" Member="KHACHHANG" ThisKey="Makh" OtherKey="MaKh" Type="KHACHHANG" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="PHIM_COMMENT" Member="PHIM" ThisKey="Maphim" OtherKey="Maphim" Type="PHIM" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="COMMENT_COMMENT" Member="COMMENT1" ThisKey="Macha" OtherKey="MaBL" Type="COMMENT" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
