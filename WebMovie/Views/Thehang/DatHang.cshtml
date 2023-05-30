@@ -1,0 +1,142 @@
+﻿@model IEnumerable<WebMovie.Models.Giohang>
+
+@{ Layout = null; }
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="@Url.Content("~/Content/user_assets/images/logoweb11.jpg")" />
+    <title>Đặt hàng</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Scripts/nprogress/nprogress.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+    <script src="~/Scripts/daterangepicker.js"></script>
+    <link href="~/Content/custom.min.css" rel="stylesheet" />
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+
+    <script src="/path/or/uri/to/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+tinyMCE.init({
+            mode: "textareas"
+
+        });</script>
+</head>
+<body style="background-image: url('../../Content/user_assets/images/uploads/slider-bg.jpg');">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mt-5">
+                    <div class="card-header text-center">
+                        <h3 class="card-title">Đặt hàng</h3>
+                    </div>
+                    <div class="card-body">
+
+
+
+                        <table class="table">
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.Mathe)</th>
+                                <th>@Html.DisplayNameFor(model => model.LoaiThe)</th>
+                                <th>@Html.DisplayNameFor(model => model.ChatLuong)</th>
+                                <th>@Html.DisplayNameFor(model => model.PhanGiai)</th>
+                                <th>@Html.DisplayNameFor(model => model.giaban)</th>
+                                <th>@Html.DisplayNameFor(model => model.soluong)</th>
+                                <th>@Html.DisplayNameFor(model => model.dThanhTIen)</th>
+
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Mathe)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.LoaiThe)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ChatLuong)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.PhanGiai)</td>
+                                    @using (Html.BeginForm("Cannhapgiohang", "GioHang", new { @id = item.Mathe }))
+                                    {
+
+                                        <td>@String.Format("{0:0,0}", item.giaban) VNĐ</td>
+                                        <td><input type="number" min="1" name="txtSoLg" value="@item.soluong" /> </td>
+                                        <td>@Html.DisplayFor(modelItem => item.dThanhTIen)</td>
+                                        <td> @Html.ActionLink("Xóa", "XoaGioHang", new { @id = item.Mathe })</td>
+                                    }
+                                </tr>
+                            }
+                            <tr style="font-weight:bold; text-align:left; color:red">
+                                <td colspan="2">Số loại sản phẩm: @ViewBag.Tongsoluongsanpham</td>
+                                <td colspan="2">Số lượng sản phẩm: @ViewBag.Tongsoluong</td>
+                                <td colspan="4">Tổng tiền: @String.Format("{0:0,0}", ViewBag.Tongtien)</td>
+                            </tr>
+                            <tr style="font-weight:bold; color:blue; ">
+                                <td colspan="5">
+                                    @Html.ActionLink("Xóa Giỏ Hàng", "XoaTatCaGioHang")
+                                </td>
+                            </tr>
+                            <tr style="font-weight:bold; color:yellow;">
+                                <td colspan="5">
+                                    @Html.ActionLink("Đặt hàng", "DatHang", "GioHang")
+                                </td>
+                            </tr>
+
+
+                        </table>
+
+                        @using WebMovie.Models
+                        <h2 style="text-align:center; color:red">Thông Tin Đặt Hàng</h2>
+                        @{
+                            KHACHHANG kh = (KHACHHANG)Session["TaikhoanCart"];
+                        }
+                        <
+                        <table class="center">
+
+
+                            @using (Html.BeginForm())
+                            {
+                                @Html.ValidationSummary(true)
+                                <tr style="height:40px">
+                                    <td>Tên Khách Hàng: </td>
+                                    <td style="font-weight:bold">@kh.Hoten</td>
+                                </tr>
+                                <tr style="height:40px">
+                                    <td>Email: </td>
+                                    <td style="font-weight:bold">@kh.Email</td>
+                                </tr>
+                              
+                                <tr style="height:40px">
+                                    <td>Điện thoại: </td>
+                                    <td style="font-weight:bold">@kh.DienthoaiKh</td>
+                                </tr>
+                                <tr style="height:40px">
+                                    <td>Ngày đặt: </td>
+                                    <td style="font-weight:bold">@DateTime.Now.ToShortDateString()</td>
+                                </tr>
+                                <tr style="height:40px">
+                                    <td> </td>
+                                    <td style="font-weight:bold">
+                                        <input type="submit" value="Xác nhận" class="btn btn-success" />
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+
+                        <style>
+                            table.center {
+                                margin-left: auto;
+                                margin-right: auto;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

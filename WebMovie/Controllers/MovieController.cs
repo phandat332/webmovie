@@ -258,7 +258,7 @@ namespace WebMovie.Controllers
         public ActionResult Phimle(int ? page) 
         {
             int pageNumber = (page ?? 1);
-            int pageSize = 8;
+            int pageSize = 12;
             return View(data.PHIMs.Where(n => n.Phimbo == false).ToList().ToPagedList(pageNumber, pageSize));
         }
         //sản phẩm theo quôc gia

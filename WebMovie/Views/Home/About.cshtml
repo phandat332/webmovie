@@ -47,13 +47,16 @@
                         <div class="container">
                             @foreach (var item in Model)
                             {
-                                <button class="text buy-button ">
-                                    <h2 ><b>@item.LoaiThe</b></h2>
-                                    <h2>Chất lượng video: @item.ChatLuong</h2>
-                                    <h2>Độ phân giải: @item.PhanGiai</h2>
-                                    <h2>giá:@item.GiaTien đ</h2>
-                                </button>
+                                <a  class="buy-button" href="@Url.Action("ThemGioHang", "Thehang", new { @id = item.Mathe, @strURL = Request.Url.ToString() })" >
+                                    <div >
+                                        <h2><b>@item.LoaiThe</b></h2>
+                                        <h2>Chất lượng video: @item.ChatLuong</h2>
+                                        <h2>Độ phân giải: @item.PhanGiai</h2>
+                                        <h2>giá: @item.GiaTien đ</h2>
+                                    </div>
+                                </a>
                             }
+
                         </div>
                         <div class="separator">
                             <div class="form-group row">

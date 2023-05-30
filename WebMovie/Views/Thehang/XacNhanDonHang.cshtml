@@ -1,0 +1,53 @@
+﻿@model IEnumerable<WebMovie.Models.Giohang>
+
+@{ Layout = null; }
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="@Url.Content("~/Content/user_assets/images/logoweb11.jpg")" />
+    <title>Đặt hàng</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Scripts/nprogress/nprogress.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+    <script src="~/Scripts/daterangepicker.js"></script>
+    <link href="~/Content/custom.min.css" rel="stylesheet" />
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+
+    <script src="/path/or/uri/to/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+tinyMCE.init({
+            mode: "textareas"
+
+        });</script>
+</head>
+<body style="background-image: url('../../Content/user_assets/images/uploads/slider-bg.jpg');">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mt-5">
+                    <div class="card-header text-center">
+                        <h3 class="card-title">Xác nhận đơn hàng</h3>
+                    </div>
+                    <div class="card-body" style="display: flex;">
+                        <h2> Bạn đã mua thẻ tháng thành công! </h2>
+                        <br />
+                        <hr />
+                        @Html.ActionLink("Về trang chủ", "Index", "Home", null, new { style = "display: block;height: 21px;margin-top: 10px;" })
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

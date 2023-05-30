@@ -15,7 +15,7 @@ namespace WebMovie.Controllers
         {
             return View();
         }
-       
+        [UserAuthorize]
         public ActionResult About()
         {
             return View(data.THEs.ToList().OrderBy(n => n.Mathe));

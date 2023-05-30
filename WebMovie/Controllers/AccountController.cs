@@ -97,6 +97,8 @@ namespace WebMovie.Controllers
                     ViewData["ThongBao"] = "Mật khẩu không chính xác!";
                 }
             }
+            TempData["Message"] = "bạn đã mua thẻ tháng chưa? hãy mua thẻ tháng để có trả nghiệm tốt hơn nhé";
+
             return View();
         }
 
@@ -159,7 +161,7 @@ namespace WebMovie.Controllers
 
                 db.KHACHHANGs.InsertOnSubmit(kh);
                 db.SubmitChanges();
-                return RedirectToAction("Login");
+                return RedirectToAction("About","Home");
             }
 
             return DangKy();

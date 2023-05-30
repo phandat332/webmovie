@@ -1,4 +1,4 @@
-﻿using Do_An_Wed.Models;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +13,7 @@ namespace WebMovie.Controllers
         MovieDataDataContext data = new MovieDataDataContext();
         public List<Giohang> Laygiohang()
         {
+         
             List<Giohang> lstgiohang = Session["Giohang"] as List<Giohang>;
             if (lstgiohang == null)
             {
@@ -25,10 +26,10 @@ namespace WebMovie.Controllers
         public ActionResult Giohang()
         {
             List<Giohang> lstGiohang = Laygiohang();
-            ViewBag.Tongsoluong =1;
+            ViewBag.Tongsoluong = TongSoluong();
             ViewBag.Tongtien = TongTien();
-            ViewBag.Tongsoluongsanpham = 1;
-            Session["TongSoSp"] = 1 + "";
+            ViewBag.Tongsoluongsanpham = TongSoluongSanPham();
+            Session["TongSoSp"] = TongSoluongSanPham() + "";
             return View(lstGiohang);
         }
         // GET: Giohang
@@ -41,16 +42,21 @@ namespace WebMovie.Controllers
             {
                 sanpham = new Giohang(id);
                 lstgiohang.Add(sanpham);
-                Session["TongSoSp"] = TongSoluongSanPham() + "";
-                return Redirect(strURL);
             }
             else
             {
-                Session["TongSoSp"] = TongSoluongSanPham() + "";
                 sanpham.soluong++;
-                return Redirect(strURL);
             }
+
+            Session["TongSoSp"] = TongSoluongSanPham() + "";
+
+            // Chuyển hướng trực tiếp đến trang giỏ hàng
+            return RedirectToAction("Giohang", "Thehang");
+
+            // Thay thế "TenHanhDongGiỏHàng" bằng tên hành động trong Controller của bạn để hiển thị trang giỏ hàng.
+            // Thay thế "TenController" bằng tên Controller của bạn.
         }
+
         private int TongSoluongSanPham()
         {
             int tsl = 0;
@@ -100,25 +106,13 @@ namespace WebMovie.Controllers
                 lstGiohang.RemoveAll(n => n.Mathe == id);
                 return RedirectToAction("Giohang");
             }
-            return RedirectToAction("Giohang");
+            return RedirectToAction("About","Home");
         }
-
-        public ActionResult Cannhapgiohang(int id, FormCollection collection)
-        {
-            List<Giohang> lstGiohang = Laygiohang();
-            Giohang sanpham = lstGiohang.SingleOrDefault(n => n.Mathe == id);
-            if (sanpham != null)
-            {
-                sanpham.soluong = int.Parse(collection["txtSolg"].ToString());
-            }
-            return RedirectToAction("Giohang");
-        }
-
         public ActionResult Xoatatcagiohang()
         {
             List<Giohang> lstGiohang = Laygiohang();
             lstGiohang.Clear();
-            return RedirectToAction("Giohang");
+            return RedirectToAction("About", "Home");
         }
 
         [HttpGet]
@@ -130,14 +124,18 @@ namespace WebMovie.Controllers
             }
             if (Session["GioHang"] == null)
             {
-                return RedirectToAction("sanpham", "sanphams");
+                return RedirectToAction("About", "Home");
             }
+
             List<Giohang> lstGioHang = Laygiohang();
             ViewBag.Tongsoluong = TongSoluong();
             ViewBag.Tongtien = TongTien();
             ViewBag.Tongsoluongsanpham = TongSoluongSanPham();
+
             return View(lstGioHang);
         }
+
+        [HttpPost]
         public ActionResult DatHang(FormCollection collection)
         {
             DONHANG dh = new DONHANG();
@@ -145,14 +143,13 @@ namespace WebMovie.Controllers
 
             List<Giohang> gh = Laygiohang();
 
-            var ngaygiao = String.Format("{0:dd/MM/yyyy}", collection["NgayGiao"]);
-            dh.MaKH = kh.MaKH;
+            dh.Makh = kh.MaKh;
             dh.NgayDH = DateTime.Now;
-            dh.Ngaygiao = DateTime.Parse(ngaygiao);
             dh.Trangthai = false;
 
             data.DONHANGs.InsertOnSubmit(dh);
             data.SubmitChanges();
+
             foreach (var item in gh)
             {
                 CHITIETDONHANG ctdh = new CHITIETDONHANG();
@@ -160,16 +157,14 @@ namespace WebMovie.Controllers
                 ctdh.Mathe = item.Mathe;
                 ctdh.Soluong = item.soluong;
                 ctdh.Dongia = (decimal)item.giaban;
-                //s = data.SANPHAMs.Single(n => n.MaSP == item.Masp);
-                //s.soluongton -= ctdh.soluong;               
+
                 data.CHITIETDONHANGs.InsertOnSubmit(ctdh);
-                data.SubmitChanges();
             }
 
             data.SubmitChanges();
             Session["GioHang"] = null;
 
-            return RedirectToAction("XacNhanDonHang", "GioHang");
+            return RedirectToAction("XacNhanDonHang", "Thehang");
         }
 
         public ActionResult XacNhanDonHang()
