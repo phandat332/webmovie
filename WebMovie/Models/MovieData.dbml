@@ -1,15 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Movie" Class="MovieDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-B14PQIH\PHANDAT;Initial Catalog=Movie;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="MovieConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.CHITIETDONHANG" Member="CHITIETDONHANGs">
-    <Type Name="CHITIETDONHANG">
-      <Column Name="MaDH" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Soluong" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Dongia" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Column Name="Mathe" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="DONHANG_CHITIETDONHANG" Member="DONHANG" ThisKey="MaDH" OtherKey="MaDH" Type="DONHANG" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="THE_CHITIETDONHANG" Member="THE" ThisKey="Mathe" OtherKey="Mathe" Type="THE" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.COMMENTS" Member="COMMENTs">
     <Type Name="COMMENT">
       <Column Name="MaBL" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -25,11 +15,20 @@
       <Association Name="PHIM_COMMENT" Member="PHIM" ThisKey="Maphim" OtherKey="Maphim" Type="PHIM" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
+  <Table Name="dbo.CHITIETDONHANG" Member="CHITIETDONHANGs">
+    <Type Name="CHITIETDONHANG">
+      <Column Name="MaDH" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Soluong" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Dongia" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="Mathe" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="DONHANG_CHITIETDONHANG" Member="DONHANG" ThisKey="MaDH" OtherKey="MaDH" Type="DONHANG" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="THE_CHITIETDONHANG" Member="THE" ThisKey="Mathe" OtherKey="Mathe" Type="THE" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.DONHANG" Member="DONHANGs">
     <Type Name="DONHANG">
       <Column Name="MaDH" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="NgayDH" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Ngaygiao" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Trangthai" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Makh" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="DONHANG_CHITIETDONHANG" Member="CHITIETDONHANGs" ThisKey="MaDH" OtherKey="MaDH" Type="CHITIETDONHANG" />

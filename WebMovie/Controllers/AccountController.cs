@@ -175,28 +175,54 @@ namespace WebMovie.Controllers
             return RedirectToAction("Index", "Home", new { area = "" });
         }
         // thay đổi thông tin
-        /* [HttpGet]
-         public ActionResult Suakh(int id)
-         {
-             KHACHHANG tk = db.KHACHHANGs.SingleOrDefault(n => n.MaKh == id);
-             if (tk == null)
-             {
-                 Response.StatusCode = 404;
-                 return null;
-             }
-             return View(tk);
-         }
-         [HttpPost, ActionName("Suakh")]
-         [ValidateInput(false)]
-         public ActionResult savekh(int id)
-         {
-             KHACHHANG tk = db.KHACHHANGs.SingleOrDefault(n => n.MaKh == id);
+        [UserAuthorize]
+        [HttpGet]
+             public ActionResult Chitiet()
+            {
+                KHACHHANG Makh = (KHACHHANG)Session["User"];
 
-             UpdateModel(tk);
-             db.SubmitChanges();
-             return RedirectToAction("Login");
-         }*/
-       
+                    return View(Makh);
+           
+            }
+
+
+
+        [UserAuthorize]
+        [HttpGet]
+        public ActionResult EditKh(int id)
+        {
+            KHACHHANG tk = db.KHACHHANGs.SingleOrDefault(n => n.MaKh == id);
+            if (tk == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(tk);
+        }
+
+        [HttpPost, ActionName("EditKh")]
+        [ValidateInput(false)]
+        public ActionResult Saved(FormCollection collection, int id)
+        {
+            KHACHHANG tk = db.KHACHHANGs.SingleOrDefault(n => n.MaKh == id);
+            var Matkhau1 = collection["Matkhau1"];
+            var Matkhau2 = collection["Matkhau2"];
+            if (String.IsNullOrEmpty(Matkhau1))
+            {
+                //không làm gì cả 
+            }
+            else if (tk.Matkhau != MD5Hash(Matkhau1))
+            {
+                tk.Matkhau = MD5Hash(Matkhau1);
+                UpdateModel(tk.Matkhau);
+
+            }
+            UpdateModel(tk);
+            db.SubmitChanges();
+            return RedirectToAction("Login");
+        }
+
+
         [UserAuthorize]
         public ActionResult LichSuXemPhim()
         {

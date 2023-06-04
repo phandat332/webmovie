@@ -236,12 +236,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="image\avat1.jpg" />
+    <Content Include="image\avata1.jpg" />
     <Content Include="image\AVATAR2.jpg" />
     <Content Include="image\BlackAdam.jpg" />
     <Content Include="image\hinh-ve-co-gai-cute.jpg" />
     <Content Include="image\iconplay12.png" />
     <Content Include="image\KIMETSUNOYAIBA.jpg" />
+    <Content Include="image\matran.jpg" />
+    <Content Include="image\matran12.jpg" />
     <Content Include="image\titani1.jpg" />
+    <Content Include="image\vv.jpg" />
     <Content Include="logo.ico" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -332,13 +337,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\DangKy.cshtml" />
-    <Content Include="Views\Account\Suakh.cshtml" />
+    <Content Include="Views\Account\chitiet.cshtml" />
     <Content Include="Views\movie\Theloai.cshtml" />
     <Content Include="Views\movie\Namph.cshtml" />
     <Content Include="Views\movie\SPTheotheloai.cshtml" />
     <Content Include="Views\movie\Chitiet.cshtml" />
     <Content Include="Views\movie\SPtheoNamph.cshtml" />
-    <Content Include="Views\movie\SanPhamTheoHanhdong.cshtml" />
     <Content Include="Views\movie\Xemphim.cshtml" />
     <Content Include="Views\movie\Phimle.cshtml" />
     <Content Include="Views\Account\LichSuXemPhim.cshtml" />
@@ -350,6 +354,8 @@
     <Content Include="Views\Thehang\Giohang.cshtml" />
     <Content Include="Views\Thehang\DatHang.cshtml" />
     <Content Include="Views\Thehang\XacNhanDonHang.cshtml" />
+    <Content Include="Views\movie\phimloai.cshtml" />
+    <Content Include="Views\Account\EditKh.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
