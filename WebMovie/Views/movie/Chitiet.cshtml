@@ -173,66 +173,7 @@
                     </div>
                 </div>
                 
-                <div class="container" style="width:auto; background-color: white">
-                    <div style="margin-bottom: 30px; border-bottom: 1px solid #e9ebee;">
-                        <div class="title">
-                            <div class="bt">
-                                <h6> 6 bình luận</h6>
-                            </div>
-
-                        </div>
-                        <div class="comment-container">
-                            <div class="img">
-                                <img src="~/image/hinh-ve-co-gai-cute.jpg" width="30" height="30" />
-                            </div>
-                            <div>
-                                <div class="author">Người dùng A</div>
-                                <form>
-                                    <label for="comment">Đánh giá:</label>
-                                    <textarea style=" width: 650px; height: 40px" id="comment" name="comment" required></textarea>
-                                    <label for="comment">Bình luận:</label>
-                                    <textarea style=" width: 650px; height: 70px" id="comment" name="comment" required></textarea>
-
-                                    <input type="submit" value="Đăng">
-                                </form>
-                            </div>
-                        </div>
-                        <div class="comment-container">
-                            <div class="img">
-                                <img src="~/image/hinh-ve-co-gai-cute.jpg" width="30" height="30" />
-                            </div>
-                            <div>
-                                <div class="author">Người dùng A <span> (8,5 <i class="ion-ios-star"></i>)</span></div>
-                                <div class="timestamp">15 tháng 5, 2023</div>
-                                <div class="content">Đây là bình luận của người dùng A.</div>
-                                <a href="#">Thích</a>
-                                <span aria-hidden="true"> · </span>
-                                <a href="#">phản hồi</a>
-                                <span aria-hidden="true"> · </span>
-                            </div>
-
-
-                        </div>
-
-                        <div class="comment-container">
-                            <div class="img">
-                                <img src="~/image/hinh-ve-co-gai-cute.jpg" width="30" height="30" />
-                            </div>
-                            <div>
-                                <div class="author">Người dùng B <span> (8,5 <i class="ion-ios-star"></i>)</span></div>
-                                <div class="timestamp">15 tháng 5, 2023</div>
-                                <div class="content">Đây là bình luận của người dùng B SỐNG TRÊn đời là phải có ước mơ phải có hi vọng và niềm tin vào cuộc sống sau này .</div>
-                                <a href="#">Thích</a>
-                                <span aria-hidden="true"> · </span>
-                                <a href="#">phản hồi</a>
-                                <span aria-hidden="true"> · </span>
-                            </div>
-
-                        </div>
-                      @*  @Html.Action("Index","Comment")*@
-                    </div>
-
-                </div>
+              @Html.Action("Index","Comment", new {Maphim = Model.Maphim})
             </div>
         </div>
     </div>

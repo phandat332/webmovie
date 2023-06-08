@@ -175,6 +175,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CommetBUS.cs" />
     <Compile Include="Models\Giohang.cs" />
     <Compile Include="Models\MovieData.cs">
       <DependentUpon>MovieData.dbml</DependentUpon>
@@ -347,7 +348,6 @@
     <Content Include="Views\movie\Phimle.cshtml" />
     <Content Include="Views\Account\LichSuXemPhim.cshtml" />
     <Content Include="Views\Timkiem\KQTimkiem.cshtml" />
-    <Content Include="Views\Comment\Index.cshtml" />
     <Content Include="Views\movie\quocgia.cshtml" />
     <Content Include="Views\movie\SPtheoquocgia.cshtml" />
     <Content Include="Views\movie\Theloais.cshtml" />
@@ -356,6 +356,8 @@
     <Content Include="Views\Thehang\XacNhanDonHang.cshtml" />
     <Content Include="Views\movie\phimloai.cshtml" />
     <Content Include="Views\Account\EditKh.cshtml" />
+    <Content Include="Views\Comment\Index.cshtml" />
+    <Content Include="Views\Comment\DanhSachBinhLuan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

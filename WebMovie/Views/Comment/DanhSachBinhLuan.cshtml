@@ -1,0 +1,47 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model IEnumerable<WebMovie.Models.COMMENT>
+@{
+    ViewBag.Title = "DanhSachBinhLuan";
+    Layout = null;
+}
+
+@foreach (var item in Model)
+{
+    <div class="comment-container">
+        <div class="img">
+            <img src="~/image/hinh-ve-co-gai-cute.jpg" width="50" height="30" />
+        </div>
+        <div>
+            <div class="author">
+                <span class="name">@item.KHACHHANG.Hoten</span>
+                <span class="rating">(@item.Danhgia <i class="ion-ios-star"></i>)</span>
+            </div>
+            <div class="timestamp">@item.thoigian</div>
+            <div class="content">@item.Binhluan</div>
+            <a href="#" style="margin-left: 15px;">Thích</a>
+            <span aria-hidden="true"> · </span>
+            <a href="#">phản hồi</a>
+            <span aria-hidden="true"> · </span>
+        </div>
+    </div>
+}
+
+
+<div class="pagination-container" style="color:black">
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("DanhSachBinhLuan", new { Maphim = ViewBag.Maphim, page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "comment-container" }))
+</div>
+<style>
+
+    .author .name {
+        color: #385898;
+    }
+
+    .rating i {
+        color: #f5b50a;
+    }
+    .pagination li.active a {
+        color: #000000;
+        border: 1px solid #10100f;
+    }
+</style>

@@ -244,7 +244,7 @@ namespace WebMovie.Controllers
             {
                 page = 1;
             }
-            int pageSize = 6;
+            int pageSize = 12;
             int pageNumber = (page ?? 1);
             NAMPHATHANH Namph = data.NAMPHATHANHs.SingleOrDefault(n => n.MaNam == id);
             if (Namph == null)

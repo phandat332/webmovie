@@ -1,24 +1,66 @@
-﻿@model WebMovie.Models.COMMENT
+﻿
+
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = null;
 }
 
+<div class="container" style="width:auto; background-color: white">
+    <div style="margin-bottom: 30px; border-bottom: 1px solid #e9ebee;">
+        <div class="title">
+            <div class="bt">
+                <h6> @ViewBag.TotalBinhLuan bình luận</h6>
+            </div>
 
+        </div>
+        <div class="comment-container">
+            <div class="img">
+                <img src="~/image/hinh-ve-co-gai-cute.jpg" width="40" height="30" />
+            </div>
+            <div>
+                <div class="author">@ViewBag.Hoten</div>
 
-<div class="comment-container">
-    <div class="img">
-        <img src="~/image/hinh-ve-co-gai-cute.jpg" width="30" height="30" />
-    </div>
-    <div>
-        <div class="author">@Model.KHACHHANG.Hoten</div>
-        <div class="timestamp">@Model.thoigian</div>
-        <div class="content">@Model.Binhluan</div>
-        <a href="#">Thích</a>
-        <span aria-hidden="true"> · </span>
-        <a href="#">phản hồi</a>
-        <span aria-hidden="true"> · </span>
+                @using (Html.BeginForm("Create", "Comment", FormMethod.Post))
+                {
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="rating-container">
+                        <label for="danhgia">Đánh giá:</label>
+                        <div class="select-wrapper">
+                            <select id="danhgia" name="danhgia" style=" height: 30px; padding: 0 10px 0 10px;">
+                                @for (int i = 1; i <= 10; i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <label for="Binhluan">Bình luận:</label>
+                    <textarea style="width: 650px; height: 70px" id="Binhluan" name="Binhluan" required></textarea>
+                    @Html.Hidden("Maphim", (int)ViewBag.Maphim)
+                    <input type="submit" value="Đăng">
+                }
+            </div>
+        </div>
+      @Html.Action("DanhSachBinhLuan","Comment", new {id = (int)ViewBag.Maphim})
     </div>
 
 </div>
+<style>
+    .rating-container {
+        display: flex;
+        align-items: center;
+    }
 
+        .rating-container label {
+            margin-right: 10px;
+        }
+
+        .rating-container input {
+            width: 40px;
+        }
+    .author {
+        color: #385898;
+    }
+</style>
