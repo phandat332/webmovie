@@ -15,7 +15,7 @@ namespace WebMovie.Controllers
     public class MovieController : Controller
     {
         MovieDataDataContext data = new MovieDataDataContext();
-        
+        private HomeController homeController = new HomeController();
         // GET: movie
         public ActionResult Index()
         {
@@ -24,44 +24,10 @@ namespace WebMovie.Controllers
         [UserAuthorize]
         public ActionResult Chitiet(int id)
          {
-            /* var phim = (from p in data.PHIMs
-                         where p.Maphim == id
-                         select new TheloaiPhim
-                         {
-                             Maphim = p.Maphim,
-                             TenPhim = p.TenPhim,
-                             Daodien = p.Daodien,
-                             Dienvien = p.Dienvien,
-                             Noidung = p.Noidung,
-                             Dotuoi = p.Dotuoi,
-                             Thoiluong = p.Thoiluong,
-                             Ngonngu = p.Ngonngu,
-                             Linkphim = p.Linkphim,
-                             Trailer = p.Trailer,
-                             Anhbia = p.Anhbia,
-                             Phimbo = (bool)p.Phimbo,
-                             Phanphim =p.Phanphim,
-                             Tapphim = p.Tapphim,
-                             TheLoai = (from tl in data.THELOAIs
-                                        join ct in data.PHIMTHELOAIs on tl.MaTL equals ct.MaTL
-                                        where ct.Maphim == id
-                                        select tl.TenTL).ToList(),
-                             Nam = (from n in data.NAMPHATHANHs
-                                    where n.MaNam == p.MaNam
-                                    select n.Nam).ToList(),
-                             Quociga = (from n in data.QUOCGIAs
-                                        where n.MaQG  == p.MaQG
-                                        select n.TenQG).ToList()
 
-                         }).FirstOrDefault();
-
-             if (phim == null)
-             {
-                 return HttpNotFound();
-             }
-             ViewBag.Title = phim.TenPhim + " - phimmoi24h";
-             return View(phim);*/
-
+            int maphim = id; 
+            double? trungBinh = homeController.TinhDiemTrungBinh(maphim);
+            ViewBag.trungbinh = trungBinh;
             var chitiet = from s in data.PHIMs
                           where s.Maphim == id
                           select s;
@@ -167,7 +133,7 @@ namespace WebMovie.Controllers
             {
                 page = 1;
             }
-            int pageSize = 6;
+            int pageSize = 12;
             int pageNumber = (page ?? 1);
             THELOAI theloai = data.THELOAIs.SingleOrDefault(n => n.MaTL == id);
             if (theloai == null)
@@ -197,7 +163,7 @@ namespace WebMovie.Controllers
         //  phim theo thể loại thể loại
         public ActionResult phimloai(int id,int? page)
         {
-            int pageSize = 5;
+            int pageSize = 7;
             int pageNumber = (page ?? 1);
             THELOAI theloai = data.THELOAIs.SingleOrDefault(n => n.MaTL == id);
             if (theloai == null)
