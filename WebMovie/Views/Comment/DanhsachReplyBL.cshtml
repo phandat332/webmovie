@@ -1,0 +1,61 @@
+﻿@model IEnumerable<WebMovie.Models.BINHLUAN>
+@{
+    ViewBag.Title = "DanhsachReplyBL";
+    Layout = null;
+}
+@foreach (var item in Model)
+{
+    <div class="comment-container" style="margin-left: 66px;">
+        <div class="img">
+            <img src="~/image/hinh-ve-co-gai-cute.jpg" width="50" height="30" />
+        </div>
+        <div>
+            <div class="author">
+                <span class="name">@item.KHACHHANG.Hoten</span>
+                <span class="rating">(@item.Danhgia <i class="ion-ios-star"></i>)</span>
+            </div>
+            <div class="timestamp">@item.thoigian</div>
+            <div class="content">@item.Noidung</div>
+            <a href="#" style="margin-left: 15px;">Thích</a>
+            <span aria-hidden="true"> · </span>
+            <button class="toogleButtom" onclick="toggleCommentContainer(@item.MaBL)">phản hồi</button>
+            <span aria-hidden="true"> · </span>
+
+        </div>
+    </div>
+    <div id="comment-container-@item.MaBL" style="display: none;">
+
+        @Html.Action("Reply", "Comment", new { maphim = item.Maphim, macha = item.MaBL })
+    </div>
+    @Html.Action("DanhsachReplyBL", "Comment", new { maphim = item.Maphim, macha = item.MaBL })
+}
+
+<style>
+
+    .author .name {
+        color: #385898;
+    }
+
+    .rating i {
+        color: #f5b50a;
+    }
+
+    .pagination li.active a {
+        color: #000000;
+        border: 1px solid #10100f;
+    }
+</style>
+
+<script>
+    function toggleCommentContainer(MaBL) {
+        var commentContainer = document.getElementById("comment-container-" + MaBL);
+
+        if (commentContainer.style.display === "none") {
+            commentContainer.style.display = "block";
+        } else {
+            commentContainer.style.display = "none";
+        }
+    }
+</script>
+
+

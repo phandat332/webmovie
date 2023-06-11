@@ -1,0 +1,14 @@
+﻿
+@model IEnumerable<WebMovie.Models.QUOCGIA>
+@{
+    ViewBag.Title = "Quocgia";
+
+}
+<li>
+    @foreach (var item in Model)
+    {
+        <a href="@Url.Action("SPtheoquocgia", "Movie", new { id = item.MaQG})">
+            @item.TenQG 
+        </a>
+    }
+</li>

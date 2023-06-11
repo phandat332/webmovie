@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Reply";
+    Layout = null;
+}
+
+<div class="reply-container">
+    <div class="comment-container" style="margin-left: 66px;">
+        <div class="img">
+            <img src="~/image/hinh-ve-co-gai-cute.jpg" width="55" height="30" />
+        </div>
+        <div style="width:550px;">
+            <div class="author">@ViewBag.Hoten</div>
+
+            @using (Html.BeginForm("CreateReply", "Comment", FormMethod.Post))
+            {
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="rating-container">
+                    <label for="danhgia">Đánh giá:</label>
+                    <div class="select-wrapper">
+                        <select id="danhgia" name="danhgia" style=" height: 30px; padding: 0 10px 0 10px;">
+                            @for (int i = 1; i <= 10; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                @Html.Hidden("Maphim", (int)ViewBag.Maphim)
+                @Html.Hidden("Macha", (int)ViewBag.Macha)
+                <label for="Binhluan">Bình luận:</label>
+                <textarea style="width: 650px; height: 70px" id="Binhluan" name="Binhluan" required></textarea>
+                <div style="display:flex">
+
+                    <input type="button" value="Hủy" style="margin-left:400px;height:31px;margin-top: 10px;">
+                    <input type="submit" value="Đăng" style="margin-left:20px;">
+                </div>
+            }
+        </div>
+    </div>
+</div>

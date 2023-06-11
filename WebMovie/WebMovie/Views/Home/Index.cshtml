@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "Trang chủ - phimmoi24h";
+}
+
+<div class="slider movie-items">
+    <div class="container">
+        <div class="row">
+            <div class="social-link">
+                <p>Theo dõi chúng tôi: </p>
+                <a href="#"><i class="ion-social-facebook"></i></a>
+                <a href="#"><i class="ion-social-twitter"></i></a>
+                <a href="#"><i class="ion-social-googleplus"></i></a>
+                <a href="#"><i class="ion-social-youtube"></i></a>
+            </div>
+            <div class="slick-multiItemSlider slick-initialized slick-slider">
+
+                <div aria-live="polite" class="slick-list draggable">
+                    <div class="slick-track" style="opacity: 1; width: 1156px; transform: translate3d(0px, 0px, 0px);" role="listbox">
+                        <div class="movie-item slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" style="width: 274px;" tabindex="-1" role="option" aria-describedby="slick-slide70">
+                            <div class="mv-img">
+                                <a href="@Url.Action("Chitiet", "Movie", new { id = 17 })" tabindex="0">
+                                    <img src="~/image/titani1.jpg" alt="Titanic-1997" style="width:285px; height:437px;">
+                                </a>
+
+                            </div>
+                            <div class="title-in">
+                                <div class="cate">
+
+                                    <span class="blue"><a href="#" tabindex="0">tình cảm</a></span>
+
+                                </div>
+                                <h6><a href=" @Url.Action("Chitiet", "Movie", new { id = 17 })" tabindex="0">Titanic</a></h6>
+                                <p><i class="ion-android-star"></i><span>10</span> /10</p>
+                            </div>
+                        </div>
+
+                        <div class="movie-item slick-slide slick-active" data-slick-index="1" aria-hidden="false" style="width: 274px;" tabindex="-1" role="option" aria-describedby="slick-slide70">
+                            <div class="mv-img">
+                                <a href=" @Url.Action("Chitiet", "Movie", new { id = 18 })" tabindex="0">
+                                    <img src="~/image/themphim18.jpg" style="width:285px; height:437px;">
+                                </a>
+                            </div>
+                            <div class="title-in">
+                                <div class="cate">
+
+                                    <span class="blue"><a href="#" tabindex="0">Khoa học viễn tưởng</a></span>
+
+                                </div>
+                                <h6><a href=" @Url.Action("Chitiet", "Movie", new { id = 18 })" tabindex="0">Ma trận</a></h6>
+                                <p><i class="ion-android-star"></i><span>10.00</span> /10</p>
+                            </div>
+                        </div>
+
+                        <div class="movie-item slick-slide slick-active" data-slick-index="1" aria-hidden="false" style="width: 274px;" tabindex="-1" role="option" aria-describedby="slick-slide70">
+                            <div class="mv-img">
+                                <a href=" @Url.Action("Chitiet", "Movie", new { id = 20 })" tabindex="0">
+                                    <img src="~/image/vv.jpg" style="width:285px; height:437px;">
+                                </a>
+                            </div>
+                            <div class="title-in">
+                                <div class="cate">
+
+                                    <span class="blue"><a href="#" tabindex="0">Hành động</a></span>
+
+                                </div>
+                                <h6><a href=" @Url.Action("Chitiet", "Movie", new { id = 20})" tabindex="0">Batman đại chiến Superman</a></h6>
+                                <p><i class="ion-android-star"></i><span>10.00</span> /10</p>
+                            </div>
+                        </div>
+
+                        <div class="movie-item slick-slide slick-active" data-slick-index="1" aria-hidden="false" style="width: 274px;" tabindex="-1" role="option" aria-describedby="slick-slide70">
+                            <div class="mv-img">
+                                <a href=" @Url.Action("Chitiet", "Movie", new { id = 21 })" tabindex="0">
+                                    <img src="~/image/avat1.jpg" style="width:285px; height:437px;">
+                                </a>
+                            </div>
+                            <div class="title-in">
+                                <div class="cate">
+
+                                    <span class="blue"><a href="#" tabindex="0">Khoa học viễn tưởng</a></span>
+
+                                </div>
+                                <h6><a href=" @Url.Action("Chitiet", "Movie", new { id = 21 })" tabindex="0">Avata</a></h6>
+                                <p><i class="ion-android-star"></i><span>10.00</span> /10</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="movie-items">
+    <div class="container">
+        <div class="row ipad-width">
+         
+            <div class="col-md-8">
+                @Html.Action("phimloai", "Movie", new { id = 5 })
+
+                @Html.Action("phimloai", "Movie", new { id = 9 })
+                @Html.Action("phimloai", "Movie", new { id = 2 })
+                @Html.Action("phimloai", "Movie", new { id = 3 })
+            </div>
+               
+                <div class="col-md-4">
+                    <div class="sidebar">
+                        <div class="celebrities celeb-author">
+                            @Html.Action("Namph", "Movie", new { @class = "sb-title" })
+                            <samp></samp>
+                            @Html.Action("Theloai", "Movie", new { @class = "sb-title" })
+
+
+                          </div>
+                     </div>
+                  </div>
+         </div>
+    </div>
+</div>
+

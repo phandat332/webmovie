@@ -1,0 +1,109 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@using WebMovie.Models;
+@model PagedList.PagedList<WebMovie.Models.PHIM>
+
+@{
+    ViewBag.Title = "SPTheotheloai";
+
+}
+@if (Model.Any())
+{
+    <div class="hero common-hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="hero-ct">
+                        <h1>Phim theo tên tìm kiếm</h1>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-single">
+        <div class="container">
+            <div class="row ipad-width">
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="topbar-filter">
+                        <p> Phim theo tên: @ViewBag.Tukhoa </p>
+                    </div>
+                    <div class="flex-wrap-movielist">
+
+                        @foreach (var item in Model)
+                        {
+                            <div class="movie-item-style-2 movie-item-style-1">
+                                <img src="@Url.Content("/image/" + item.Anhbia)" alt="">
+                                <div class="hvr-inner" style="margin: 80px 40px; background-color: #ffffff00 ">
+                                    <a href="@Url.Action("Chitiet", "Movie", new { id = item.Maphim })">
+                                        <img src="~/image/iconplay12.png" />
+
+                                    </a>
+                                </div>
+                                <div class="mv-item-infor">
+                                    <h6><a href="@Url.Action("Chitiet", "Movie", new { id = item.Maphim })"> @item.TenPhim</a></h6>
+
+                                    @* <p class="rate"><i class="ion-android-star"></i><span>10.00</span> /10</p>*@
+                                </div>
+                            </div>
+                        }
+                        @ViewBag.Message
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="page-single">
+        <div class="container">
+            <div class="row ipad-width">
+                <div style="text-align: center; ">
+
+                    <div class="MenuTrang" style="padding-left: 10%; ">
+                        @Html.PagedListPager(Model, page => Url.Action("KQTimkiem", new { page = page, @sTukhoa = ViewBag.Tukhoa }))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+
+    <div class="hero common-hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="hero-ct">
+                        <h2 style="color:white;padding-left:100px">Phim theo tên tìm kiếm</h2>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-single">
+        <div class="container">
+            <div class="row ipad-width" style="height:500px">
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="topbar-filter">
+                        <p> Phim theo tên: @ViewBag.Tukhoa </p>
+                    </div>
+                    <div class="flex-wrap-movie" style="padding-left:400px">
+                        <h2 style="color:white"> không thìm thấy phim có tên @ViewBag.Tukhoa</h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}

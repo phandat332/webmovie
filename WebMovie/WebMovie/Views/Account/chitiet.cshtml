@@ -1,0 +1,98 @@
+﻿@model WebMovie.Models.KHACHHANG
+
+@{
+    ViewBag.Title = "Thông tin khách hàng - phimmoi24h";
+}
+
+
+
+<div class="hero common-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="hero-ct">
+                    <h2 style="color:white">THÔNG TIN KHÁCH HÀNG</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-single" style="padding:50px 0;">
+    <div class="container">
+        <div class="row ipad-width">
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="topbar-filter">
+
+                </div>
+                <div class="flex-wrap-movielist">
+                   
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="page-single movie-single movie_single">
+    <div class="container">
+        <div class="row ipad-width2">
+            <div class="col-md-5 col-sm-12 col-xs-12" style="padding-left:40px;">
+                <div style="margin-left:40px;">
+                    <img src="~/image/hinh-ve-co-gai-cute.jpg" alt="" style="border-radius: 60%;width:300px;float:right;">
+                    <h3 style="color:white;padding:20px 0 20px 170px ">@Html.DisplayFor(model => model.Hoten)</h3>
+                </div>
+
+            </div>
+            <div class="col-md-7 col-sm-12 col-xs-12" style="padding: 50px 50px 0 50px;float:right;">
+
+                <div style="color:white">
+
+                    <dt class="col-sm-3">Tài khoản:</dt>
+                    <dd class="col-sm-9">Người dùng</dd>
+                    <dt class="col-sm-3">Tên người dùng:</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Hoten)</dd>
+                    <dt class="col-sm-3">tài khoản:</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Taikhoan)</dd>
+                    <dt class="col-sm-3">mật khẩu:</dt>
+                    <dd class="col-sm-9">******* </dd>
+                    <dt class="col-sm-3">số điện thoại:</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.DienthoaiKh)</dd>
+                    <dt class="col-sm-3">Email:</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Email)</dd>
+
+
+                </div>
+                <div style="direction:inherit;">
+                    @Html.ActionLink("Quay lại", "Index", "Home", null, new { @class = "button primary-button" })
+
+
+                    @Html.ActionLink("Chỉnh sửa", "Editkh", "Account", new {id = Model.MaKh}, new { @class = "button success-button" })
+                </div>   
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .button {
+        display: inline-block;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .primary-button {
+        background-color: #007bff;
+        margin-right:60px;
+    }
+
+    .success-button {
+        background-color: #ff0000;
+    }
+
+</style>
